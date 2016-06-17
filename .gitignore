@@ -1,0 +1,4 @@
+.DS_Store
+uploads/
+assets/img/
+application/libraries/Lib_redis.php

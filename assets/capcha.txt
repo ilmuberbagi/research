@@ -1,0 +1,8 @@
+Google Capcha:
+Site Key : 6LdT5BwTAAAAAHP9S-A5QQUIDmMoK5Hd_p5ZWCt8
+Secret Key : 6LdT5BwTAAAAAKEVUvViBKApAdpphEnu63uSbW8K
+
+head:
+<script src='https://www.google.com/recaptcha/api.js'></script>
+Position:
+<div class="g-recaptcha" data-sitekey="6LdT5BwTAAAAAHP9S-A5QQUIDmMoK5Hd_p5ZWCt8"></div>
