@@ -70,11 +70,11 @@ class Login extends CI_Controller {
 	}
 	
 	public function proc_register(){
-		$this->load->library('recaptcha');
-		$recaptcha = $this->input->post('g-recaptcha-response');
-        if (!empty($recaptcha)) {
-            $response = $this->recaptcha->verifyResponse($recaptcha);
-            if (isset($response['success']) and $response['success'] === true) {
+		// $this->load->library('recaptcha');
+		// $recaptcha = $this->input->post('g-recaptcha-response');
+        // if (!empty($recaptcha)) {
+            // $response = $this->recaptcha->verifyResponse($recaptcha);
+            // if (isset($response['success']) and $response['success'] === true) {
 				$this->load->helper('misc');
 				$pass = generatePassword(8,4);
 				$userid = $this->security->xss_clean($this->input->post('user_id'));
@@ -109,6 +109,7 @@ class Login extends CI_Controller {
 					);
 					$message = $this->load->view('template/mailer/createUser', $result, TRUE);
 					$send = $this->lib_mailer->sendmail(array('email'=>$email), 'Research FTUI', $message, '', $bcc);
+										
 					if($send){
 						$this->session->set_flashdata('success','<b>Success,</b> Registration process successfully. We just send you an email containing your account to login into application.');
 					}else{
@@ -116,10 +117,10 @@ class Login extends CI_Controller {
 					}				
 				}else
 					$this->session->set_flashdata('warning','<b>Error</b> Trouble while register new user!');
-			}else
-				$this->session->set_flashdata('Warning','<b>Warning,</b> Please pass the capcha request!');
-        }else
-			$this->session->set_flashdata('Warning','<b>Warning,</b> Please pass the capcha request!');
+			// }else
+				// $this->session->set_flashdata('Warning','<b>Warning,</b> Please pass the capcha request!');
+        // }else
+			// $this->session->set_flashdata('Warning','<b>Warning,</b> Please pass the capcha request!');
 		
 		redirect('register');
 	}
@@ -133,7 +134,7 @@ class Login extends CI_Controller {
 		$email = $this->input->post('email');
 		$this->load->library('Lib_mailer');
 		$this->lib_mailer->init();
-		# get data member:
+		# get data member
 		$data = $this->mdl_login->check_user_data('email', $email);
 		if(!empty($data)){
 			$bcc = array(
@@ -147,16 +148,23 @@ class Login extends CI_Controller {
 				'name'		=> $data[0]['name'],
 				'status'	=> $data[0]['status'],
 			);
-			
 			# update password
 			$act = $this->mdl_login->update($data[0]['user_id'], array('password' => md5($result['password'])));
 			if($act){
 				$message = $this->load->view('template/mailer/password_reset', $result, TRUE);
-				$this->lib_mailer->sendmail(array('email'=>$email), 'Research FTUI', $message, '', $bcc);
-				$msg = '<div class="alert alert-success alert-dismissable">
+				$send = $this->lib_mailer->sendmail(array('email'=>$email), 'Research FTUI', $message, '', $bcc);
+				var_dump($send); die();
+				if($send != -1){
+					$msg = '<div class="alert alert-success alert-dismissable">
 						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
 						<h4><i class="icon fa fa-check"></i> Success!</h4>Your new password has been sent to your email.</div>';
-				$this->session->set_flashdata('invalid',$msg);
+					$this->session->set_flashdata('invalid',$msg);
+				}else{
+					$msg = '<div class="alert alert-warning alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+						<h4><i class="icon fa fa-check"></i> Warning!</h4>Trouble while sending email.</div>';
+					$this->session->set_flashdata('invalid',$msg);
+				}
 			}
 		}else{
 			$msg = '<div class="alert alert-warning alert-dismissable">

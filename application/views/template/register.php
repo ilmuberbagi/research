@@ -75,9 +75,9 @@
 					<label>Functional Position</label>
 					<input type="text" class="form-control" name="functional" placeholder="" required>
 				</div>
-				<div class="form-group">
+				<!-- div class="form-group">
 					<div class="g-recaptcha" data-sitekey="6LdT5BwTAAAAAHP9S-A5QQUIDmMoK5Hd_p5ZWCt8"></div>
-				</div>
+				</div -->
 				<div class="form-action">
 					<input type="reset" name="reset" class="btn btn-default" value="Batal">
 					<input type="submit" name="submit" class="btn btn-danger submit" value="Register">
