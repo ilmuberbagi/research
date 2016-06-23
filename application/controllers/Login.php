@@ -130,6 +130,19 @@ class Login extends CI_Controller {
 	 * @email
 	 */
 	 
+	public function test(){
+		$to      = 'sabbana.a7@gmail.com';
+		$subject = 'the subject';
+		$message = 'hello';
+		$headers = 'From: webmaster@example.com' . "\r\n" .
+			'Reply-To: webmaster@example.com' . "\r\n" .
+			'X-Mailer: PHP/' . phpversion();
+
+		$send = mail($to, $subject, $message, $headers);
+		var_dump($send);
+
+	}
+	 
 	public function reset_password(){
 		$email = $this->input->post('email');
 		$this->load->library('Lib_mailer');

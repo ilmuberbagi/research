@@ -54,9 +54,33 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '_404';
 
 $route['reset'] = 'login/reset';
-$route['news/read/(:any)'] = 'home/news/read/$1';
+
+$route['news/page'] = 'home/news/page';
+$route['news/page/(:any)'] = 'home/news/page/$1';
+$route['news/read/(:any)/(:any)'] = 'home/news/read/$1/$2';
 $route['news'] = 'home/news';
+
+$route['grant/page'] = 'home/grant/page';
+$route['grant/page/(:any)'] = 'home/grant/page/$1';
+$route['grant/read/(:any)/(:any)'] = 'home/grant/read/$1/$2';
+$route['grant'] = 'home/grant';
+
+$route['conferences/page'] = 'home/conferences/page';
+$route['conferences/page/(:any)'] = 'home/conferences/page/$1';
+$route['conferences/read/(:any)/(:any)'] = 'home/conferences/read/$1/$2';
+$route['conferences'] = 'home/conferences';
+
+
+$route['videos/page'] = 'home/videos/page';
+$route['videos/page/(:any)'] = 'home/videos/page/$1';
+$route['videos/read/(:any)/(:any)'] = 'home/videos/read/$1/$2';
+$route['videos'] = 'home/videos';
+$route['resources'] = 'home/resources';
+$route['download/resource/(:any)'] = 'home/download/$1';
+
+
 $route['about'] = 'home/about';
+$route['service'] = 'home/service';
 $route['contact'] = 'home/contact';
 
  $route['register'] = 'login/register';

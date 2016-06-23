@@ -1,26 +1,28 @@
 <div class="container">
 	<div class="row">
 		<div class="col-md-8">
-			<?php if($this->uri->segment(1) == "about"){?>
-				<div class="page-header">
-					<h4>Profil Unit Riset dan Pengembangan Masyarakat FTUI</h4>
-				</div>
-				<?php echo $info[0]['about']; ?>
-				<div class="page-header">
-					<h4>Visi &amp; Misi</h4>
-				</div>
-				<?php echo $info[0]['vision']; ?>
-				<?php echo $info[0]['mission']; ?>
-				<div class="page-header">
-					<h4>Struktur Organisasi</h4>
-				</div>
-				<?php echo $info[0]['structure']; ?>
-			<?php }else{?>
-				<div class="page-header">
-					<h4>Services</h4>
-				</div>
-				<?php echo $info[0]['service'] ? $info[0]['service']:'Description about service'; ?>
-			<?php } ?>
+			<div class="page-header">
+				<h4>Resources</h4>
+			</div>
+
+			<table class="table table-bordered table-striped">
+				<tr>
+					<th>No.</th>
+					<th>Title</th>
+					<th>View</th>
+					<th>Download</th>
+				</tr>
+				<?php if(!empty($resources)){ $no=0; foreach($resources as $r){ $no++; ?>
+				<tr>
+					<td><?php echo $no;?></td>
+					<td><?php echo $r['resource_title'];?></td>
+					<td><?php echo number_format($r['viewed']);?></td>
+					<td><a href="<?php echo site_url().'download/resource/'.$r['resource_id'];?>"><i class="fa fa-download"></i></a></td>
+				</tr>
+				<?php }}else{?>
+				<tr><td colspan="4">Belum ada data yang dapat ditampilkan.</td></tr>
+				<?php } ?>
+			</table>
 		</div>
 		
 		<div class="col-md-4 sidebar">

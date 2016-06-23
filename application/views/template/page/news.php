@@ -22,18 +22,28 @@
 					<th>News Title</th>
 					<th>Posted</th>
 					<th>Last Update</th>
-					<th>Author</th>
+					<th>Type</th>
 					<th>Status</th>
 					<th>Action</th>
 				</thead>
 				<tbody>
-				<?php if(!empty($news)){ $no=0; foreach($news as $a){ $no++; ?>
+				<?php 
+					if(!empty($news)){ $no=0; foreach($news as $a){ $no++; 	?>
 				<tr>
 					<td><?php echo $no;?></td>
-					<td><?php echo $a['news_title'];?></td>
+					<td>
+						<?php echo $a['news_title'];?><br/>
+						<small>Author : <?php echo $a['name'];?></small>
+					</td>
 					<td><?php echo date('d/m/Y', strtotime($a['date_posted']));?></td>
 					<td><?php echo date('d/m/Y H:i', strtotime($a['last_updated']));?></td>
-					<td><?php echo $a['name'];?></td>
+					<td>
+						<?php 
+							if($a['type'] == 1) echo "<span class='label label-primary'>News</label>";
+							else if($a['type'] == 2) echo "<span class='label label-warning'>Seminars</label>";
+							else echo "<span class='label label-info'>Grant</label>";
+						?>
+					</td>
 					<td><?php echo $a['status']==1?'<span class="label label-success">Active</span>':'<span class="label label-default">Inactive</span>';?></td>
 					<td>
 						<span class="btn-group">

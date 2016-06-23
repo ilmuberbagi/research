@@ -35,38 +35,12 @@
 								<li><a href="#">All Research Centers / Group</a></li>
 							</ul>
 						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Research Data <span class="caret"></span></a>
-							<ul class="dropdown-menu multi-level">
-								<li class="dropdown-submenu">
-									<a href="#" tabindex="-1">By Field/Major</a>
-									<ul class="dropdown-menu">
-										<li><a href="#">Civil & Environmental</a></li>
-										<li><a href="#">Mechanical & Naval</a></li>
-										<li><a href="#">Electrical & Computer</a></li>
-										<li><a href="#">Metallurgical & Material</a></li>
-										<li><a href="#">Architecture & Interior Design</a></li>
-										<li><a href="#">Chemical & Bioproccess</a></li>
-										<li><a href="#">Industrial</a></li>
-									</ul>
-								</li>
-								<li class="dropdown-submenu">
-									<a href="#" tabindex="-1">By Education Level</a>
-									<ul class="dropdown-menu">
-										<li><a href="#">Undergraduate</a></li>
-										<li><a href="#">Graduate</a></li>
-										<li><a href="#">Doctorate</a></li>
-									</ul>
-								</li>
-								<li role="presentation" class="divider"></li>
-								<li><a href="#">Research Database Portal</a></li>
-							</ul>
-						</li>
-						<li class=""><a href="#">Grants and Incentives</a></li>
-						<li class=""><a href="#">Conferences/Seminars</a></li>
-						<li class=""><a href="#">Data and Statistic</a></li>
-						<li class=""><a href="#">Services</a></li>
-						<li class=""><a href="<?php echo base_url().'contact';?>">Contact Us</a></li>
+						<li class="<?php echo $this->uri->segment(1) == 'grant'? 'active':'';?>"><a href="<?php echo site_url().'grant';?>">Grants and Incentives</a></li>
+						<li class="<?php echo $this->uri->segment(1) == 'conferences'? 'active':'';?>"><a href="<?php echo site_url().'conferences';?>">Conferences/Seminars</a></li>
+						<li class="<?php echo $this->uri->segment(1) == 'statistics'? 'active':'';?>"><a href="#">Data and Statistics</a></li>
+						<li class="<?php echo $this->uri->segment(1) == 'service'? 'active':'';?>"><a href="<?php echo site_url().'service';?>">Services</a></li>
+						<li class="<?php echo $this->uri->segment(1) == 'resources'? 'active':'';?>"><a href="<?php echo site_url().'resources';?>">Resources</a></li>
+						<li class="<?php echo $this->uri->segment(1) == 'contact'? 'active':'';?>"><a href="<?php echo base_url().'contact';?>">Contact Us</a></li>
 					</ul>
 				</div>
 			</div>

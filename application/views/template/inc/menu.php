@@ -30,7 +30,7 @@
 					<ul class="treeview-menu">
 						<li><a href="<?php echo base_url().'dashboard/information#about';?>"><i class="fa fa-arrow-circle-right"></i> About</a></li>
 						<li><a href="<?php echo base_url().'dashboard/information#contact';?>"><i class="fa fa-arrow-circle-right"></i>  Contact</a></li>
-						<li><a href="<?php echo base_url().'dashboard/news';?>"><i class="fa fa-arrow-circle-right"></i>  News</a></li>
+						<li><a href="<?php echo base_url().'dashboard/news';?>"><i class="fa fa-arrow-circle-right"></i>  Post/News</a></li>
 						<li><a href="<?php echo base_url().'dashboard/slideshow';?>"><i class="fa fa-arrow-circle-right"></i>  Slide Show</i></a></li>
 					</ul>
 				</li>
@@ -44,7 +44,7 @@
 				</li>
 				
 				<li><a href="#"><i class="fa fa-user"></i> <span>Account Management</span></a></li>
-				<li><a href="#"><i class="fa fa-file"></i> <span>File Management</span></a></li>
+				<li><a href="<?php echo site_url().'dashboard/resources';?>"><i class="fa fa-file"></i> <span>File Management</span></a></li>
 			</ul>
         </section>
 	</aside>

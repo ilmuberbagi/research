@@ -26,6 +26,7 @@ class Lib_cms {
 			'vision'		=> $this->ci->security->xss_clean($this->ci->input->post('vision')),
 			'structure'		=> $this->ci->security->xss_clean($this->ci->input->post('structure')),
 			'contact'		=> $this->ci->security->xss_clean($this->ci->input->post('contact')),
+			'service'		=> $this->ci->security->xss_clean($this->ci->input->post('service')),
 			'last_updated'	=> date('Y-m-d H:i:s')
 		);
 		$act = $this->ci->cms->update('information', array('id', $id), $data);
@@ -39,6 +40,7 @@ class Lib_cms {
 			'user_id' => $this->ci->session->userdata('user_id'),
 			'news_title' => $this->ci->security->xss_clean($this->ci->input->post('news_title')),
 			'news_content' => $this->ci->input->post('news_content'),
+			'type' => $this->ci->input->post('type'),
 			'status' => $this->ci->security->xss_clean($this->ci->input->post('status')),
 			'date_posted' => date('Y-m-d H:i:s'),
 		);
@@ -71,11 +73,48 @@ class Lib_cms {
 		redirect('dashboard/news');
 	}
 	
+	public function insert_resources(){
+		$data = array(
+			'user_id' => $this->ci->session->userdata('user_id'),
+			'resource_title' => $this->ci->security->xss_clean($this->ci->input->post('resource_title')),
+			'date_create' => date('Y-m-d H:i:s'),
+			'date_update' => date('Y-m-d H:i:s'),
+		);
+		if($_FILES){
+			$config['upload_path'] = './uploads/files/';
+			$config['allowed_types'] = '*';
+			$config['max_size'] = '10240'; # Max size 10 MB
+			
+			$ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+			$fileName = date('Ymd-His').mt_rand(0,10000).'.'.$ext;
+			$config['file_name'] = $fileName;
+
+			$path = base_url().'uploads/files/';
+			$this->ci->load->library('upload', $config);
+			if(!$this->ci->upload->do_upload()){
+				$act = $this->ci->cms->insert('resources', $data);
+				if($act) $this->ci->session->set_flashdata('warning','File has been saved.');
+				else $this->ci->session->set_flashdata('error','Trouble saving file.');
+			}else{
+				$data['file_url'] = $path.$fileName;
+				$act = $this->ci->cms->insert('resources', $data);
+				if($act) $this->ci->session->set_flashdata('success','File has been saved.');
+				else $this->ci->session->set_flashdata('error','Trouble saving file.');
+			}
+		}else{
+			$act = $this->ci->cms->insert('resources', $data);
+			if($act) $this->ci->session->set_flashdata('success','File has been saved.');
+			else $this->ci->session->set_flashdata('error','Trouble saving file.');
+		}
+		redirect('dashboard/resources');
+	}
+	
 	public function update_news(){
 		$id = $this->ci->input->post('news_id');
 		$data = array(
 			'news_title' => $this->ci->security->xss_clean($this->ci->input->post('news_title')),
 			'news_content' => $this->ci->input->post('news_content'),
+			'type' => $this->ci->input->post('type'),
 			'status' => $this->ci->security->xss_clean($this->ci->input->post('status')),
 			'last_updated' => date('Y-m-d H:i:s'),
 		);
@@ -106,6 +145,41 @@ class Lib_cms {
 			else $this->ci->session->set_flashdata('error','Trouble updating news.');
 		}
 		redirect('dashboard/news');
+	}
+	
+	public function update_resources(){
+		$id = $this->ci->input->post('resource_id');
+		$data = array(
+			'resource_title' => $this->ci->security->xss_clean($this->ci->input->post('resource_title')),
+			'date_update' => date('Y-m-d H:i:s'),
+		);
+		if($_FILES){
+			$config['upload_path'] = './uploads/files/';
+			$config['allowed_types'] = '*';
+			$config['max_size'] = '10240'; # Max size 10 MB
+			
+			$ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+			$fileName = date('Ymd-His').mt_rand(0,10000).'.'.$ext;
+			$config['file_name'] = $fileName;
+
+			$path = base_url().'uploads/files/';
+			$this->ci->load->library('upload', $config);
+			if(!$this->ci->upload->do_upload()){
+				$act = $this->ci->cms->update('resources', array('resource_id', $id), $data);
+				if($act) $this->ci->session->set_flashdata('info','Resource has been updated.');
+				else $this->ci->session->set_flashdata('error','Trouble updating file.');
+			}else{
+				$data['file_url'] = $path.$fileName;
+				$act = $this->ci->cms->update('resources', array('resource_id', $id), $data);
+				if($act) $this->ci->session->set_flashdata('success','Resource has been updated.');
+				else $this->ci->session->set_flashdata('error','Trouble updating file.');
+			}
+		}else{
+			$act = $this->ci->cms->update('resources', array('resource_id', $id), $data);
+			if($act) $this->ci->session->set_flashdata('success','Resource has been updated.');
+			else $this->ci->session->set_flashdata('error','Trouble updating file.');
+		}
+		redirect('dashboard/resources');
 	}
 	
 	public function delete_news(){

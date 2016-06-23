@@ -98,6 +98,17 @@ class Mdl_cms extends CI_Model{
 		return $this->db->query($sql)->result_array();
 	}
 	
+	public function get_resources(){
+		$sql = "select * from resources order by date_create DESC";
+		return $this->db->query($sql)->result_array();
+	}
+	
+	public function current_resource($id){
+		$sql = "select * from resources where resource_id = '$id'";
+		return $this->db->query($sql)->result_array();
+	}
+	
+
 	
 	# mics
 	# ==================================================

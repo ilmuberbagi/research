@@ -17,6 +17,7 @@
 						<li class="active"><a href="#about" data-toggle="tab">About</a></li>
 						<li><a href="#visimisi" data-toggle="tab">Vision & Mission</a></li>
 						<li><a href="#organization" data-toggle="tab">Organization Structure</a></li>
+						<li><a href="#service" data-toggle="tab">Services</a></li>
 						<li><a href="#contact" data-toggle="tab">Contact</a></li>
 					</ul>
 					<div class="tab-content">
@@ -56,6 +57,20 @@
 									<div class="form-group">
 										<textarea name="structure" class="form-control description">
 										<?php echo $info[0]['structure'];?></textarea>
+									</div>
+									<div class="form-action">
+										<input type="submit" class="btn btn-primary" value="Save" name="submit">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="tab-pane" id="service">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<textarea name="service" class="form-control description">
+										<?php echo $info[0]['service'];?></textarea>
 									</div>
 									<div class="form-action">
 										<input type="submit" class="btn btn-primary" value="Save" name="submit">

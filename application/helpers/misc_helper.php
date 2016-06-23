@@ -59,4 +59,11 @@ function generatePassword($length, $strength){
     return $password;
 }
 
+function gen_url($str){
+	if($str == "")
+		$str = 'untitled';
+	
+	$str = str_replace('+','-', urlencode($str));
+	return strtolower($str);
+}
 ?>

@@ -15,11 +15,13 @@
 			$image = $news[0]['thumbnail_url'];
 			$author = $news[0]['user_id'];
 			$content = $news[0]['news_content'];
+			$type = $news[0]['type'];
 			$action = 'update';
 		}else{
 			$id = '';
 			$title = '';
 			$image = '';
+			$type = '';
 			$author = $this->session->userdata('user_id');
 			$content = '';
 			$action = 'insert';
@@ -49,6 +51,15 @@
 								<input type="file" name="userfile" class="" value="<?php echo $image;?>">
 							</div>
 						</div>
+						<div class="form-group">
+							<label>Post Type</label>
+							<select name="type" class="form-control">
+								<option value="1" <?php echo $type == 1? 'selected':'';?>>News</option>
+								<option value="2" <?php echo $type == 2? 'selected':'';?>>Conferences and Seminars</option>
+								<option value="3" <?php echo $type == 3? 'selected':'';?>>Grant and Incentives</option>
+							</select>
+						</div>
+						<hr/>
 						<div class="form-action">
 							<input type="submit" name="submit" class="btn btn-primary" value="<?php echo ucwords($action);?>">
 						</div>
@@ -67,17 +78,15 @@
 						<div class="form-group">
 							<label>Image</label>
 							<div class="">
-								<img src="<?php echo $image;?>" class="img-responsive">
+								<img src="<?php echo $image ? $image : site_url().'uploads/default.jpg';?>" class="img-responsive">
 							</div>
 						</div>
 						<div class="form-group">
 							<label>Status</label>
-							<div class="input-group">
-								<select name="status" class="form-control">
-									<option value="1">Show</option>
-									<option value="0">Hidden</option>
-								</select>
-							</div>
+							<select name="status" class="form-control">
+								<option value="1">Show</option>
+								<option value="0">Hidden</option>
+							</select>
 						</div>
 					</div>
 				</div>

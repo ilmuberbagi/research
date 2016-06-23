@@ -13,11 +13,11 @@
 
 $(function () {
     'use strict';
-	var urlPost = window.location.origin+"/asset/do_upload";
+	var urlPost = window.location.origin+"/ibf/research/dashboard/do_upload";
     $('#fileupload').fileupload({
         url: urlPost,
 		maxFileSize: 2*1024*1024, // 2MB
-		acceptFileTypes:  /(\.|\/)(png|jpg|jpeg|mp4|)$/i,
+	acceptFileTypes:  /(\.|\/)(doc|docx|jpg|png|pdf|xls|xlsx|rar|zip)$/i,
     });
 
     $('#fileupload').fileupload(
