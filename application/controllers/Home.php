@@ -17,10 +17,10 @@ class Home extends CI_Controller{
 		$this->load->view('template_front', $this->data);
 	}
 	
-	public function about(){
-		$this->data['page'] = 'page/about';
+	public function about($param = null){
 		$this->data['video'] = $this->front->get_video_5();
 		$this->data['info'] = $this->front->get_information();
+		$this->data['page'] = 'page/about';
 		$this->load->view('template_front', $this->data);
 	}
 	

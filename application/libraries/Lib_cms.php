@@ -27,6 +27,9 @@ class Lib_cms {
 			'structure'		=> $this->ci->security->xss_clean($this->ci->input->post('structure')),
 			'contact'		=> $this->ci->security->xss_clean($this->ci->input->post('contact')),
 			'service'		=> $this->ci->security->xss_clean($this->ci->input->post('service')),
+			'research_centers'	=> $this->ci->security->xss_clean($this->ci->input->post('research_centers')),
+			'research_groups'	=> $this->ci->security->xss_clean($this->ci->input->post('research_groups')),
+			'researchers'	=> $this->ci->security->xss_clean($this->ci->input->post('researchers')),
 			'last_updated'	=> date('Y-m-d H:i:s')
 		);
 		$act = $this->ci->cms->update('information', array('id', $id), $data);

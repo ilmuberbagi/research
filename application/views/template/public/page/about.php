@@ -2,19 +2,32 @@
 	<div class="row">
 		<div class="col-md-8">
 			<?php if($this->uri->segment(1) == "about"){?>
-				<div class="page-header">
-					<h4>Profil Unit Riset dan Pengembangan Masyarakat FTUI</h4>
-				</div>
-				<?php echo $info[0]['about']; ?>
-				<div class="page-header">
-					<h4>Visi &amp; Misi</h4>
-				</div>
-				<?php echo $info[0]['vision']; ?>
-				<?php echo $info[0]['mission']; ?>
-				<div class="page-header">
-					<h4>Struktur Organisasi</h4>
-				</div>
-				<?php echo $info[0]['structure']; ?>
+				<?php if($this->uri->segment(2) == "research-centers"){?>
+					<div class="page-header"><h4>Research Centers</h4></div>
+					<?php echo $info[0]['research_centers']; ?>
+
+				<?php }else if($this->uri->segment(2) == "research-groups"){?>
+					<div class="page-header"><h4>Research Groups</h4></div>
+					<?php echo $info[0]['research_groups']; ?>
+
+				<?php }else if($this->uri->segment(2) == "researchers"){?>
+					<div class="page-header"><h4>Researchers</h4></div>
+					<?php echo $info[0]['researchers']; ?>
+				<?php }else{?>
+					<div class="page-header">
+						<h4>Profil Unit Riset dan Pengembangan Masyarakat FTUI</h4>
+					</div>
+					<?php echo $info[0]['about']; ?>
+					<div class="page-header">
+						<h4>Visi &amp; Misi</h4>
+					</div>
+					<?php echo $info[0]['vision']; ?>
+					<?php echo $info[0]['mission']; ?>
+					<div class="page-header">
+						<h4>Struktur Organisasi</h4>
+					</div>
+					<?php echo $info[0]['structure']; ?>
+				<?php }?>
 			<?php }else{?>
 				<div class="page-header">
 					<h4>Services</h4>

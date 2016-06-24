@@ -20,7 +20,7 @@ class Mdl_front extends CI_Model{
 	
 	public function get_news_home(){
 		$sql = "select a.*, b.name from news a left join users b on a.user_id = b.user_id 
-				where a.status = 1 order by date_posted DESC limit 0,10";
+				where a.status = 1 order by date_posted DESC limit 0,8";
 		return $this->db->query($sql)->result_array();
 	}
 	

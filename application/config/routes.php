@@ -80,6 +80,8 @@ $route['download/resource/(:any)'] = 'home/download/$1';
 
 
 $route['about'] = 'home/about';
+$route['about/(:any)'] = 'home/about/$1';
+
 $route['service'] = 'home/service';
 $route['contact'] = 'home/contact';
 

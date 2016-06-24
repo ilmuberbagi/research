@@ -29,8 +29,8 @@
 						</div>
 						<div class="page-body">
 							<?php if(!empty($news)){ foreach($news as $n){?>
-							<div class="col-md-6">
-								<div class="thumbnail">
+							<div class="col-md-6 col-xs-6" style="margin-bottom:10px; min-height:370px">
+								<div class="thumbnail img-responsive">
 									<div class="img-thumb-bg" style="background-image:url('<?php echo $n['thumbnail_url'];?>')"></div>
 								</div>
 								<div class="caption">
@@ -43,7 +43,7 @@
 								</div>
 							</div>
 							<?php } ?>
-							<a class="btn btn-warning" href="<?php echo site_url().'news';?>">All News</a>
+							<div style="clear:both"><a class="btn btn-warning" href="<?php echo site_url().'news';?>">All News</a></diV>
 							<?php }else{?>
 							<strong>Belum ada berita yang dapat ditampilkan...</strong>
 							<?php } ?>

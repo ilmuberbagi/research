@@ -19,6 +19,9 @@
 						<li><a href="#organization" data-toggle="tab">Organization Structure</a></li>
 						<li><a href="#service" data-toggle="tab">Services</a></li>
 						<li><a href="#contact" data-toggle="tab">Contact</a></li>
+						<li><a href="#rcenters" data-toggle="tab">Research Centers</a></li>
+						<li><a href="#rgroups" data-toggle="tab">Research Groups</a></li>
+						<li><a href="#researchers" data-toggle="tab">Researchers</a></li>
 					</ul>
 					<div class="tab-content">
 						<!-- about -->
@@ -85,6 +88,48 @@
 									<div class="form-group">
 										<textarea name="contact" class="form-control description">
 										<?php echo $info[0]['contact'];?></textarea>
+									</div>
+									<div class="form-action">
+										<input type="submit" class="btn btn-primary" value="Save" name="submit">
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tab-pane" id="rcenters">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<textarea name="research_centers" class="form-control description">
+										<?php echo $info[0]['research_centers'];?></textarea>
+									</div>
+									<div class="form-action">
+										<input type="submit" class="btn btn-primary" value="Save" name="submit">
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tab-pane" id="rgroups">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<textarea name="research_groups" class="form-control description">
+										<?php echo $info[0]['research_groups'];?></textarea>
+									</div>
+									<div class="form-action">
+										<input type="submit" class="btn btn-primary" value="Save" name="submit">
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tab-pane" id="researchers">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<textarea name="researchers" class="form-control description">
+										<?php echo $info[0]['researchers'];?></textarea>
 									</div>
 									<div class="form-action">
 										<input type="submit" class="btn btn-primary" value="Save" name="submit">
