@@ -21,6 +21,7 @@
 					<th>No</th>
 					<th>Title</th>
 					<th>File Location</th>
+					<th>Type</th>
 					<th>Viewed</th>
 					<th>Status</th>
 					<th>Action</th>
@@ -34,7 +35,8 @@
 					<td><?php echo $no;?></td>
 					<td><?php echo $a['resource_title'];?></td>
 					<td><?php echo $a['file_url'];?></td>
-					<td><?php echo $a['viewed'];?></td>
+					<td><?php echo $a['enable_download'] == 1 ? '<span class="badge label-success" data-toggle="tooltip" title="Resource">R</span>':'<span class="badge label-warning" data-toggle="tooltip" title="Asset">A</span>';?></td>
+					<td align="center"><?php echo number_format($a['viewed']);?></td>
 					<td><?php echo UR_exists($a['file_url']) ? '<span class="label label-success">OK</span>':'<span class="label label-default">Error</span>';?></td>
 					<td>
 						<span class="btn-group">

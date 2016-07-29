@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Model frontpage - researc FTUI
+ * author : sabbana
+ * company : ilmuberbagi
+ * date create : 17/07/2016
+ */
+
 class Mdl_front extends CI_Model{
 
 	public function __construct(){
@@ -54,11 +61,6 @@ class Mdl_front extends CI_Model{
 		return $this->db->query($sql);
 	}
 	
-	public function counter_resource($id){
-		$sql = "update resources set viewed = (viewed)+1 where resource_id = '$id'";
-		return $this->db->query($sql);
-	}
-	
 	public function get_current_news($id){
 		$sql = "select * from news where news_id = '$id'";
 		return $this->db->query($sql)->result_array();
@@ -95,7 +97,7 @@ class Mdl_front extends CI_Model{
 	
 	# resources
 	public function get_resources(){
-		$sql = "select * from resources order by date_create DESC";
+		$sql = "select * from resources where enable_download = 1 order by date_create DESC";
 		return $this->db->query($sql)->result_array();
 	}
 	
@@ -103,7 +105,11 @@ class Mdl_front extends CI_Model{
 		$sql = "select * from resources where resource_id = '$id'";
 		return $this->db->query($sql)->result_array();
 	}
-	
+		
+	public function counter_resource($id){
+		$sql = "update resources set viewed = (viewed)+1 where resource_id = '$id'";
+		return $this->db->query($sql);
+	}
 	
 
 	

@@ -118,8 +118,10 @@ class Mdl_cms extends CI_Model{
 	}
 	
 	#user
-	public function get_user(){
+	public function get_user($uid=""){
 		$id = $this->session->userdata('user_id');
+		if($uid != "")
+			$id = $uid;
 		$sql = "select a.*, b.role_name, c.department_name from users a 
 				left join role b on a.role_id = b.role_id
 				left join department c on a.department_id = c.department_id
@@ -127,6 +129,12 @@ class Mdl_cms extends CI_Model{
 		return $this->db->query($sql)->result_array();
 	}
 	
+	public function get_all_users(){
+		$sql = "select a.*, b.role_name, c.department_name from users a 
+				left join role b on a.role_id = b.role_id
+				left join department c on a.department_id = c.department_id";
+		return $this->db->query($sql)->result_array();		
+	}
 }
 
 

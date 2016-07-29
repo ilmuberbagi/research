@@ -13,11 +13,13 @@
 			$id = $sources[0]['resource_id'];
 			$title = $sources[0]['resource_title'];
 			$image = $sources[0]['file_url'];
+			$enable = $sources[0]['enable_download'];
 			$action = 'update';
 		}else{
 			$id = '';
 			$title = '';
 			$image = '';
+			$enable = '';
 			$action = 'insert';
 		}
 	?>
@@ -45,6 +47,11 @@
 							<div class="input-group">
 								<input type="file" name="userfile" class="" value="<?php echo $image;?>">
 							</div>
+						</div>
+						<div class="form-group">
+							<label>Enable Download</label><br/>
+							<label><input type="radio" name="enable_download" value="1" <?php echo $enable == 1? 'checked':'';?>> Yes</label>
+							<label><input type="radio" name="enable_download" value="0" <?php echo $enable == 0? 'checked':'';?>> No</label>
 						</div>
 						<hr/>
 						<div class="form-action">

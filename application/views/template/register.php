@@ -10,6 +10,7 @@
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 	<style>
 	.note-userid, .note-email{color:#FF0000; padding-left:2px; padding-bottom:5px; border-bottom:solid 1px #FF0000}
+	label span{ color:#FF0000}
 	</style>
 
 </head>
@@ -35,10 +36,15 @@
 
 			<form action="<?php echo site_url().'login/proc_register';?>" method="post">
 				<div class="form-group has-feedback">
-					<label>User ID <i class="fa fa-question-circle" data-toggle="popover" data-placement="top" title="User ID" data-content="Enter user id with your identity number such as NIDN or NIP or NPM"></i></label>
+					<label>User ID <i class="fa fa-question-circle" data-toggle="popover" data-placement="top" title="User ID" data-content="Enter your unique ID such as NIP/NIDN or NPM"></i> <span>*</span></label>
 					<input type="text" class="form-control" name="user_id" placeholder="User ID" id="user_id" required autofocus>
 					<span class="glyphicon glyphicon-user form-control-feedback"></span>
 					<div class="note-userid" style="display:none"><i class="fa fa-warning"></i> User ID has been used. Please use another one.</div>
+				</div>
+				<div class="form-group has-feedback">
+					<label>NIP/NPM <span>*</span></label>
+					<input type="text" class="form-control" name="usercode" placeholder="NIP/NPM" id="nip" required>
+					<span class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
 					<label>Fullname <i class="fa fa-question-circle" data-toggle="popover" data-placement="top" title="Fullname" data-content="Enter your fullname include your title such as Prof, Dr, etc"></i></label>
@@ -83,6 +89,9 @@
 					<input type="submit" name="submit" class="btn btn-danger submit" value="Register">
 				</div>
 			</form>
+			<hr/>
+			<a href="<?php echo site_url().'login/reset';?>"><i class="fa fa-question-circle"></i> I forgot my password</a><br>
+			<a href="<?php echo site_url().'login';?>"><i class="fa fa-lock"></i> Back to Login page</a>
 		</div>
 	</div>
 

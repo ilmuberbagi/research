@@ -1,5 +1,12 @@
 <?php	
 
+/**
+ * research FTUI 
+ * author : sabbana
+ * company : Ilmuberbagi
+ * date create : 13/07/2016
+ */
+
 class Home extends CI_Controller{
 
 	var $data = array();

@@ -37,48 +37,19 @@ class Lib_mailer {
     }
 
 	# smtp server
-	// public function isSMTP()
-	// {
-    	// $this->mail->isSMTP();
-		// $this->mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
-		// $this->mail->SMTPAuth = true; // authentication enabled
-		// $this->mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
-		// $this->mail->Host = "smtp.eng.ui.ac.id";
-		// $this->mail->Port = 465; // or 587
-		// $this->mail->IsHTML(true);
-		// $this->mail->Username = "research";
-		// $this->mail->Password = "3yha6anyq";
-    // }
-	
-	# google rely
 	public function isSMTP()
 	{
-		# mail relay google 
     	$this->mail->isSMTP();
 		$this->mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
 		$this->mail->SMTPAuth = true; // authentication enabled
 		$this->mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
-		$this->mail->Host = "smtp.gmail.com";
+		$this->mail->Host = "smtp.eng.ui.ac.id";
 		$this->mail->Port = 465; // or 587
 		$this->mail->IsHTML(true);
-		$this->mail->Username = "info@ilmuberbagi.or.id";
-		$this->mail->Password = "chonnam2012";
+		$this->mail->Username = "research";
+		$this->mail->Password = "3yha6anyq";
     }
 	
-	# local SMPT
-	// public function isSMTP($host='smtp.eng.ui.ac.id', $port=465, $auth=True, $username='research', $password='3yha6anyq') {
-    	// $this->mail->isSMTP();
-		// $this->mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
-    	// $this->mail->SMTPAuth = $auth;
-    	// $this->mail->Host = $host;
-    	// $this->mail->Port = $port;
-		// $this->mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
-    	// if(!empty($username))
-    		// $this->mail->Username = $username;
-    	// if(!empty($password))
-    		// $this->mail->Password = $password;
-    // }
-
     public function sendmail($to, $subject, $message, $cc=array(), $bcc=array()) {
     	if(!is_array($to))
     		return FALSE;
@@ -109,5 +80,36 @@ class Lib_mailer {
     	}
     	return TRUE;
     }
+
+	# trash code
+	
+	# google relay
+	// public function isSMTP()
+	// {
+		// # mail relay google 
+    	// $this->mail->isSMTP();
+		// $this->mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+		// $this->mail->SMTPAuth = true; // authentication enabled
+		// $this->mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+		// $this->mail->Host = "smtp.gmail.com";
+		// $this->mail->Port = 465; // or 587
+		// $this->mail->IsHTML(true);
+		// $this->mail->Username = "info@ilmuberbagi.or.id";
+		// $this->mail->Password = "chonnam2012";
+    // }
+	
+	# local SMPT
+	// public function isSMTP($host='smtp.eng.ui.ac.id', $port=465, $auth=True, $username='research', $password='3yha6anyq') {
+    	// $this->mail->isSMTP();
+		// $this->mail->SMTPDebug = 1; // debugging: 1 = errors and messages, 2 = messages only
+    	// $this->mail->SMTPAuth = $auth;
+    	// $this->mail->Host = $host;
+    	// $this->mail->Port = $port;
+		// $this->mail->SMTPSecure = 'ssl'; // secure transfer enabled REQUIRED for Gmail
+    	// if(!empty($username))
+    		// $this->mail->Username = $username;
+    	// if(!empty($password))
+    		// $this->mail->Password = $password;
+    // }
 
 }

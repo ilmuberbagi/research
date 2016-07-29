@@ -7,6 +7,7 @@
 	</section>
 
 	<section class="content">
+		<?php if($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2){?>
 		<div class="box">
 			<div class="box-header with-border">
 				<h3 class="box-title"><i class="fa fa-globe"></i> Layanan Online</h3>
@@ -68,5 +69,14 @@
 				</div>
 			</div>
 		</div>
+		<?php }else{?>
+		<div class="box">
+			<div class="box-header with-border">
+				<b>Selamat Datang di Dashboard Riset dan Publikasi FTUI</b>
+			</div>
+			<div class="box-body">
+			</div>
+		</div>
+		<?php }?>
 	</section>
 </div>

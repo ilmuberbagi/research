@@ -70,7 +70,7 @@
 				<?php } ?>
 			</div> 
 			
-					<div class="col-md-4 sidebar">
+			<div class="col-md-4 sidebar">
 			<!-- search box -->
 			<div class="row">
 				<div class="list-group">
@@ -127,5 +127,6 @@
 			</div>		
 		</div>
 		
+		</div>
 	</div>
 <?php } ?>

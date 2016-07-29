@@ -16,7 +16,11 @@
 						<div class="col-md-12">
 							<table class="table">
 								<tr>
-									<td rowspan="8" width="20%"><img src="<?php echo set_image($user[0]['avatar']);?>" class="img-responsive"></td>
+									<td rowspan="9" width="20%"><img src="<?php echo set_image($user[0]['avatar']);?>" class="img-responsive"></td>
+									<th width="20%">Username</th>
+									<td><?php echo $user[0]['user_id'];?></td>
+								</tr>
+								<tr>
 									<th width="20%">Researcher Name</th>
 									<td><?php echo $user[0]['name'];?></td>
 								</tr>

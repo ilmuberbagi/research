@@ -38,6 +38,7 @@
 					</div>
 				</div>
 			</form>
+			<hr/>
 			<a href="<?php echo site_url().'login/reset';?>"><i class="fa fa-question-circle"></i> I forgot my password</a><br>
 			<a href="<?php echo site_url().'login/register';?>"><i class="fa fa-user"></i> Register new researcher</a>
 

@@ -34,6 +34,7 @@ class Login extends CI_Controller {
 			$this->mdl_login->update($user[0]['user_id'], array('last_login'=> date('Y-m-d H:i:s')));
 			$sessionData = array(
 				'user_id'	=> $user[0]['user_id'],
+				'department_id'	=> $user[0]['department_id'],
 				'email'		=> $user[0]['email'],
 				'avatar'	=> $user[0]['avatar'],
 				'name'		=> $user[0]['name'],
@@ -69,25 +70,27 @@ class Login extends CI_Controller {
 		echo $res;
 	}
 	
-	public function proc_register(){
+	public function proc_register_email(){
 		// $this->load->library('recaptcha');
 		// $recaptcha = $this->input->post('g-recaptcha-response');
         // if (!empty($recaptcha)) {
             // $response = $this->recaptcha->verifyResponse($recaptcha);
             // if (isset($response['success']) and $response['success'] === true) {
 				$this->load->helper('misc');
-				$pass = generatePassword(8,4);
+				// $pass = generatePassword(8,4);
 				$userid = $this->security->xss_clean($this->input->post('user_id'));
+				$code = $this->security->xss_clean($this->input->post('usercode'));
 				$status = $this->input->post('role_id');
 				$name = $this->security->xss_clean($this->input->post('name'));
 				$email = $this->security->xss_clean($this->input->post('email'));
 				$data = array(
 					'user_id'	=> $userid,
+					'user_code'	=> $code,
 					'name'		=> $name,
 					'email'		=> $email,
 					'role_id'	=> $status,
 					'department_id'	=> $this->input->post('department_id'),
-					'password'	=> md5($pass),
+					'password'	=> md5($code),
 					'phone'		=> $this->security->xss_clean($this->input->post('phone')),
 					'functional' => $this->security->xss_clean($this->input->post('functional')),
 					'date_create' => date('Y-m-d H:i:s'),
@@ -122,6 +125,36 @@ class Login extends CI_Controller {
         // }else
 			// $this->session->set_flashdata('Warning','<b>Warning,</b> Please pass the capcha request!');
 		
+		redirect('register');
+	}
+
+	public function proc_register(){
+		$this->load->helper('misc');
+		// $pass = generatePassword(8,4);
+		$userid = $this->security->xss_clean($this->input->post('user_id'));
+		$code = $this->security->xss_clean($this->input->post('usercode'));
+		$status = $this->input->post('role_id');
+		$name = $this->security->xss_clean($this->input->post('name'));
+		$email = $this->security->xss_clean($this->input->post('email'));
+		$data = array(
+			'user_id'	=> $userid,
+			'user_code'	=> $code,
+			'name'		=> $name,
+			'email'		=> $email,
+			'status'	=> 1,
+			'role_id'	=> $status,
+			'department_id'	=> $this->input->post('department_id'),
+			'password'	=> md5($code),
+			'phone'		=> $this->security->xss_clean($this->input->post('phone')),
+			'functional' => $this->security->xss_clean($this->input->post('functional')),
+			'date_create' => date('Y-m-d H:i:s'),
+		);
+		$act = $this->mdl_login->create_user($data);
+		if($act){
+			$this->session->set_flashdata('success','<b>Success,</b> Proses registrasi peneliti berhasil. Silakan gunakan <b>user ID</b> dan <b>NIP/NPM </b>untuk masuk ke aplikasi pertama kali. Gunakan fitur <b>Change Password </b> untuk memperbaharui password Anda.');
+		}else{
+			$this->session->set_flashdata('warning','<b>Warning!</b> Terjadi kesalahan saat memproses data. Proses registrasi peneliti gagal dilakukan. Mohon untuk menghubungi administrator.');
+		}				
 		redirect('register');
 	}
 	

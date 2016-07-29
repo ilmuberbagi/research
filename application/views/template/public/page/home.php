@@ -29,7 +29,7 @@
 						</div>
 						<div class="page-body">
 							<?php if(!empty($news)){ foreach($news as $n){?>
-							<div class="col-md-6 col-xs-6" style="margin-bottom:10px; min-height:370px">
+							<div class="col-md-6 col-xs-6" style="margin-bottom:10px; min-height:380px">
 								<div class="thumbnail img-responsive">
 									<div class="img-thumb-bg" style="background-image:url('<?php echo $n['thumbnail_url'];?>')"></div>
 								</div>

@@ -75,43 +75,7 @@ class Lib_cms {
 		}
 		redirect('dashboard/news');
 	}
-	
-	public function insert_resources(){
-		$data = array(
-			'user_id' => $this->ci->session->userdata('user_id'),
-			'resource_title' => $this->ci->security->xss_clean($this->ci->input->post('resource_title')),
-			'date_create' => date('Y-m-d H:i:s'),
-			'date_update' => date('Y-m-d H:i:s'),
-		);
-		if($_FILES){
-			$config['upload_path'] = './uploads/files/';
-			$config['allowed_types'] = '*';
-			$config['max_size'] = '10240'; # Max size 10 MB
-			
-			$ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
-			$fileName = date('Ymd-His').mt_rand(0,10000).'.'.$ext;
-			$config['file_name'] = $fileName;
-
-			$path = base_url().'uploads/files/';
-			$this->ci->load->library('upload', $config);
-			if(!$this->ci->upload->do_upload()){
-				$act = $this->ci->cms->insert('resources', $data);
-				if($act) $this->ci->session->set_flashdata('warning','File has been saved.');
-				else $this->ci->session->set_flashdata('error','Trouble saving file.');
-			}else{
-				$data['file_url'] = $path.$fileName;
-				$act = $this->ci->cms->insert('resources', $data);
-				if($act) $this->ci->session->set_flashdata('success','File has been saved.');
-				else $this->ci->session->set_flashdata('error','Trouble saving file.');
-			}
-		}else{
-			$act = $this->ci->cms->insert('resources', $data);
-			if($act) $this->ci->session->set_flashdata('success','File has been saved.');
-			else $this->ci->session->set_flashdata('error','Trouble saving file.');
-		}
-		redirect('dashboard/resources');
-	}
-	
+		
 	public function update_news(){
 		$id = $this->ci->input->post('news_id');
 		$data = array(
@@ -150,10 +114,59 @@ class Lib_cms {
 		redirect('dashboard/news');
 	}
 	
+
+	public function delete_news(){
+		$id = $this->ci->input->post('news_id');
+		$act = $this->ci->cms->delete('news', array('news_id', $id));
+		if($act) $this->ci->session->set_flashdata('success','News has been deleted.');
+		else $this->ci->session->set_flashdata('error','Trouble deleting news.');
+		redirect('dashboard/news');
+	}
+		
+	# resource/file modules
+	# =========================================================
+	public function insert_resources(){
+		$data = array(
+			'user_id' => $this->ci->session->userdata('user_id'),
+			'resource_title' => $this->ci->security->xss_clean($this->ci->input->post('resource_title')),
+			'enable_download' => $this->ci->input->post('enable_download'),
+			'date_create' => date('Y-m-d H:i:s'),
+			'date_update' => date('Y-m-d H:i:s'),
+		);
+		if($_FILES){
+			$config['upload_path'] = './uploads/files/';
+			$config['allowed_types'] = '*';
+			$config['max_size'] = '10240'; # Max size 10 MB
+			
+			$ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
+			$fileName = date('Ymd-His').mt_rand(0,10000).'.'.$ext;
+			$config['file_name'] = $fileName;
+
+			$path = base_url().'uploads/files/';
+			$this->ci->load->library('upload', $config);
+			if(!$this->ci->upload->do_upload()){
+				$act = $this->ci->cms->insert('resources', $data);
+				if($act) $this->ci->session->set_flashdata('warning','File has been saved.');
+				else $this->ci->session->set_flashdata('error','Trouble saving file.');
+			}else{
+				$data['file_url'] = $path.$fileName;
+				$act = $this->ci->cms->insert('resources', $data);
+				if($act) $this->ci->session->set_flashdata('success','File has been saved.');
+				else $this->ci->session->set_flashdata('error','Trouble saving file.');
+			}
+		}else{
+			$act = $this->ci->cms->insert('resources', $data);
+			if($act) $this->ci->session->set_flashdata('success','File has been saved.');
+			else $this->ci->session->set_flashdata('error','Trouble saving file.');
+		}
+		redirect('dashboard/resources');
+	}
+
 	public function update_resources(){
 		$id = $this->ci->input->post('resource_id');
 		$data = array(
 			'resource_title' => $this->ci->security->xss_clean($this->ci->input->post('resource_title')),
+			'enable_download' => $this->ci->input->post('enable_download'),
 			'date_update' => date('Y-m-d H:i:s'),
 		);
 		if($_FILES){
@@ -185,14 +198,15 @@ class Lib_cms {
 		redirect('dashboard/resources');
 	}
 	
-	public function delete_news(){
-		$id = $this->ci->input->post('news_id');
-		$act = $this->ci->cms->delete('news', array('news_id', $id));
-		if($act) $this->ci->session->set_flashdata('success','News has been deleted.');
-		else $this->ci->session->set_flashdata('error','Trouble deleting news.');
-		redirect('dashboard/news');
+	public function delete_resource(){
+		$id = $this->ci->input->post('resource_id');
+		$act = $this->ci->cms->delete('resources', array('resource_id', $id));
+		if($act) $this->ci->session->set_flashdata('success','File has been deleted.');
+		else $this->ci->session->set_flashdata('error','Trouble deleting file.');
+		redirect('dashboard/resources');
 	}
 	
+
 	# slideshow module 1qaz2wsx
 	# ===================================
 	public function insert_slide(){
@@ -314,30 +328,7 @@ class Lib_cms {
 		else $this->ci->session->set_flashdata('error','Trouble deleting video.');
 		redirect('dashboard/research/video');
 	}
-
-	# change password 
-	# ============================
-	public function change_password(){
-		$this->ci->load->library('form_validation');
-		$id = $this->ci->security->xss_clean($this->ci->input->post('user_id'));
-		$pass = $this->ci->security->xss_clean($this->ci->input->post('member_password'));
-		$repass = $this->ci->security->xss_clean($this->ci->input->post('member_repassword'));
-		$this->ci->form_validation->set_rules('member_password','Password','required|trim');
-		$this->ci->form_validation->set_rules('member_repassword','Ulangi Password','required|trim|match[member_password]');
-		if($this->ci->form_validation->run() == 'FALSE'){
-			$msg = validation_errors();
-			$this->ci->session->set_flashdata('alert', $msg);
-		}else{
-			$data = array('password' => md5($pass));
-			$change = $this->ci->cms->update('users', array('user_id', $id), $data);
-			if($change)
-				$this->ci->session->set_flashdata('success','Your password has been updated.');
-			else
-				$this->ci->session->set_flashdata('alert','Trouble while updating your password!');
-		}
-		redirect('dashboard/edit/password');
-	}
-
+	
 	# research proposal
 	# ===================================
 	public function insert_research_proposal(){
@@ -447,6 +438,53 @@ class Lib_cms {
 			}
 		}
 		redirect('dashboard/profile');
+	}
+
+	# change password 
+	# ============================
+	public function change_password(){
+		$this->ci->load->library('form_validation');
+		$id = $this->ci->security->xss_clean($this->ci->input->post('user_id'));
+		$pass = $this->ci->security->xss_clean($this->ci->input->post('member_password'));
+		$repass = $this->ci->security->xss_clean($this->ci->input->post('member_repassword'));
+		$this->ci->form_validation->set_rules('member_password','Password','required|trim');
+		$this->ci->form_validation->set_rules('member_repassword','Ulangi Password','required|trim|match[member_password]');
+		if($this->ci->form_validation->run() == 'FALSE'){
+			$msg = validation_errors();
+			$this->ci->session->set_flashdata('alert', $msg);
+		}else{
+			$data = array('password' => md5($pass));
+			$change = $this->ci->cms->update('users', array('user_id', $id), $data);
+			if($change)
+				$this->ci->session->set_flashdata('success','Your password has been updated.');
+			else
+				$this->ci->session->set_flashdata('alert','Trouble while updating your password!');
+		}
+		redirect('dashboard/edit/password');
+	}
+	
+	# change status
+	# ============================
+	public function change_user_status(){
+		$id = $this->ci->security->xss_clean($this->ci->input->post('user_id'));
+		$sts = $this->ci->security->xss_clean($this->ci->input->post('status'));
+		if($sts == 0) $status = 1; else $status = 0;
+		$data = array('status' => $status);
+		$change = $this->ci->cms->update('users', array('user_id', $id), $data);
+		if($change)
+			$this->ci->session->set_flashdata('success','User status has been updated.');
+		else
+			$this->ci->session->set_flashdata('alert','Trouble while updating user status!');
+		redirect('dashboard/account');
+	}
+	
+	# delete users
+	public function delete_user(){
+		$id = $this->ci->input->post('user_id');
+		$act = $this->ci->cms->delete('users', array('user_id', $id));
+		if($act) $this->ci->session->set_flashdata('success','User been deleted.');
+		else $this->ci->session->set_flashdata('error','Trouble deleting user.');
+		redirect('dashboard/account');
 	}
 
 	
