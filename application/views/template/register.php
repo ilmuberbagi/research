@@ -42,8 +42,8 @@
 					<div class="note-userid" style="display:none"><i class="fa fa-warning"></i> User ID has been used. Please use another one.</div>
 				</div>
 				<div class="form-group has-feedback">
-					<label>NIP/NPM <span>*</span></label>
-					<input type="text" class="form-control" name="usercode" placeholder="NIP/NPM" id="nip" required>
+					<label>NIP/NUP <span>*</span></label>
+					<input type="text" class="form-control" name="usercode" placeholder="NIP/NUP" id="nip" required>
 					<span class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
@@ -61,13 +61,6 @@
 					<label>Phone</label>
 					<input type="phone" class="form-control" name="phone" placeholder="+62">
 					<span class="glyphicon glyphicon-phone form-control-feedback"></span>
-				</div>
-				<div class="form-group has-feedback">
-					<label>Status</label>
-					<select name="role_id" class="form-control" required>
-						<option value="3">Dosen</option>
-						<option value="4">Mahasiswa</option>
-					</select>
 				</div>
 				<div class="form-group has-feedback">
 					<label>Department</label>

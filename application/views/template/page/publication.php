@@ -3,51 +3,54 @@
 		<h1>Publication</h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url().'dashboard';?>"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li class="active">Publication Data</li>
+			<li class="active">Publication</li>
 		</ol>
 	</section>
 
-	<section class="content">
+	<section class="content usetooltip">
 		<div class="box box-success">
 			<div class="box-header with-border">
 				<h3 class="box-title"><i class="fa fa-book"></i> &nbsp; Publication Data</h3>
 				<div class="box-tools pull-right">
 					<?php if($this->session->userdata('role') == 3 || $this->session->userdata('role') == 4){?>
-						<a class="btn btn-default" href="<?php echo base_url().'publication/action/input';?>"><i class="fa fa-plus-circle"></i></a>
+					<span class="btn-group">
+						<a data-tooltip="tooltip" title="Input Data" class="btn btn-default btn-sm" href="<?php echo base_url().'publication/action/input';?>"><i class="fa fa-plus-circle"></i></a>
+						<a data-tooltip="tooltip" title="Import Publication" class="btn btn-success btn-sm" href="<?php echo base_url().'publication/action/import';?>"><i class="fa fa-cloud-upload"></i></a>
+					</span>
 					<?php }else{?>
 					<span class="btn-group">
-						<a class="btn btn-default btn-sm" href="<?php echo base_url().'publication/action/export/pdf';?>"><i class="fa fa-file"></i></a>
-						<a class="btn btn-default btn-sm" href="<?php echo base_url().'publication/action/export/excel';?>"><i class="fa fa-file-text"></i></a>
+						<a data-tooltip="tooltip" title="Export PDF" class="btn btn-danger btn-sm" href="<?php echo base_url().'publication/action/export/excel';?>"><i class="fa fa-file-pdf-o"></i></a>
+						<a data-tooltip="tooltip" title="Export Excel" class="btn btn-success btn-sm" href="<?php echo base_url().'publication/action/export/excel';?>"><i class="fa fa-file-excel-o"></i></a>
 					</span>
 					<?php }?>
 				</div>
 			</div>
 			<div class="box-body">
-				<table  class="table table-striped table-hover data-publication">
+				<table  class="table table-striped table-bordered data-publication">
 				<thead>
 					<th>No</th>
 					<th>Author</th>
 					<th>Title</th>
 					<th>Department</th>
 					<th>Status SIDR</th>
+					<th>SIDR Verify</th>
 					<th>Action</th>
 				</thead>
 				<tbody>
 				<?php if(!empty($publication)){ $no=0; foreach($publication as $a){ $no++; ?>
 				<tr>
 					<td><?php echo $no;?></td>
-					<td><?php echo $this->lib_general->get_name_from_user_id($a['author']);?></td>
+					<td><?php echo $a['author'];?></td>
 					<td><?php echo $a['title'];?></td>
 					<td><?php echo $a['department_name'];?></td>
 					<td><?php echo $a['sidr_upload']==1?'<span class="label label-success">Uploaded</span>':'<span class="label label-default">No</span>';?></td>
-					<td>
+					<td align="center"><?php echo $a['sidr_verify']==1? '<i class="fa fa-check-circle text-success"></i>':'<i class="fa fa-times-circle text-danger"></i>';?></td>
+					<td width="100">
 						<span class="btn-group">
 							<a data-tooltip="tooltip" title="Edit Publication" href="<?php echo site_url().'publication/action/edit/'.$a['pub_id'];?>" class="btn btn-sm btn-default"><i class="fa fa-edit"></i></a>
-							<?php if($this->session->userdata('role') == 3 || $this->session->userdata('role') == 4){?>
-								<a data-tooltip="tooltip" title="Author Publication" href="<?php echo site_url().'publication/action/author/'.$a['pub_id'];?>" class="btn btn-sm btn-default"><i class="fa fa-users"></i></a>
-							<?php }else{?>
-								<a data-tooltip="tooltip" title="View SIDR" href="<?php echo site_url().'publication/action/sidr/'.$a['pub_id'];?>" class="btn btn-sm btn-default"><i class="fa fa-file"></i></a>
-							<?php } ?>
+
+							<a data-tooltip="tooltip" title="View SIDR" href="<?php echo site_url().'publication/action/sidr/'.$a['pub_id'];?>" class="btn btn-sm btn-default"><i class="fa fa-file"></i></a>
+
 							<a data-tooltip="tooltip" title="Delete Publication" href="#" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#modalDelete" onclick="return delete_article('<?php echo $a['pub_id'];?>')"><i class="fa fa-trash"></i></a>
 						</span>
 					</td>

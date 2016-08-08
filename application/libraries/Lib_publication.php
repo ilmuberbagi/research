@@ -23,9 +23,12 @@ class Lib_publication {
 		$publication_data = array(
 			'pub_id' => date('YmdHis').mt_rand(0,100),
 			'pub_type_id' => $this->ci->input->post('type_id'),
+			'user_id' => $user_id,
 			'department_id' => $this->ci->session->userdata('department_id'),
+			'publication_name' => $this->ci->security->xss_clean($this->ci->input->post('publication_name')),
 			'title' => $this->ci->security->xss_clean($this->ci->input->post('title')),
-			'author' => $user_id,
+			'abstract' => $this->ci->input->post('abstract'),
+			'author' => $this->ci->security->xss_clean($this->ci->input->post('author')),
 			'date_input' => date('Y-m-d H:i:s'),
 			'date_update' => date('Y-m-d H:i:s'),
 		);
@@ -35,17 +38,12 @@ class Lib_publication {
 			'pub_country' => $this->ci->security->xss_clean($this->ci->input->post('pub_country')),
 			'pub_year' => $this->ci->security->xss_clean($this->ci->input->post('pub_year')),
 			'pub_website' => $this->ci->security->xss_clean($this->ci->input->post('pub_website')),
-			'pub_volume' => $this->ci->security->xss_clean($this->ci->input->post('pub_volume')),
 			'page' => $this->ci->security->xss_clean($this->ci->input->post('page')),
-			'paten' => $this->ci->security->xss_clean($this->ci->input->post('paten')),
 			'issn_isbn' => $this->ci->security->xss_clean($this->ci->input->post('issn_isbn')),
 			'q_year' => $this->ci->security->xss_clean($this->ci->input->post('q_year')),
 			'freq_year' => $this->ci->security->xss_clean($this->ci->input->post('freq_year')),
 			'db_index' => $this->ci->security->xss_clean($this->ci->input->post('db_index')),
 			'detail' => $this->ci->security->xss_clean($this->ci->input->post('detail')),
-		);
-		$impact = array(
-			'pub_id' => $publication_data['pub_id'],
 			'jcr' => $this->ci->security->xss_clean($this->ci->input->post('jcr')),
 			'scr' => $this->ci->security->xss_clean($this->ci->input->post('scr')),
 		);
@@ -67,8 +65,6 @@ class Lib_publication {
 				$act = $this->ci->pub->insert('publication', $publication_data);
 				if($act){
 					$this->ci->pub->insert('publication_detail', $publication_detail);
-					$this->ci->pub->insert('publication_impact_factor', $impact);
-					$this->ci->pub->insert('publication_author', array('pub_id' => $publication_data['pub_id'], 'author_id' => $user_id));
 					$this->ci->session->set_flashdata('warning','New Publication data has been saved without SIDR file.');
 				}else 
 					$this->ci->session->set_flashdata('error','Trouble saving publication.');
@@ -78,8 +74,6 @@ class Lib_publication {
 				$act = $this->ci->pub->insert('publication', $publication_data);
 				if($act){
 					$this->ci->pub->insert('publication_detail', $publication_detail);
-					$this->ci->pub->insert('publication_impact_factor', $impact);
-					$this->ci->pub->insert('publication_author', array('pub_id' => $publication_data['pub_id'], 'author_id' => $user_id));
 					$this->ci->session->set_flashdata('success','New Publication data has been saved.');
 				}else 
 					$this->ci->session->set_flashdata('error','Trouble saving publication.');
@@ -88,8 +82,6 @@ class Lib_publication {
 			$act = $this->ci->pub->insert('publication', $publication_data);
 			if($act){
 				$this->ci->pub->insert('publication_detail', $publication_detail);
-				$this->ci->pub->insert('publication_impact_factor', $impact);
-				$this->ci->pub->insert('publication_author', array('pub_id' => $publication_data['pub_id'], 'author_id' => $user_id));
 				$this->ci->session->set_flashdata('warning','New Publication data has been saved without SIDR file.');
 			}else 
 				$this->ci->session->set_flashdata('error','Trouble saving publication.');
@@ -102,7 +94,9 @@ class Lib_publication {
 		$publication_data = array(
 			'pub_type_id' => $this->ci->input->post('type_id'),
 			'title' => $this->ci->security->xss_clean($this->ci->input->post('title')),
-			'author' => $this->ci->session->userdata('user_id'),
+			'publication_name' => $this->ci->security->xss_clean($this->ci->input->post('publication_name')),
+			'abstract' => $this->ci->input->post('abstract'),
+			'author' => $this->ci->security->xss_clean($this->ci->input->post('author')),
 			'date_update' => date('Y-m-d H:i:s'),
 		);
 		$publication_detail = array(
@@ -110,16 +104,12 @@ class Lib_publication {
 			'pub_country' => $this->ci->security->xss_clean($this->ci->input->post('pub_country')),
 			'pub_year' => $this->ci->security->xss_clean($this->ci->input->post('pub_year')),
 			'pub_website' => $this->ci->security->xss_clean($this->ci->input->post('pub_website')),
-			'pub_volume' => $this->ci->security->xss_clean($this->ci->input->post('pub_volume')),
 			'page' => $this->ci->security->xss_clean($this->ci->input->post('page')),
-			'paten' => $this->ci->security->xss_clean($this->ci->input->post('paten')),
 			'issn_isbn' => $this->ci->security->xss_clean($this->ci->input->post('issn_isbn')),
 			'q_year' => $this->ci->security->xss_clean($this->ci->input->post('q_year')),
 			'freq_year' => $this->ci->security->xss_clean($this->ci->input->post('freq_year')),
 			'db_index' => $this->ci->security->xss_clean($this->ci->input->post('db_index')),
 			'detail' => $this->ci->security->xss_clean($this->ci->input->post('detail')),
-		);
-		$impact = array(
 			'jcr' => $this->ci->security->xss_clean($this->ci->input->post('jcr')),
 			'scr' => $this->ci->security->xss_clean($this->ci->input->post('scr')),
 		);
@@ -138,7 +128,6 @@ class Lib_publication {
 				$act = $this->ci->pub->update('publication', array('pub_id', $id), $publication_data);
 				if($act){
 					$this->ci->pub->update('publication_detail', array('pub_id', $id), $publication_detail);
-					$this->ci->pub->update('publication_impact_factor', array('pub_id', $id), $impact);
 					$this->ci->session->set_flashdata('success','Publication data has been updated.');
 				}else 
 					$this->ci->session->set_flashdata('error','Trouble updating publication.');
@@ -148,7 +137,6 @@ class Lib_publication {
 				$act = $this->ci->pub->update('publication', array('pub_id', $id), $publication_data);
 				if($act){
 					$this->ci->pub->update('publication_detail', array('pub_id', $id), $publication_detail);
-					$this->ci->pub->update('publication_impact_factor', array('pub_id', $id), $impact);
 					$this->ci->session->set_flashdata('success','Publication data has been updated.');
 				}else 
 					$this->ci->session->set_flashdata('error','Trouble updating publication.');
@@ -157,7 +145,6 @@ class Lib_publication {
 			$act = $this->ci->pub->update('publication', array('pub_id', $id), $publication_data);
 			if($act){
 				$this->ci->pub->update('publication_detail', array('pub_id', $id), $publication_detail);
-				$this->ci->pub->update('publication_impact_factor', array('pub_id', $id), $impact);
 				$this->ci->session->set_flashdata('success','New Publication data has been updated.');
 			}else 
 				$this->ci->session->set_flashdata('error','Trouble updating publication.');
@@ -169,10 +156,26 @@ class Lib_publication {
 	public function delete_publication(){
 		$id = $this->ci->input->post('pub_id');
 		$act = $this->ci->pub->delete('publication', array('pub_id', $id));
-		if($act) $this->ci->session->set_flashdata('success','News has been deleted.');
-		else $this->ci->session->set_flashdata('error','Trouble deleting news.');
+		if($act) $this->ci->session->set_flashdata('success','Publication data has been deleted.');
+		else $this->ci->session->set_flashdata('error','Trouble deleting publication.');
 		redirect('publication');
 	}
-
+	
+	public function sidr_verify($pub_id){
+		$act = $this->ci->pub->update('publication', array('pub_id', $pub_id), array('sidr_verify'=>1));
+		if($act) $this->ci->session->set_flashdata('success','SIDR has been verified.');
+		else $this->ci->session->set_flashdata('error','Trouble verifying SIDR.');
+		redirect('publication/action/sidr/'.$pub_id);
+	}
+	
+	public function export($param){
+		$data['types'] = $this->ci->pub->get_publication_type();
+		$data['publication'] = $this->ci->pub->get_all_publication_report();
+		if($param == 'excel'){
+			$this->ci->load->view('template/page/export_excel', $data);
+		}else{
+			# pdf export
+		}
+	}
 	
 }

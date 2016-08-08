@@ -133,7 +133,7 @@ class Login extends CI_Controller {
 		// $pass = generatePassword(8,4);
 		$userid = $this->security->xss_clean($this->input->post('user_id'));
 		$code = $this->security->xss_clean($this->input->post('usercode'));
-		$status = $this->input->post('role_id');
+		// $status = $this->input->post('role_id');
 		$name = $this->security->xss_clean($this->input->post('name'));
 		$email = $this->security->xss_clean($this->input->post('email'));
 		$data = array(
@@ -142,7 +142,7 @@ class Login extends CI_Controller {
 			'name'		=> $name,
 			'email'		=> $email,
 			'status'	=> 1,
-			'role_id'	=> $status,
+			'role_id'	=> 3,
 			'department_id'	=> $this->input->post('department_id'),
 			'password'	=> md5($code),
 			'phone'		=> $this->security->xss_clean($this->input->post('phone')),
@@ -151,7 +151,7 @@ class Login extends CI_Controller {
 		);
 		$act = $this->mdl_login->create_user($data);
 		if($act){
-			$this->session->set_flashdata('success','<b>Success,</b> Proses registrasi peneliti berhasil. Silakan gunakan <b>user ID</b> dan <b>NIP/NPM </b>untuk masuk ke aplikasi pertama kali. Gunakan fitur <b>Change Password </b> untuk memperbaharui password Anda.');
+			$this->session->set_flashdata('success','<b>Success,</b> Proses registrasi peneliti berhasil. Silakan gunakan <b>user ID</b> dan <b>NIP/NUP </b>untuk masuk ke aplikasi pertama kali. Gunakan fitur <b>Change Password </b> untuk memperbaharui password Anda.');
 		}else{
 			$this->session->set_flashdata('warning','<b>Warning!</b> Terjadi kesalahan saat memproses data. Proses registrasi peneliti gagal dilakukan. Mohon untuk menghubungi administrator.');
 		}				
@@ -239,7 +239,7 @@ class Login extends CI_Controller {
 	
     public function signout(){
 		$this->session->sess_destroy();
-        redirect();
+        redirect('login');
     }
 
 }

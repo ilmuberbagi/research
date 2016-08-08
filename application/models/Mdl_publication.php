@@ -29,6 +29,21 @@ class Mdl_publication extends CI_Model{
 	}
 
 	# publications
+	public function get_all_publication_report($user_id = null){
+		$sql = "select a.*, b.type_name, c.department_name, d.* from publication a 
+				left join publication_detail d on a.pub_id = d.pub_id 
+				left join publication_type b on a.pub_type_id = b.type_id 
+				left join department c on a.department_id = c.department_id 
+				order by a.date_input DESC";
+		if($user_id != null)
+			$sql = "select a.*, b.type_name, c.department_name, d.* from publication a 
+				left join publication_detail d on a.pub_id = d.pub_id 
+				left join publication_type b on a.pub_type_id = b.type_id 
+				left join department c on a.department_id = c.department_id where a.user_id = '$user_id'
+				order by a.date_input DESC";
+		return $this->db->query($sql)->result_array();
+	}
+
 	public function get_all_publication($user_id = null){
 		$sql = "select a.*, b.type_name, c.department_name from publication a 
 				left join publication_type b on a.pub_type_id = b.type_id 
@@ -37,22 +52,21 @@ class Mdl_publication extends CI_Model{
 		if($user_id != null)
 			$sql = "select a.*, b.type_name, c.department_name from publication a 
 				left join publication_type b on a.pub_type_id = b.type_id 
-				left join department c on a.department_id = c.department_id where a.author = '$user_id'
+				left join department c on a.department_id = c.department_id where a.user_id = '$user_id'
 				order by a.date_input DESC";
 		return $this->db->query($sql)->result_array();
 	}
 
 	public function current_publication($id){
-		$sql = "select a.*,x.*,y.*, b.type_name, c.department_name from publication a 
+		$sql = "select a.*,x.*, b.type_name, c.department_name from publication a 
 				left join publication_detail x on a.pub_id = x.pub_id 
-				left join publication_impact_factor y on a.pub_id = y.pub_id 
 				left join publication_type b on a.pub_type_id = b.type_id 
 				left join department c on a.department_id = c.department_id where a.pub_id = '$id'";
 		return $this->db->query($sql)->result_array();
 	}
 	
 	public function get_publication_type(){
-		$sql = "select * from publication_type order by type_name ASC";
+		$sql = "select * from publication_type order by type_id ASC";
 		return $this->db->query($sql)->result_array();
 	}
 	
@@ -68,9 +82,11 @@ class Mdl_publication extends CI_Model{
 		return $data[0]['name'];
 	}
 	
+	# author model
 	public function get_authors($pub_id){
-		$sql = "select a.*, b.department_name from users a left join department b on a.department_id = b.department_id 
-				where user_id in (select author_id from publication_author where pub_id = '$pub_id')";
+		$sql = "select a.*, b.*, c.department_name from publication_author a left join users b on a.author_id = b.user_id
+				left outer join department c on b.department_id = c.department_id
+				where a.pub_id = '$pub_id' order by pub_author_id ASC";
 		return $this->db->query($sql)->result_array();
 	}
 	
@@ -79,6 +95,10 @@ class Mdl_publication extends CI_Model{
 		return $this->db->query($sql)->result_array();
 	}
 	
+	public function delete_author($user_id, $pub){
+		$sql = "delete from publication_author where md5(author_id) = '$user_id' and pub_id = '$pub'";
+		return $this->db->query($sql);
+	}
 	
 }
 

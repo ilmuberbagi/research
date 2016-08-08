@@ -49,6 +49,7 @@
 						<a href="#"><i class="fa fa-book"></i> <span>Publication</span> <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
 							<li><a href="<?php echo base_url().'publication';?>"><i class="fa fa-arrow-circle-right"></i> Publication Data</a></li>
+							<li><a href="<?php echo base_url().'publication/grant';?>"><i class="fa fa-arrow-circle-right"></i> Grant</a></li>
 						</ul>
 					</li>
 					
@@ -61,8 +62,7 @@
 						<a href="#"><i class="fa fa-book"></i> <span>Publication</span> <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
 							<li><a href="<?php echo base_url().'publication';?>"><i class="fa fa-arrow-circle-right"></i> Publication</a></li>
-							<li><a href="<?php echo base_url().'publication/input';?>"><i class="fa fa-arrow-circle-right"></i>  Input Data</a></li>
-							<li><a href="<?php echo base_url().'publication/import';?>"><i class="fa fa-arrow-circle-right"></i>  Import Data</a></li>
+							<li><a href="<?php echo base_url().'publication/grant';?>"><i class="fa fa-arrow-circle-right"></i> Grant</a></li>
 						</ul>
 					</li>
 				<?php } ?>
