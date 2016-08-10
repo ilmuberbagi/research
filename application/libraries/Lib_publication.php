@@ -160,7 +160,7 @@ class Lib_publication {
 		else $this->ci->session->set_flashdata('error','Trouble deleting publication.');
 		redirect('publication');
 	}
-	
+
 	public function sidr_verify($pub_id){
 		$act = $this->ci->pub->update('publication', array('pub_id', $pub_id), array('sidr_verify'=>1));
 		if($act) $this->ci->session->set_flashdata('success','SIDR has been verified.');
@@ -168,13 +168,38 @@ class Lib_publication {
 		redirect('publication/action/sidr/'.$pub_id);
 	}
 	
+	public function publish_publication(){
+		$pub_id = $this->ci->input->post('pub_id');
+		$act = $this->ci->pub->update('publication', array('pub_id', $pub_id), array('publish'=>1));
+		if($act) $this->ci->session->set_flashdata('success','Publication data has been published.');
+		else $this->ci->session->set_flashdata('error','Trouble publishing publication.');
+		redirect('publication');
+	}
+	
 	public function export($param){
-		$data['types'] = $this->ci->pub->get_publication_type();
-		$data['publication'] = $this->ci->pub->get_all_publication_report();
+		$this->data['types'] = $this->ci->pub->get_publication_type();
+		$this->data['publication'] = $this->ci->pub->get_all_publication_report();
 		if($param == 'excel'){
-			$this->ci->load->view('template/page/export_excel', $data);
+			$this->ci->load->view('template/page/export_excel', $this->data);
 		}else{
 			# pdf export
+			require_once('includes/pdf_report/SIApdf.php');
+			$pdf = new SIApdf(PDF_PAGE_ORIENTATION, PDF_UNIT, PDF_PAGE_FORMAT, true, 'UTF-8', false);		
+			$data = array('pdf_title' => 'Data publikasi FTUI', 'pdf_margin' => array(20,20,10)); //margin = array(kiri, atas, kanan)
+			$pdf->sia_set_properties($data);
+			$pdf->SetFont('helvetica', '', 9);
+				
+			#ukuran kertas milimiter
+			$pdf->AddPage('L', array(841,594), false, false);
+			$pdf->setPageOrientation('L',true,5);
+			
+			#tulis konten html ke PDF
+			$html = $this->ci->load->view('template/page/export_pdf', $this->data, true);
+			$pdf->writeHTML($html, true, false, true, false, '');
+						
+			#finish pdf
+			$pdf->lastPage();
+			$pdf->Output('publication-'.date('YmdHis').'.pdf', 'I');
 		}
 	}
 	

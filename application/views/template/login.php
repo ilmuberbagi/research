@@ -8,20 +8,21 @@
     <link rel="stylesheet" href="<?php echo base_url().'assets/css/ionicons.min.css';?>">
     <link rel="stylesheet" href="<?php echo base_url().'assets/css/adminLTE.min.css';?>">
     <link rel="stylesheet" href="<?php echo base_url().'assets/plugins/iCheck/square/blue.css';?>">
-
+	<style>
+		.login-title{border-top:solid 1px #AAA; text-align:center; color:#222; padding:10px; background:#EEE;}
+	</style>
 </head>
 <body class="hold-transition login-page">
 	<div class="login-box">
-		<div class="login-logo">
-			<a href="<?php echo site_url();?>"><b>Research</b> FTUI</a>
-		</div>
 		<div class="login-box-body">
-			<p class="login-box-msg">Log in with your username and password.</p>
+			<a href="<?php echo site_url();?>"><img src="<?php echo site_url().'assets/public/img/logo-ftui.jpg';?>" alt="Research FTUI"></a>
+			<h4 class="login-title"><i class="fa fa-lock"></i> LOGIN</h4>
+			<p class="login-box-msg">Login with your username and password.</p>
 			<?php echo $this->session->flashdata('invalid');?>
 			<form action="<?php echo site_url().'login/auth';?>" method="post">
 				<div class="form-group has-feedback">
 					<input type="text" class="form-control" name="username" placeholder="Username">
-					<span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+					<span class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
 					<input type="password" class="form-control" name="password" placeholder="Password">

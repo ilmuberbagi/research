@@ -6,8 +6,12 @@ $(function(){
 	$(".data-publication").DataTable();
 });
 
-function delete_article(id){
+function delete_publication(id){
 	$("#pub_id").val(id);
 	$(".msg").html("Are you sure want to delete this publication?");
+}
+function publish_publication(id){
+	$("#pub_id_pub").val(id);
+	$(".msg").html("Are you sure want to publish this data?");
 }
 </script>

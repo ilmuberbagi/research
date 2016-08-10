@@ -1,6 +1,6 @@
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Dashboard <small>CMS Research FTUI</small></h1>
+		<h1>Dashboard <small>Research and Community Engangement</small></h1>
 		<ol class="breadcrumb">
 			<li><a href="#"><i class="fa fa-dashboard"></i> Dashboard</a></li>
 		</ol>
@@ -72,9 +72,45 @@
 		<?php }else{?>
 		<div class="box">
 			<div class="box-header with-border">
-				<b>Selamat Datang di Dashboard Riset dan Publikasi FTUI</b>
+				<b><i class="fa fa-home"></i> Selamat Datang di Dashboard Research and Community Engangement FTUI</b>
 			</div>
 			<div class="box-body">
+				<div class="row">
+					<!-- journal -->
+					<div class="col-lg-3 col-xs-6">
+						<div class="small-box bg-red">
+							<div class="inner"><h3>Profile</h3><p>Researcher Data</p></div>
+							<div class="icon"><i class="fa fa-user"></i></div>
+							<a href="<?php echo base_url().'dashboard/profile';?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<!-- publication -->
+					<div class="col-lg-3 col-xs-6">
+						<div class="small-box bg-green">
+							<div class="inner">
+								<h3><?php echo number_format($count_news);?></h3>
+								<p>Publications</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-book"></i>
+							</div>
+							<a href="<?php echo base_url().'publication';?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<!-- quotes -->
+					<div class="col-lg-3 col-xs-6">
+						<div class="small-box bg-yellow">
+							<div class="inner">
+								<h3><?php echo number_format($count_video);?></h3>
+								<p>Grants</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-bookmark"></i>
+							</div>
+							<a href="<?php echo base_url().'publication/grant';?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 		<?php }?>

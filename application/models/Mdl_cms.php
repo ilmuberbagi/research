@@ -20,6 +20,13 @@ class Mdl_cms extends CI_Model{
 		return $this->db->query($sql)->result_array();
 	}
 	
+	public function count_publication($id = null){
+		$sql = "select * from publication";
+		if($id !== "")
+			$sql = "select * from publication where user_id = '$id'";
+		return $this->db->query($sql)->num_rows();
+	}
+	
 	public function count_news(){
 		$sql = "select * from news";
 		return $this->db->query($sql)->num_rows();

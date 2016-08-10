@@ -90,7 +90,7 @@
 						<div class="list-group-item title"><i class="fa fa-lock"></i> LOGIN</div>
 						<div class="list-group-item">
 							<div class="list-group-item">
-								<form method="POST" action="<?php echo site_url().'login/auth/home';?>">
+								<form method="POST" action="<?php echo site_url().'login/auth/home';?>" class="form">
 									<div class="form-group">
 										<label>Username</label>
 										<input type="text" name="username" class="form-control" placeholder="Username">
@@ -103,6 +103,9 @@
 										<input type="submit" name="submit" class="btn btn-block btn-warning" value="Login">
 									</div>
 								</form>
+							</div>
+							<div class="list-group-item">
+								<p><a href="<?php echo site_url().'register';?>" class="pull-right">Register new researcher &raquo;</a></p>
 							</div>
 						</div>
 					</div>

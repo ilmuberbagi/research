@@ -16,6 +16,11 @@ class Dashboard extends CI_Controller{
 		$this->data['count_slide'] = $this->cms->count_slide();
 		$this->data['count_news'] = $this->cms->count_news();
 		$this->data['count_video'] = $this->cms->count_video();
+		if($this->session->userdata('role') == 3 || $this->session->userdata('role') == 4){
+			$this->data['count_slide'] = 0;
+			$this->data['count_news'] = $this->cms->count_publication($this->session->userdata('user_id'));
+			$this->data['count_video'] = 0;
+		}
 		$this->load->view('template', $this->data);
 	}
 	

@@ -9,17 +9,18 @@
     <link rel="stylesheet" href="<?php echo base_url().'assets/css/adminLTE.min.css';?>">
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 	<style>
-	.note-userid, .note-email{color:#FF0000; padding-left:2px; padding-bottom:5px; border-bottom:solid 1px #FF0000}
-	label span{ color:#FF0000}
+		.note-userid, .note-email{color:#FF5500; padding-left:2px; padding-bottom:5px; border-bottom:solid 1px #FF5500}
+		label span{ color:#FF0000}
+		.login-title{border-top:solid 1px #AAA; text-align:center; color:#222; padding:10px; background:#EEE;}
+
 	</style>
 
 </head>
 <body class="hold-transition login-page">
 	<div class="login-box">
-		<div style="text-align:center; font-size:2em; font-weight:bold; color:#666">
-			Researcher <div style="font-size:16px; margin-bottom:20px; font-weight:normal">Registration</div>
-		</div>
 		<div class="login-box-body">
+			<a href="<?php echo site_url();?>"><img src="<?php echo site_url().'assets/public/img/logo-ftui.jpg';?>" alt="Research FTUI"></a>
+			<h4 class="login-title"><i class="fa fa-bookmark"></i> REGISTRATION</h4>
 			<p class="login-box-msg" style="border-bottom:solid 1px #DDD; margin-bottom:10px">Please fill your data correctly. We will send you an activation account to your email.</p>
 			
 			<?php if($this->session->flashdata('success') != ''){?>
@@ -36,7 +37,7 @@
 
 			<form action="<?php echo site_url().'login/proc_register';?>" method="post">
 				<div class="form-group has-feedback">
-					<label>User ID <i class="fa fa-question-circle" data-toggle="popover" data-placement="top" title="User ID" data-content="Enter your unique ID such as NIP/NIDN or NPM"></i> <span>*</span></label>
+					<label>User ID <i class="fa fa-question-circle" data-toggle="popover" data-placement="top" title="User ID" data-content="Enter your unique ID such as NIP/NUP or NIDN"></i> <span>*</span></label>
 					<input type="text" class="form-control" name="user_id" placeholder="User ID" id="user_id" required autofocus>
 					<span class="glyphicon glyphicon-user form-control-feedback"></span>
 					<div class="note-userid" style="display:none"><i class="fa fa-warning"></i> User ID has been used. Please use another one.</div>

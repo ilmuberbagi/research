@@ -34,6 +34,7 @@ class Publication extends CI_Controller{
 			case "delete": $this->lib_publication->delete_publication(); break;
 			case "insert": $this->lib_publication->insert_publication(); break;
 			case "update": $this->lib_publication->update_publication(); break;
+			case "publish": $this->lib_publication->publish_publication(); break;
 			case "sidr": $this->preview_sidr($id); break;
 			case "import": $this->import_excel(); break;
 			case "sidr_verify": $this->lib_publication->sidr_verify($id); break;
@@ -159,7 +160,6 @@ class Publication extends CI_Controller{
 		else $this->session->set_flashdata('warning','Trouble importing data');
 		redirect('publication/action/import');
 	}
-	
 	
 
 }

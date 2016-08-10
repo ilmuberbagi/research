@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="<?php echo base_url().'assets/css/font-awesome.min.css';?>">
     <link rel="stylesheet" href="<?php echo base_url().'assets/css/ionicons.min.css';?>">
     <link rel="stylesheet" href="<?php echo base_url().'assets/css/adminLTE.min.css';?>">
+	<style>
+		.login-title{border-top:solid 1px #AAA; text-align:center; color:#222; padding:10px; background:#EEE;}
+	</style>
 
 </head>
 <body class="hold-transition login-page">
 	<div class="login-box">
-		<div class="login-logo">
-			<a href="<?php echo site_url();?>"><b>Research</b> FTUI</a>
-		</div>
 		<div class="login-box-body">
+			<a href="<?php echo site_url();?>"><img src="<?php echo site_url().'assets/public/img/logo-ftui.jpg';?>" alt="Research FTUI"></a>
+			<h4 class="login-title"><i class="fa fa-refresh"></i> RESET PASSWORD</h4>
 			<p class="login-box-msg">Enter your email. We will send you a new password to log in.</p>
 			<?php echo $this->session->flashdata('invalid');?>
 			<form action="<?php echo site_url().'login/reset_password';?>" method="post">
