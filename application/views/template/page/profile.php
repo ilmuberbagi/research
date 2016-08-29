@@ -86,7 +86,7 @@
 									<input type="text" name="link_research_gate" class="form-control" value="<?php echo $user[0]['link_research_gate'];?>">
 								</div>
 								<div class="form-group">
-									<label>Link Google Scholar</label><br/><small>Untuk membuat research gate kunjungi <a href="http://scholar.google.com" target="_blank">http://scholar.google.com</a></small>
+									<label>Link Google Scholar</label><br/><small>Untuk membuat google scholar kunjungi <a href="http://scholar.google.com" target="_blank">http://scholar.google.com</a></small>
 									<input type="text" name="link_google_scholar" class="form-control" value="<?php echo $user[0]['link_google_scholar'];?>">
 								</div>
 								<div class="form-group">
