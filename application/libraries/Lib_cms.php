@@ -55,6 +55,8 @@ class Lib_cms {
 			'link_scopus'	=> $this->ci->security->xss_clean($this->ci->input->post('link_scopus')),
 			'index_scholar'	=> $this->ci->security->xss_clean($this->ci->input->post('index_scholar')),
 			'index_scopus'	=> $this->ci->security->xss_clean($this->ci->input->post('index_scopus')),
+			'expertise'	=> $this->ci->security->xss_clean($this->ci->input->post('expertise')),
+			'profile'	=> $this->ci->input->post('profile'),
 			'date_update'	=> date('Y-m-d H:i:s')
 		);
 		$act = $this->ci->cms->update('users', array('user_id', $id), $data);

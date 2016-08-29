@@ -165,12 +165,29 @@ class Dashboard extends CI_Controller{
 	}
 	
 	# profile
-	public function profile($id = ""){
+	public function profile($id = "", $param = ""){
 		$this->data['title'] = 'Profile';
-		$this->data['page'] = 'page/profile';
 		$this->data['departments'] = $this->cms->get_department();
 		$this->data['user'] = $this->cms->get_user($id);
-		$this->load->view('template', $this->data);
+		$this->data['page'] = 'page/profile';
+		if($param !== ''){
+			$this->load->model('Mdl_publication','pub');
+			$this->data['types'] = $this->pub->get_publication_type();
+			$this->data['grants'] = $this->pub->get_grant_by_user($id);
+			foreach($this->data['types'] as $type){
+				$this->data['publication'][$type['type_id']] = $this->pub->get_publication_by_type($id, $type['type_id']);
+			}
+			
+			if($param == 'print'){
+				$this->data['page'] = 'page/print_profile';
+				$this->load->view('template_print', $this->data);
+			}else if($param == 'excel'){
+				$this->load->view('template/page/profile_excel', $this->data);
+			}else
+				$this->load->view('template', $this->data);
+			
+		}else
+			$this->load->view('template', $this->data);
 	}
 	
 	# Account list

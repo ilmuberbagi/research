@@ -67,6 +67,18 @@ class Mdl_publication extends CI_Model{
 		return $this->db->query($sql)->result_array();
 	}
 
+	public function get_publication_by_type($user_id, $type){
+		$sql = "select * from publication a 
+				left join publication_detail b on a.pub_id = b.pub_id where pub_type_id = '$type' and user_id = '$user_id'
+				order by date_input DESC";
+		return $this->db->query($sql)->result_array();
+	}
+	
+	public function get_grant_by_user($user_id){
+		$sql = "select * from grants where user_id = '$user_id' order by date_input DESC";
+		return $this->db->query($sql)->result_array();
+	}
+	
 	public function current_publication($id){
 		$sql = "select a.*,x.*, b.type_name, c.department_name from publication a 
 				left join publication_detail x on a.pub_id = x.pub_id 

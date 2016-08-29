@@ -41,8 +41,18 @@
 						<span class="btn-group">
 							<a href="<?php echo site_url().'dashboard/profile/'.$a['user_id'];?>" class="btn btn-sm btn-default" data-tooltip="tooltip" title="Detail user"><i class="fa fa-search"></i></a>
 							<a href="#" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#modalStatus" onclick="return status_user('<?php echo $a['user_id'].'#'.$a['status'];?>')" data-tooltip="tooltip" title="Change status"><i class="fa fa-check-circle"></i></a>
-							<a href="#" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#modalDelete" onclick="return delete_user('<?php echo $a['user_id'];?>')" data-tooltip="tooltip" title="Delete user"><i class="fa fa-trash"></i></a>
-							<a href="#" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#modalReset" onclick="return reset('<?php echo $a['user_id'].'#'.($a['user_code'] !== "" ? $a['user_code']:'123456');?>')" data-tooltip="tooltip" title="Reset Password"><i class="fa fa-refresh"></i></a>
+							
+							<button type="button" class="btn btn-default btn-sm">Action</button>
+								<button aria-expanded="false" type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+									<span class="caret"></span>
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li><a href="#" data-toggle="modal" data-target="#modalDelete" onclick="return delete_user('<?php echo $a['user_id'];?>')"><i class="fa fa-trash"></i> Delete</a></li>
+									<li><a href="#" data-toggle="modal" data-target="#modalReset" onclick="return reset('<?php echo $a['user_id'].'#'.($a['user_code'] !== "" ? $a['user_code']:'123456');?>')"><i class="fa fa-refresh"></i> Reset Password</a></li>
+									<li><a target="_blank" href="<?php echo site_url().'dashboard/profile/'.$a['user_id'].'/print';?>"><i class="fa fa-print"></i> Print Profile</a></li>
+									<li><a href="<?php echo site_url().'dashboard/profile/'.$a['user_id'].'/excel';?>"><i class="fa fa-file-excel-o"></i> Export Profile</a></li>
+								</ul>
 						</span>
 					</td>
 				</tr>

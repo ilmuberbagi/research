@@ -141,7 +141,7 @@ class Login extends CI_Controller {
 			'user_code'	=> $code,
 			'name'		=> $name,
 			'email'		=> $email,
-			'status'	=> 1,
+			'status'	=> 0,
 			'role_id'	=> 3,
 			'department_id'	=> $this->input->post('department_id'),
 			'password'	=> md5($code),
@@ -151,7 +151,7 @@ class Login extends CI_Controller {
 		);
 		$act = $this->mdl_login->create_user($data);
 		if($act){
-			$this->session->set_flashdata('success','<b>Success,</b> Proses registrasi peneliti berhasil. Silakan gunakan <b>user ID</b> dan <b>NIP/NUP </b>untuk masuk ke aplikasi pertama kali. Gunakan fitur <b>Change Password </b> untuk memperbaharui password Anda.');
+			$this->session->set_flashdata('success','<b>Success,</b> Proses registrasi peneliti berhasil. Mohon menunggu untuk proses verifikasi oleh admin. Silakan gunakan <b>user ID</b> dan <b>NIP/NUP </b>untuk masuk ke aplikasi pertama kali. Gunakan fitur <b>Change Password </b> untuk memperbaharui password Anda.');
 		}else{
 			$this->session->set_flashdata('warning','<b>Warning!</b> Terjadi kesalahan saat memproses data. Proses registrasi peneliti gagal dilakukan. Mohon untuk menghubungi administrator.');
 		}				
