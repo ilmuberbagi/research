@@ -18,4 +18,10 @@ function status_user(id){
 	if(sts[1] == 0)
 		$(".msg").html("Are you sure want to activate this user?");
 }
+function reset(id){
+	sts = id.split('#');
+	$("#user_pass_id").val(sts[0]);
+	$("#password").val(sts[1]);
+	$(".msg").html("Are you sure want to change the password selected user with <b>"+sts[1]+"</b>?");
+}
 </script>

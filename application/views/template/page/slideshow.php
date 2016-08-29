@@ -7,7 +7,7 @@
 		</ol>
 	</section>
 
-	<section class="content">
+	<section class="content usetooltip">
 		<div class="box box-success">
 			<div class="box-header with-border">
 				<h3 class="box-title"><i class="fa fa-image"></i> &nbsp; Slideshow</h3>
@@ -35,8 +35,8 @@
 					<td><?php echo $a['status']==1?'<span class="label label-success">Active</span>':'<span class="label label-default">Inactive</span>';?></td>
 					<td>
 						<span class="btn-group">
-							<a href="<?php echo site_url().'dashboard/edit/slide/'.$a['slide_id'];?>" class="btn btn-sm btn-default"><i class="fa fa-edit"></i></a>
-							<a href="#" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#modalDelete" onclick="return delete_article('<?php echo $a['slide_id'];?>')"><i class="fa fa-trash"></i></a>
+							<a href="<?php echo site_url().'dashboard/edit/slide/'.$a['slide_id'];?>" class="btn btn-sm btn-default" data-tooltip="tooltip" title="Edit slide"><i class="fa fa-edit"></i></a>
+							<a href="#" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#modalDelete" data-tooltip="tooltip" title="Delete slide" onclick="return delete_article('<?php echo $a['slide_id'];?>')"><i class="fa fa-trash"></i></a>
 						</span>
 					</td>
 				</tr>

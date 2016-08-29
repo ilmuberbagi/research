@@ -1,23 +1,29 @@
-		<div class="row">
+		<!-- start image slider -->
+		<div class="row" style="background-color:#EEE">
 			<div class="col-md-12">
-				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-					<div class="carousel-inner" role="listbox">
-						<?php if(!empty($slideshow)){ $no=0; foreach ($slideshow as $slide){ $no++;?>
-						<div class="item <?php echo $no==1? 'active':'';?>">
-							<img src="<?php echo $slide['img_url'];?>" alt="">
-							<div class="carousel-caption">
-								<h3><?php echo $slide['caption_title'];?></h3>
-								<p><?php echo $slide['caption_text'];?></p>
+				<div class="container">
+					<div class="row">
+						<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+							<div class="carousel-inner" role="listbox">
+								<?php if(!empty($slideshow)){ $no=0; foreach ($slideshow as $slide){ $no++;?>
+								<div class="item <?php echo $no==1? 'active':'';?>">
+									<img src="<?php echo $slide['img_url'];?>" alt="">
+									<!-- div class="carousel-caption">
+										<h3><?php echo $slide['caption_title'];?></h3>
+										<p><?php echo $slide['caption_text'];?></p>
+									</div -->
+								</div>
+								<?php }}?>
 							</div>
+							<!-- Controls -->
+							<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
+							<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
 						</div>
-						<?php }}?>
 					</div>
-					<!-- Controls -->
-					<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev"> <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> <span class="sr-only">Previous</span> </a>
-					<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next"> <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span> <span class="sr-only">Next</span> </a>
 				</div>
 			</div>
 		</div>
+		<!-- end image slider -->
 
 		<!-- content -->
 		<div class="container">
@@ -58,7 +64,7 @@
 							<div class="list-group-item">
 								<form action="<?php echo site_url().'search';?>" method="GET">
 									<div class="input-group">
-										<input type="text" class="form-control" placeholder="Enter keyword" aria-describedby="basic-addon2">
+										<input type="text" class="form-control" name="key" placeholder="Type something..">
 										<span class="input-group-btn" id="basic-addon2">
 											<button class="btn btn-warning" type="button"><i class="fa fa-search"></i></button>
 										</span>
@@ -67,15 +73,66 @@
 							</div>
 						</div>
 					</div>
-					
 					<div class="row">
+						<ul class="nav nav-tabs title" role="tablist">
+							<li class="active" role="presentation"><a href="#publication" aria-controls="settings" role="tab" data-toggle="tab">RECENT PUBLICATIONS</a></li>
+							<li role="presentation"><a href="#grant" aria-controls="messages" role="tab" data-toggle="tab">GRANTS</a></li>
+						</ul>
+						<!-- Tab panes -->
+						<div class="tab-content">
+							<!-- publication -->
+							<div role="tabpanel" class="tab-pane active" id="publication">
+								<?php if(!empty($publication)){ $no=0; foreach($publication as $g){ $no++;?>
+									<div class="list-group-item data">
+										<div class="row">
+											<div class="col-md-2 big">
+												<div class="date"><?php echo date('d', strtotime($g['date_input']));?></div>
+												<div><?php echo date('M', strtotime($g['date_input']));?></div>
+												<div><?php echo date('Y', strtotime($g['date_input']));?></div>
+											</div>
+											<div class="col-md-10">
+												<div class="item-title"><?php echo $g['title'];?></div>
+												<div class="author">Authors : <?php echo $g['author'];?></div>
+											</div>
+										</div>
+									</div>
+								<?php }}else{?>
+									<div class="list-group-item">No data available</div>
+								<?php } ?>
+								<div class="list-group-item"><a href="<?php echo site_url().'research/publication';?>">Browse All Publications &raquo;</a></div>
+							</div>
+							<div role="tabpanel" class="tab-pane" id="grant">
+								<?php if(!empty($grant)){ $no=0; foreach($grant as $g){ $no++; ?>
+									<div class="list-group-item data">
+										<div class="row">
+											<div class="col-md-2 big">
+												<div class="date"><?php echo date('d', strtotime($g['date_input']));?></div>
+												<div><?php echo date('M', strtotime($g['date_input']));?></div>
+												<div><?php echo date('Y', strtotime($g['date_input']));?></div>
+											</div>
+											<div class="col-md-10">
+												<b><?php echo $g['research_title'];?></b>
+												<div class="author">Authors : <?php echo $g['main_researcher'];?></div>
+											</div>
+										</div>
+									</div>
+								<?php }}else{?>
+									<div class="list-group-item">No data available</div>
+								<?php } ?>
+								<div class="list-group-item"><a href="<?php echo site_url().'research/grant';?>">Browse All Grants &raquo;</a></div>
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<BR/>
 						<div class="list-group-item title"><i class="fa fa-video-camera"></i> LATEST VIDEOS</div>
 						<div class="list-group-item">
 							<?php if(!empty($video)){ foreach($video as $v){?>
 							<div class="list-group-item">
-								<div class="embed-responsive embed-responsive-16by9">
-									<iframe id="youtube-home" class="embed-responsive-item" src="<?php echo $v['video_url'];?>" frameborder="0" allowfullscreen></iframe>
-								</div>
+								<a href="<?php echo site_url().'videos/read/'.$v['video_id'].'/'.gen_url($v['video_title']);?>">
+									<img src="<?php echo getYoutubeImage($v['video_url']);?>" class="img-responsive">
+								</a>
 							</div>
 							<?php }?>
 							<p><a href="<?php echo site_url().'videos';?>" class="btn btn-warning btn-block btn-sm">Index video</a></p>

@@ -1,5 +1,5 @@
 	<header class="main-header">
-		<a href="index2.html" class="logo">
+		<a href="<?php echo site_url().'dashboard';?>" class="logo">
 			<span class="logo-mini"><b>FTUI</b></span>
 			<span class="logo-lg"><b>Research </b>FTUI</span>
 		</a>
@@ -12,33 +12,9 @@
 				<ul class="nav navbar-nav">
 				
 					<li class="dropdown messages-menu">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope-o"></i><span class="label label-success">0</span></a>
-						<ul class="dropdown-menu">
-							<li class="header">Belum ada pesan masuk</li>
-							<li class="footer"><a href="#">Lihat semua pesan</a></li>
-						</ul>
-					</li>
-
-					<li class="dropdown notifications-menu">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="fa fa-users"></i>
-							<span class="label label-warning">0</span>
+						<a href="<?php echo site_url().'dashboard';?>">
+							Dashboard Research FTUI
 						</a>
-						<ul class="dropdown-menu">
-							<li class="header">Belum ada member baru</li>
-							<li class="footer"><a href="#">Lihat semua member</a></li>
-						</ul>
-					</li>
-					
-					<li class="dropdown tasks-menu">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<i class="fa fa-flag-o"></i>
-							<span class="label label-danger">0</span>
-						</a>
-						<ul class="dropdown-menu">
-							<li class="header">Belum ada artikel baru</li>
-							<li class="footer"><a href="#">Lihat semua artikel</a></li>
-						</ul>
 					</li>
 
 					<li class="dropdown user user-menu">
@@ -71,7 +47,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true"><i class="fa fa-remove"></i></span><span class="sr-only">Close</span></button>
-					<img class="img-circle link" src="<?php echo set_image($this->session->userdata('avatar'));?>"  style="max-width:100px;">
+					<img class="img-circle link" src="<?php echo set_image($this->session->userdata('avatar'));?>"  style="width:100px;height:100px">
 					<h4 class="modal-title">Change Photo</h4>
 					<div>Change profile photo</div>
 				</div>

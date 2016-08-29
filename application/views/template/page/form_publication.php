@@ -26,7 +26,7 @@
 			$pub_year = $curr_pub[0]['pub_year'];
 			$pub_website = $curr_pub[0]['pub_website'];
 			$page = $curr_pub[0]['page'];
-			$paten = $curr_pub[0]['paten'];
+			$volume = $curr_pub[0]['volume'];
 			$issn_isbn = $curr_pub[0]['issn_isbn'];
 			$qyear = $curr_pub[0]['q_year'];
 			$freq_year = $curr_pub[0]['freq_year'];
@@ -52,7 +52,7 @@
 			$pub_year = '';
 			$pub_website = '';
 			$page = '';
-			$paten = '';
+			$volume = '';
 			$issn_isbn = '';
 			$qyear = '';
 			$freq_year = '';
@@ -85,7 +85,8 @@
 						</div>
 						<div class="form-group">
 							<label>Publication Type</label>
-							<select name="type_id" class="form-control select" required>
+							<select name="type_id" class="form-control" required>
+								<option value="">- Select type -</option>
 								<?php if(!empty($types)){ foreach($types as $t){?>
 								<option value="<?php echo $t['type_id'];?>" <?php echo $t['type_id'] == $type_id ?'selected':'';?>><?php echo $t['type_name'];?></option>
 								<?php }}?>
@@ -100,7 +101,7 @@
 							<textarea name="abstract" class="form-control description" rows="10"><?php echo $abstract;?></textarea>
 						</div>
 						<div class="form-group">
-							<label>Upload SIDR </label><br/><small>Allowed file type <b>PDF</b> <i class="fa fa-file-pdf-o"></i></small>
+							<label>Upload File </label><br/><small>Allowed file type <b>PDF</b> <i class="fa fa-file-pdf-o"></i></small>
 							<div class="input-group">
 								<input type="file" name="userfile" class="form-input">
 							</div>
@@ -121,15 +122,19 @@
 					<div class="box-body">
 						<div class="form-group">
 							<label>Publisher</label><br/><small>Publisher (Assosiation/Institution)</small>
-							<input type="text" name="publisher" class="form-control" value='<?php echo $publisher;?>' placeholder="">
+							<input type="text" name="publisher" class="form-control" value='<?php echo $publisher;?>' placeholder="Publisher">
 						</div>
 						<div class="form-group">
 							<label>ISSN/ISBN</label>
 							<input type="text" name="issn_isbn" class="form-control" value='<?php echo $issn_isbn;?>' placeholder="ISSN/ISBN">
 						</div>
 						<div class="form-group">
-							<label>Page</label>
-							<input type="number" min="0" name="page" class="form-control" value='<?php echo $page;?>' placeholder="Please fill the number">
+							<label>Page</label><br/><small>	Masukkan halaman. Misal : 102-105</small>
+							<input type="text" name="page" class="form-control" value='<?php echo $page;?>' placeholder="Ex : 102-105">
+						</div>
+						<div class="form-group">
+							<label>Volume</label>
+							<input type="number" min="0" name="volume" class="form-control" value='<?php echo $volume;?>' placeholder="Please fill the number">
 						</div>
 						<div class="form-group">
 							<label>Country</label>
@@ -146,10 +151,6 @@
 						<div class="form-group">
 							<label>Website</label><br/><small>Masukan URL website yang merujuk artikel ilmiah</small>
 							<input type="url" name="pub_website" class="form-control" value='<?php echo $pub_website;?>' placeholder="http://">
-						</div>
-						<div class="form-group">
-							<label>Detail</label><br/><small>Detail Karya Ilmiah (Penerbit,Tahun Terbit, Vol, Hal, dll)</small>
-							<textarea name="detail" class="form-control" rows="3"><?php echo $detail;?></textarea>
 						</div>
 					</div>
 				</div>
@@ -170,8 +171,9 @@
 							<input type="number" name="scr" class="form-control" step="any" min="0" value='<?php echo $scr;?>'>
 						</div>
 						<div class="form-group">
-							<label>Quartile Ranking</label><br/><small>Lihat quartile ranking dari website <a href="http://www.scimagojr.com/" target="_blank">http://www.scimagojr.com/</a></small>
-							<select name="q_year" class="form-control select">
+							<label>Quartile Ranking</label><br/><small>Lihat quartile ranking dari website <a href="http://www.scimagojr.com/" target="_blank">http://www.scimagojr.com/</a>.<br/>Pilih Q5 jika publikasi tidak termasuk Q1-Q4</small>
+							<select name="q_year" class="form-control" required>
+								<option value="">- Select Quartile Ranking -</option>
 								<option value="Q1" <?php echo $qyear=="Q1"?'selected':'';?>>Q1</option>
 								<option value="Q2" <?php echo $qyear=="Q2"?'selected':'';?>>Q2</option>
 								<option value="Q3" <?php echo $qyear=="Q3"?'selected':'';?>>Q3</option>

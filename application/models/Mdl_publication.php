@@ -29,18 +29,28 @@ class Mdl_publication extends CI_Model{
 	}
 
 	# publications
-	public function get_all_publication_report($user_id = null){
-		$sql = "select a.*, b.type_name, c.department_name, d.* from publication a 
-				left join publication_detail d on a.pub_id = d.pub_id 
-				left join publication_type b on a.pub_type_id = b.type_id 
-				left join department c on a.department_id = c.department_id 
-				order by a.date_input DESC";
-		if($user_id != null)
+	public function get_all_publication_report($role, $uid, $dept_id = '', $year =''){
+		$filter = "";
+		if($dept_id !== "" && $year !== "")
+			$filter = "where a.department_id = '$dept_id' and d.pub_year = '$year'";
+		else if($dept_id == "" && $year !== "")
+			$filter = "where d.pub_year = '$year'";
+		else if($dept_id !== "" && $year == "")
+			$filter = "where a.department_id = '$dept_id'";
+				
+		if($role == 3 || $role == 4){
 			$sql = "select a.*, b.type_name, c.department_name, d.* from publication a 
 				left join publication_detail d on a.pub_id = d.pub_id 
 				left join publication_type b on a.pub_type_id = b.type_id 
-				left join department c on a.department_id = c.department_id where a.user_id = '$user_id'
+				left join department c on a.department_id = c.department_id where a.user_id = '$uid'
 				order by a.date_input DESC";
+		}else{
+			$sql = "select a.*, b.type_name, c.department_name, d.* from publication a 
+				left join publication_detail d on a.pub_id = d.pub_id 
+				left join publication_type b on a.pub_type_id = b.type_id 
+				left join department c on a.department_id = c.department_id ".$filter." 
+				order by a.date_input DESC";
+		}
 		return $this->db->query($sql)->result_array();
 	}
 

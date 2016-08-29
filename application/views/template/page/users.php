@@ -7,7 +7,7 @@
 		</ol>
 	</section>
 
-	<section class="content">
+	<section class="content usetooltip">
 		<div class="box box-success">
 			<div class="box-header with-border">
 				<h3 class="box-title"><i class="fa fa-users"></i> &nbsp; Users</h3>
@@ -39,9 +39,10 @@
 					<td><?php echo $a['status'] == 1 ? '<span class="label label-success">Aktif</span>':'<span class="label label-default">Inactive</span>';?></td>
 					<td>
 						<span class="btn-group">
-							<a href="<?php echo site_url().'dashboard/profile/'.$a['user_id'];?>" class="btn btn-sm btn-default"><i class="fa fa-search"></i></a>
-							<a href="#" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#modalStatus" onclick="return status_user('<?php echo $a['user_id'].'#'.$a['status'];?>')"><i class="fa fa-check-circle"></i></a>
-							<a href="#" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#modalDelete" onclick="return delete_user('<?php echo $a['user_id'];?>')"><i class="fa fa-trash"></i></a>
+							<a href="<?php echo site_url().'dashboard/profile/'.$a['user_id'];?>" class="btn btn-sm btn-default" data-tooltip="tooltip" title="Detail user"><i class="fa fa-search"></i></a>
+							<a href="#" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#modalStatus" onclick="return status_user('<?php echo $a['user_id'].'#'.$a['status'];?>')" data-tooltip="tooltip" title="Change status"><i class="fa fa-check-circle"></i></a>
+							<a href="#" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#modalDelete" onclick="return delete_user('<?php echo $a['user_id'];?>')" data-tooltip="tooltip" title="Delete user"><i class="fa fa-trash"></i></a>
+							<a href="#" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#modalReset" onclick="return reset('<?php echo $a['user_id'].'#'.($a['user_code'] !== "" ? $a['user_code']:'123456');?>')" data-tooltip="tooltip" title="Reset Password"><i class="fa fa-refresh"></i></a>
 						</span>
 					</td>
 				</tr>
@@ -99,6 +100,32 @@
 			<div class="modal-footer">
 				<input type="reset" name="reset" value="Cancel" class="btn btn-white" data-dismiss="modal">
 				<input type="submit" name="move" value="Change" class="btn btn-warning action">
+			</div>
+			</form>
+		</div>	
+	</div>
+</div>
+
+<!-- modal reset -->
+<div class="modal inmodal" id="modalReset" tabindex="-1" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content animated bounceInDown">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+				<span aria-hidden="true"><i class="fa fa-remove"></i></span><span class="sr-only">Close</span></button>
+				<i class="fa fa-refresh modal-icon"></i>
+				<h4 class="modal-title">Reset Password</h4>
+				<div>Reset default password.</div>
+			</div>
+			<form name="formdelete" action="<?php echo base_url().'dashboard/update/reset_password';?>" method="POST">
+			<div class="modal-body">
+				<input type="hidden" name="user_id" id="user_pass_id">
+				<input type="hidden" name="password" id="password">
+				<div class="msg"></div>
+			</div>
+			<div class="modal-footer">
+				<input type="reset" name="reset" value="Cancel" class="btn btn-white" data-dismiss="modal">
+				<input type="submit" name="move" value="Reset" class="btn btn-warning action">
 			</div>
 			</form>
 		</div>	

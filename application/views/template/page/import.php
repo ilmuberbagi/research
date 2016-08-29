@@ -1,15 +1,28 @@
+<?php
+	$form_title = 'Publication <small>Import Data (Excel)</small>';
+	$crumb = 'Publication';
+	$file_source = 'form_publication.xls';
+	$form_action = base_url().'publication/upload_form_publication';
+	if($this->uri->segment(1) == 'grants'){
+		$file_source = 'form_grant.xls';
+		$form_title = 'Grant <small>Import Data (Excel)</small>';
+		$crumb = 'Grant';
+		$form_action = base_url().'grants/upload_form_grant';
+	}	
+?>
+
 <div class="content-wrapper">
 	<section class="content-header">
-		<h1>Publication <small>Import Data (Excel)</small></h1>
+		<h1><?php echo $form_title;?></h1>
 		<ol class="breadcrumb">
 			<li><a href="<?php echo base_url().'dashboard';?>"><i class="fa fa-dashboard"></i> Home</a></li>
-			<li><a href="<?php echo base_url().'publication';?>">Publication</a></li>
-			<li class="active">Import Publication</li>
+			<li><a href="<?php echo base_url().$this->uri->segment(1);?>"><?php echo $crumb;?></a></li>
+			<li class="active">Import <?php echo $crumb;?></li>
 		</ol>
 	</section>
 
 	<section class="content">
-		<form action="<?php echo base_url().'publication/upload_form_publication';?>" method="POST" enctype="multipart/form-data">
+		<form action="<?php echo $form_action;?>" method="POST" enctype="multipart/form-data">
 		<input type="hidden" name="department_id" value="<?php echo $this->session->userdata('department_id');?>">
 		<div class="row">
 			<div class="col-md-12">
@@ -20,8 +33,8 @@
 					<div class="box-body">
 						<div class="callout callout-warning">
 							<div class="text-bold" style="font-size:2em"><i class="fa fa-info-circle"></i> Note</div>
-							<p>Untuk memasukkan data publikasi dengan import data, silahkan Anda download format form publikai yang telah disediakan.<br/>Setelah selesai diisi (secara offline), Anda bisa mengunggah lewat form di bawah ini.</p>
-							<p><a style="color:#222; text-decoration:none" href="<?php echo site_url().'uploads/publication/form/template.xls';?>" class="btn btn-default"> <i class="fa fa-download"></i> Download form pengisian publikasi offline</a></p>
+							<p>Untuk memasukkan data <?php echo $crumb;?> dengan import data, silahkan Anda download format form <?php echo $crumb;?> yang telah disediakan.<br/>Setelah selesai diisi (secara offline), Anda bisa mengunggah lewat form di bawah ini.</p>
+							<p><a style="color:#222; text-decoration:none" href="<?php echo site_url().'uploads/'.strtolower($crumb).'/form/'.$file_source;?>" class="btn btn-default"> <i class="fa fa-download"></i> Download form pengisian <?php echo $crumb;?> offline</a></p>
 						</div>
 						
 						<div class="form-group">

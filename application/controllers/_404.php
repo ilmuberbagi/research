@@ -17,7 +17,6 @@ class _404 extends CI_Controller {
     }
 
     public function index() {
-		$this->data['page'] = '_404';
-        $this->load->view('template', $this->data);
+		$this->load->view('template/_404');
     }
 }

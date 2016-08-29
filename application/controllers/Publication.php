@@ -13,17 +13,25 @@ class Publication extends CI_Controller{
 
 	public function __construct(){
 		parent::__construct();
+		if($this->session->userdata('user_id') == '') redirect('login');
 		$this->load->library('Lib_publication');
 		$this->load->model('Mdl_publication','pub');
 	}
 	
 	public function index(){
+		$this->load->model('Mdl_cms');
 		$this->data['title'] = 'Publication Data';
 		$this->data['page'] = 'page/publication';
-		$user_id = $this->session->userdata('user_id');
-		$this->data['publication'] = $this->pub->get_all_publication($user_id);
-		if($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2)
-			$this->data['publication'] = $this->pub->get_all_publication();		
+		$this->data['departments'] = $this->Mdl_cms->get_department();
+		$this->data['years'] = $this->Mdl_cms->get_years();
+		$dept_id = isset($_GET['department_id']) ? $_GET['department_id']:'';
+		$year = isset($_GET['year']) ? $_GET['year']:'';
+		
+		$this->data['dept_id'] = $dept_id;
+		$this->data['year'] = $year;
+		$role = $this->session->userdata('role');
+		$uid = $this->session->userdata('user_id');
+		$this->data['publication'] = $this->pub->get_all_publication_report($role, $uid, $dept_id, $year);		
 		$this->load->view('template', $this->data);
 	}
 
@@ -35,7 +43,7 @@ class Publication extends CI_Controller{
 			case "insert": $this->lib_publication->insert_publication(); break;
 			case "update": $this->lib_publication->update_publication(); break;
 			case "publish": $this->lib_publication->publish_publication(); break;
-			case "sidr": $this->preview_sidr($id); break;
+			case "detail": $this->detail_publication($id); break;
 			case "import": $this->import_excel(); break;
 			case "sidr_verify": $this->lib_publication->sidr_verify($id); break;
 			case "save_author": $this->lib_publication->save_author(); break;
@@ -59,8 +67,8 @@ class Publication extends CI_Controller{
 		$this->load->view('template', $this->data);
 	}
 	
-	public function preview_sidr($pub_id){
-		$this->data['title'] = "SIDR Attachment";
+	public function detail_publication($pub_id){
+		$this->data['title'] = "Publication Detail";
 		$this->data['curr_pub'] = $this->pub->current_publication($pub_id);
 		$this->data['page'] = "page/sidr";
 		$this->load->view('template', $this->data);
@@ -134,14 +142,14 @@ class Publication extends CI_Controller{
 			}
 			$detail[$index]['pub_id'] = $data[$index]['pub_id'];
 			$detail[$index]['page'] = $this->security->xss_clean($sheetData[$start_record][20]);
-			$detail[$index]['issn_isbn'] = $this->security->xss_clean($sheetData[$start_record][21]);
-			$detail[$index]['detail'] = $this->security->xss_clean($sheetData[$start_record][22]);
-			$detail[$index]['jcr'] = $this->security->xss_clean($sheetData[$start_record][23]);
-			$detail[$index]['scr'] = $this->security->xss_clean($sheetData[$start_record][24]);
-			$detail[$index]['q_year'] = $this->security->xss_clean($sheetData[$start_record][25]);
-			$detail[$index]['freq_year'] = $this->security->xss_clean($sheetData[$start_record][26]);
-			$detail[$index]['pub_country'] = $this->security->xss_clean($sheetData[$start_record][27]);
-			$detail[$index]['publisher'] = $this->security->xss_clean($sheetData[$start_record][28]);
+			$detail[$index]['volume'] = $this->security->xss_clean($sheetData[$start_record][21]);
+			$detail[$index]['jcr'] = $this->security->xss_clean($sheetData[$start_record][22]);
+			$detail[$index]['scr'] = $this->security->xss_clean($sheetData[$start_record][23]);
+			$detail[$index]['q_year'] = $this->security->xss_clean($sheetData[$start_record][24]);
+			$detail[$index]['freq_year'] = $this->security->xss_clean($sheetData[$start_record][25]);
+			$detail[$index]['pub_country'] = $this->security->xss_clean($sheetData[$start_record][26]);
+			$detail[$index]['publisher'] = $this->security->xss_clean($sheetData[$start_record][27]);
+			$detail[$index]['issn_isbn'] = $this->security->xss_clean($sheetData[$start_record][28]);
 			$detail[$index]['pub_year'] = $this->security->xss_clean($sheetData[$start_record][29]);
 			$detail[$index]['pub_website'] = $this->security->xss_clean($sheetData[$start_record][30]);
 			$detail[$index]['db_index'] = $this->security->xss_clean($sheetData[$start_record][31]);

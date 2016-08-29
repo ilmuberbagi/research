@@ -2,31 +2,32 @@
 	<div class="row">
 		<div class="col-md-8">
 			<div class="page-header">
-				<h4>Resources</h4>
+				<h4>Researchers</h4>
+				<div class="pull-right">
+					<a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button">Sort By <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="<?php echo site_url().'researchers?sort=name';?>">Name</a></li>
+						<li><a href="<?php echo site_url().'researchers?sort=department';?>">Department</a></li>
+					</ul>
+				</div>
 			</div>
-
-			<table class="table table-bordered table-striped">
-				<tr>
-					<th>No.</th>
-					<th>Title</th>
-					<th>View</th>
-					<th>Download</th>
-				</tr>
-				<?php if(!empty($resources)){ $no=0; foreach($resources as $r){ $no++; ?>
-				<tr>
-					<td><?php echo $no;?></td>
-					<td><?php echo $r['resource_title'];?></td>
-					<td align="right"><?php echo number_format($r['viewed']);?></td>
-					<td align="center"><a target="_blank" href="<?php echo site_url().'download/resource/'.$r['resource_id'];?>"><i class="fa fa-download"></i></a></td>
-				</tr>
-				<?php }}else{?>
-				<tr><td colspan="4">Belum ada data yang dapat ditampilkan.</td></tr>
-				<?php } ?>
-			</table>
+			
+			<?php if(!empty($result)){ foreach ($result as $r){?>
+				<div class="col-md-6">
+					<table style="width:100%; margin-bottom:50px; padding:10px">
+						<tr><td rowspan="4" valign="top" width="75"><img src="<?php echo $r['avatar']?$r['avatar']:site_url().'assets/img/user.jpg';?>" width="60" class="img-responsive img">
+						<a href="#" class="btn btn-sm brn-default">Profile &raquo;</a>
+						</td><th width="100">Name</th><td><?php echo $r['name'];?></td></tr>
+						<tr><th>Department</th><td><?php echo $r['department_name'];?></td></tr>
+						<tr><th>Expertise</th><td><?php echo $r['research_interest'];?></td></tr>
+						<tr><th>Research Interest</th><td><?php echo $r['research_interest'];?></td></tr>
+					</table>
+				</div>
+			<?php }}else{ echo "No Researchers registered.";}?>
+			<br/>
 		</div>
 		
 		<div class="col-md-4 sidebar">
-			<!-- search box -->
 			<div class="row">
 				<div class="list-group">
 					<div class="list-group-item">

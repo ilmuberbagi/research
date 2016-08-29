@@ -16,10 +16,12 @@ class Dashboard extends CI_Controller{
 		$this->data['count_slide'] = $this->cms->count_slide();
 		$this->data['count_news'] = $this->cms->count_news();
 		$this->data['count_video'] = $this->cms->count_video();
+		$this->data['count_publication'] = $this->cms->count_publication();
+		$this->data['count_grant'] = $this->cms->count_grant();
+
 		if($this->session->userdata('role') == 3 || $this->session->userdata('role') == 4){
-			$this->data['count_slide'] = 0;
-			$this->data['count_news'] = $this->cms->count_publication($this->session->userdata('user_id'));
-			$this->data['count_video'] = 0;
+			$this->data['count_publication'] = $this->cms->count_publication($this->session->userdata('user_id'));
+			$this->data['count_grant'] = $this->cms->count_grant($this->session->userdata('user_id'));
 		}
 		$this->load->view('template', $this->data);
 	}
@@ -143,10 +145,12 @@ class Dashboard extends CI_Controller{
 			case "slide": $this->lib_cms->update_slide(); break;
 			case "information": $this->lib_cms->update_info(); break;
 			case "password": $this->lib_cms->change_password(); break;
+			case "reset_password": $this->lib_cms->reset_password(); break;
 			case "research": $this->lib_cms->update_research_proposal(); break;
 			case "resources": $this->lib_cms->update_resources(); break;
 			case "avatar": $this->lib_cms->change_avatar(); break;
 			case "user_status": $this->lib_cms->change_user_status(); break;
+			case "profile": $this->lib_cms->update_profile(); break;
 		}
 	}
 	
@@ -164,6 +168,7 @@ class Dashboard extends CI_Controller{
 	public function profile($id = ""){
 		$this->data['title'] = 'Profile';
 		$this->data['page'] = 'page/profile';
+		$this->data['departments'] = $this->cms->get_department();
 		$this->data['user'] = $this->cms->get_user($id);
 		$this->load->view('template', $this->data);
 	}

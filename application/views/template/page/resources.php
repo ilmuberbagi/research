@@ -7,7 +7,7 @@
 		</ol>
 	</section>
 
-	<section class="content">
+	<section class="content usetooltip">
 		<div class="box box-success">
 			<div class="box-header with-border">
 				<h3 class="box-title"><i class="fa fa-paperclip"></i> &nbsp; Resources</h3>
@@ -24,7 +24,7 @@
 					<th>Type</th>
 					<th>Viewed</th>
 					<th>Status</th>
-					<th>Action</th>
+					<th width="150px">Action</th>
 				</thead>
 				<tbody>
 				<?php 
@@ -40,9 +40,9 @@
 					<td><?php echo UR_exists($a['file_url']) ? '<span class="label label-success">OK</span>':'<span class="label label-default">Error</span>';?></td>
 					<td>
 						<span class="btn-group">
-							<a href="<?php echo $a['file_url'];?>" class="btn btn-sm btn-default"><i class="fa fa-download"></i></a>
-							<a href="<?php echo site_url().'dashboard/edit/resources/'.$a['resource_id'];?>" class="btn btn-sm btn-default"><i class="fa fa-edit"></i></a>
-							<a href="#" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#modalDelete" onclick="return delete_article('<?php echo $a['resource_id'];?>')"><i class="fa fa-trash"></i></a>
+							<a href="<?php echo $a['file_url'];?>" class="btn btn-sm btn-default" data-tooltip="tooltip" title="Download File"><i class="fa fa-download"></i></a>
+							<a href="<?php echo site_url().'dashboard/edit/resources/'.$a['resource_id'];?>" class="btn btn-sm btn-default" data-tooltip="tooltip" title="Edit File"><i class="fa fa-edit"></i></a>
+							<a href="#" class="btn btn-sm btn-default"  data-toggle="modal" data-target="#modalDelete" onclick="return delete_article('<?php echo $a['resource_id'];?>')" data-tooltip="tooltip" title="Delete file"><i class="fa fa-trash"></i></a>
 						</span>
 					</td>
 				</tr>

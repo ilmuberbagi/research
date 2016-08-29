@@ -26,8 +26,8 @@
 		}
 		.list th{
 			font-size:1.1em;
-			background:#555;
-			color:#FFF;
+			background:#EEE;
+			color:#222;
 		}
 	</style>
   </head>
@@ -40,35 +40,37 @@
 	header('Pragma: public');
 	print "\xEF\xBB\xBF"; // UTF-8 BOM
 	# ==================================================
-	echo "<table class='title'><tr><td colspan='".(count($types)+16)."' align='center'><b>DATA PUBLIKASI DEPARTEMEN TEKNIK ELEKTRO FTUI</b></td></tr></table><br/>";
+	// echo "<table class='title'><tr><td colspan='".(count($types)+16)."' align='center'><b>".$title."</b></td></tr></table><br/>";
+	echo "<table class='title'><tr><td colspan='3' rowspan='3'><img src='".site_url().'assets/public/img/logo-ftui.jpg'."' width='250'></td><td colspan='".(count($types)+13)."'><b>".$title."</b></td></tr></table><br/>";
 	if(!empty($publication)){
 ?>
-	<table class="list" width="200%">
+	<table class="list" width="200%" border="1" cellspacing="0">
 		<thead>
 		<tr>
 			<th rowspan="2">No</th>
-			<th rowspan="2">Nama Penulis Artikel (dalam urutan sesuai dokumen karya ilmiah)</th>
+			<th rowspan="2">Nama Penulis Artikel<br/>(dalam urutan sesuai dokumen karya ilmiah)</th>
 			<th rowspan="2">Departemen</th>
 			<th rowspan="2">Judul Artikel/Invensi</th>
-			<th rowspan="2">Status Uplaod SIDR</th>
-			<th rowspan="2">Verifikasi SIDR</th>
+			<th rowspan="2">Uplaod File</th>
+			<th rowspan="2">Status</th>
 			<th colspan="<?php echo count($types);?>" style="width:<?php echo (count($types)*100);?>px">Jenis Publikasi/Karya</th>
-			<th rowspan="2">Detail Karya Ilmiah (Penerbit,Tahun Terbit, Vol, Hal, dll)</th>
+			<th rowspan="2">Page</th>
+			<th rowspan="2">Volume</th>
 			<th colspan="2">Impact Factor</th>
-			<th rowspan="2">Ranking Quartil (Q1, Q2, Q3, Q4, Q5)</th>
-			<th rowspan="2">Frekuensi Terbit dalam q 1 tahun</th>
+			<th rowspan="2">Ranking Quartil<br/>(Q1, Q2, Q3, Q4, Q5)</th>
+			<th rowspan="2">Frekuensi Terbit<br/>dalam q 1 tahun</th>
 			<th rowspan="2">Negara Domisili Jurnal</th>
-			<th rowspan="2">Penerbit/Publisher (Asosiasi/Institusi)</th>
-			<th rowspan="2">Tahun Awal Terbit</th>
+			<th rowspan="2">Penerbit/Publisher<br/>(Asosiasi/Institusi)</th>
+			<th rowspan="2">Tahun<br/>Awal Terbit</th>
 			<th rowspan="2">Alamat Website</th>
-			<th rowspan="2">Database Indeks ( SCOPUS, Proquest, JSTOR, ScienceDirect, dll)</th>
+			<th rowspan="2">Database Indeks<br/>( SCOPUS, Proquest, JSTOR, ScienceDirect, dll)</th>
 		</tr>
 		<tr>
 			<?php foreach($types as $t){?>
-			<th style="width:100px"><?php echo $t['type_name'];?></th>
+			<th style="width:100px"><?php echo str_replace(' ','<br/>', $t['type_name']);?></th>
 			<?php }?>
-			<th>Thomson Reuters-Journal Citation Reports (JCR)</th>
-			<th>SCImago Journal Rank (SJR)</th>
+			<th>Thomson Reuters-Journal<br/>Citation Reports (JCR)</th>
+			<th>SCImago Journal<br/>Rank (SJR)</th>
 		</tr>
 		</thead>
 		<tbody>
@@ -84,9 +86,10 @@
 			<td valign="top" align="center"><?php echo $a['sidr_upload']==1?'v':'';?></td>
 			<td valign="top" align="center"><?php echo $a['sidr_verify']==1? 'v':'';?></td>
 			<?php foreach($types as $t){?>
-			<?php echo $a['pub_type_id'] == $t['type_id'] ? '<td bgcolor="yellow" valign="top" align="center">v</td>':'<td></td>';?>
+			<?php echo $a['pub_type_id'] == $t['type_id'] ? '<td bgcolor="#FFFFDD" valign="top" align="center">v</td>':'<td bgcolor="#FFFFDD"></td>';?>
 			<?php }?>
-			<td valign="top"><?php echo $a['detail'];?></td>
+			<td valign="top" align="center"><?php echo $a['page'];?></td>
+			<td valign="top" align="center"><?php echo $a['volume'];?></td>
 			<td valign="top" align="center"><?php echo $a['jcr'];?></td>
 			<td valign="top" align="center"><?php echo $a['scr'];?></td>
 			<td valign="top" align="center"><?php echo $a['q_year'];?></td>

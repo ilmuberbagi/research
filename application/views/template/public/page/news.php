@@ -9,19 +9,37 @@
 				<p class="text-muted"><i class="fa fa-calendar"></i> <?php echo date('d/m/Y', strtotime($news[0]['last_updated'])); ?> <i class="fa fa-clock-o"></i> <?php echo date('H:i', strtotime($news[0]['date_posted']));?> Authored By: Administrator</p>
 				<?php echo $news[0]['news_content']; ?>
 			</div>
-			
+		
 			<!-- popular news -->
 			<div class="col-md-4 sidebar">
-				<div class="list-group">
-				<a href="#" class="list-group-item title">Popular News</a>
-				<?php if(!empty($popular)){ foreach ($popular as $on) {?>				
-					<a href="<?php echo site_url("news/read/".$on['news_id'].'/'.gen_url($on['news_title'])); ?>" class="list-group-item">
-						<div class="img-thumb-list" style="background-image:url('<?php echo $on['thumbnail_url'];?>')"></div>
-						<?php echo $on['news_title']; ?>
-					</a>
-				<?php }} ?>				
+				<!-- search box -->
+				<div class="row">
+					<div class="list-group">
+						<div class="list-group-item">
+							<form action="<?php echo site_url().'search';?>" method="GET">
+								<div class="input-group">
+									<input type="text" class="form-control" placeholder="Type something.." name="key">
+									<span class="input-group-btn" id="basic-addon2">
+										<button class="btn btn-warning" type="button"><i class="fa fa-search"></i></button>
+									</span>
+								</div>
+							</form>
+						</div>
+					</div>
 				</div>
-			</div>			
+
+				<div class="row">
+					<div class="list-group">
+						<a href="#" class="list-group-item title"><i class="fa fa-newspaper-o"></i> Popular News</a>
+						<?php if(!empty($popular)){ foreach ($popular as $on) {?>				
+							<a href="<?php echo site_url("news/read/".$on['news_id'].'/'.gen_url($on['news_title'])); ?>" class="list-group-item">
+								<div class="img-thumb-list" style="background-image:url('<?php echo $on['thumbnail_url'];?>')"></div>
+								<?php echo $on['news_title']; ?>
+							</a>
+						<?php }} ?>				
+					</div>
+				</div>			
+			</div>
 		</div>
 		<hr/>
 		
@@ -49,7 +67,7 @@
 					<?php }else if($this->uri->segment(1) == 'grant'){ $url = 'grant'?>
 						<h4><i class="fa fa-newspaper-o"></i> Grant and Incentives</h4>
 					<?php }else{ $url = 'conferences'?>
-						<h4><i class="fa fa-newspaper-o"></i> Converences and Seminars</h4>
+						<h4><i class="fa fa-newspaper-o"></i> Conferences and Seminars</h4>
 					<?php } ?>
 				</div>
 				<?php if(!empty($news)){ foreach($news as $n){ ?>
@@ -77,7 +95,7 @@
 					<div class="list-group-item">
 						<form action="<?php echo site_url().'search';?>" method="GET">
 							<div class="input-group">
-								<input type="text" class="form-control" placeholder="Enter keyword" aria-describedby="basic-addon2">
+								<input type="text" class="form-control" placeholder="Type something.." name="key">
 								<span class="input-group-btn" id="basic-addon2">
 									<button class="btn btn-warning" type="button"><i class="fa fa-search"></i></button>
 								</span>
@@ -86,24 +104,7 @@
 					</div>
 				</div>
 			</div>
-			
-			<div class="row">
-				<div class="list-group-item title"><i class="fa fa-video-camera"></i> LATEST VIDEOS</div>
-				<div class="list-group-item">
-					<?php if(!empty($video)){ foreach($video as $v){?>
-					<div class="list-group-item">
-						<div class="embed-responsive embed-responsive-16by9">
-							<iframe id="youtube-home" class="embed-responsive-item" src="<?php echo $v['video_url'];?>" frameborder="0" allowfullscreen></iframe>
-						</div>
-					</div>
-					<?php }?>
-					<p><a href="<?php echo site_url().'videos';?>" class="btn btn-warning btn-block btn-sm">Index video</a></p>
-					<?php }else{?>
-						<strong>Belum ada video yang dapat ditampilkan...</strong>
-					<?php } ?>
-				</div>
-			</div>
-			
+						
 			<div class="row">
 				<br/>
 				<div class="list-group-item title"><i class="fa fa-lock"></i> LOGIN</div>

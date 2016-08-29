@@ -22,8 +22,15 @@ class Mdl_cms extends CI_Model{
 	
 	public function count_publication($id = null){
 		$sql = "select * from publication";
-		if($id !== "")
+		if($id !== null)
 			$sql = "select * from publication where user_id = '$id'";
+		return $this->db->query($sql)->num_rows();
+	}
+	
+	public function count_grant($id = null){
+		$sql = "select * from grants";
+		if($id !== null)
+			$sql = "select * from grants where user_id = '$id'";
 		return $this->db->query($sql)->num_rows();
 	}
 	
@@ -121,6 +128,17 @@ class Mdl_cms extends CI_Model{
 	# ==================================================
 	public function get_department(){
 		$sql = "select * from department order by department_name ASC";
+		return $this->db->query($sql)->result_array();
+	}
+	
+	public function current_department($id){
+		$sql = "select * from department where department_id = '$id'";
+		return $this->db->query($sql)->result_array();
+	}
+	
+	# years
+	public function get_years(){
+		$sql = "select distinct(pub_year) as year from publication_detail order by year DESC";
 		return $this->db->query($sql)->result_array();
 	}
 	

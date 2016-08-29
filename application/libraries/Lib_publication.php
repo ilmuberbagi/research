@@ -39,6 +39,7 @@ class Lib_publication {
 			'pub_year' => $this->ci->security->xss_clean($this->ci->input->post('pub_year')),
 			'pub_website' => $this->ci->security->xss_clean($this->ci->input->post('pub_website')),
 			'page' => $this->ci->security->xss_clean($this->ci->input->post('page')),
+			'volume' => $this->ci->security->xss_clean($this->ci->input->post('volume')),
 			'issn_isbn' => $this->ci->security->xss_clean($this->ci->input->post('issn_isbn')),
 			'q_year' => $this->ci->security->xss_clean($this->ci->input->post('q_year')),
 			'freq_year' => $this->ci->security->xss_clean($this->ci->input->post('freq_year')),
@@ -105,6 +106,7 @@ class Lib_publication {
 			'pub_year' => $this->ci->security->xss_clean($this->ci->input->post('pub_year')),
 			'pub_website' => $this->ci->security->xss_clean($this->ci->input->post('pub_website')),
 			'page' => $this->ci->security->xss_clean($this->ci->input->post('page')),
+			'volume' => $this->ci->security->xss_clean($this->ci->input->post('volume')),
 			'issn_isbn' => $this->ci->security->xss_clean($this->ci->input->post('issn_isbn')),
 			'q_year' => $this->ci->security->xss_clean($this->ci->input->post('q_year')),
 			'freq_year' => $this->ci->security->xss_clean($this->ci->input->post('freq_year')),
@@ -165,7 +167,7 @@ class Lib_publication {
 		$act = $this->ci->pub->update('publication', array('pub_id', $pub_id), array('sidr_verify'=>1));
 		if($act) $this->ci->session->set_flashdata('success','SIDR has been verified.');
 		else $this->ci->session->set_flashdata('error','Trouble verifying SIDR.');
-		redirect('publication/action/sidr/'.$pub_id);
+		redirect('publication/action/detail/'.$pub_id);
 	}
 	
 	public function publish_publication(){
@@ -176,9 +178,34 @@ class Lib_publication {
 		redirect('publication');
 	}
 	
+	private function get_department_name($dept_id){
+		$this->ci->load->model('Mdl_cms');
+		$data = $this->ci->Mdl_cms->current_department($dept_id);
+		return $data[0]['department_name'];
+	}
+	
 	public function export($param){
 		$this->data['types'] = $this->ci->pub->get_publication_type();
-		$this->data['publication'] = $this->ci->pub->get_all_publication_report();
+		
+		$dept_id = isset($_GET['department_id']) ? $_GET['department_id']:'';
+		$year = isset($_GET['year']) ? $_GET['year']:'';
+		
+		$this->data['dept_id'] = $dept_id;
+		$this->data['year'] = $year;
+		
+		$this->data['title'] = 'DATA PUBLIKASI FAKULTAS TEKNIK<br/>';
+		$this->data['title'] .= 'UNIVERSITAS INDONESIA<br/>';
+		$this->data['title'] .= $year ? 'TAHUN '.$year:'';
+		if($dept_id !== ""){
+			$this->data['title'] = 'DATA PUBLIKASI DEPARTEMEN ';
+			$this->data['title'] .= strtoupper($this->get_department_name($dept_id)).'<br/>FAKULTAS TEKNIK ';
+			$this->data['title'] .= 'UNIVERSITAS INDONESIA<br/>';
+			$this->data['title'] .= $year ? 'TAHUN '.$year:'';
+		}
+		
+		$uid = $this->ci->session->userdata('user_id');
+		$role = $this->ci->session->userdata('role');
+		$this->data['publication'] = $this->ci->pub->get_all_publication_report($role, $uid, $dept_id, $year);
 		if($param == 'excel'){
 			$this->ci->load->view('template/page/export_excel', $this->data);
 		}else{

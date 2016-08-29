@@ -11,6 +11,7 @@
 			
 			<form method="POST" action="<?php echo site_url().'dashboard/update/information';?>">
 			<input type="hidden" name="id" value="<?php echo $info[0]['id'];?>">
+			<input type="hidden" name="page" value="<?php echo current_url();?>">
 			<div class="col-md-12">
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs">
@@ -22,6 +23,7 @@
 						<li><a href="#rcenters" data-toggle="tab">Research Centers</a></li>
 						<li><a href="#rgroups" data-toggle="tab">Research Groups</a></li>
 						<li><a href="#researchers" data-toggle="tab">Researchers</a></li>
+						<li><a href="#statistics" data-toggle="tab">Data and Statistics</a></li>
 					</ul>
 					<div class="tab-content">
 						<!-- about -->
@@ -130,6 +132,20 @@
 									<div class="form-group">
 										<textarea name="researchers" class="form-control description">
 										<?php echo $info[0]['researchers'];?></textarea>
+									</div>
+									<div class="form-action">
+										<input type="submit" class="btn btn-primary" value="Save" name="submit">
+									</div>
+								</div>
+							</div>
+						</div>
+						
+						<div class="tab-pane" id="statistics">
+							<div class="row">
+								<div class="col-md-12">
+									<div class="form-group">
+										<textarea name="statistics" class="form-control description">
+										<?php echo $info[0]['statistics'];?></textarea>
 									</div>
 									<div class="form-action">
 										<input type="submit" class="btn btn-primary" value="Save" name="submit">

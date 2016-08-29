@@ -66,6 +66,33 @@
 							<a href="<?php echo base_url().'dashboard/information';?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
+
+					<!-- publication -->
+					<div class="col-lg-3 col-xs-6">
+						<div class="small-box bg-green">
+							<div class="inner">
+								<h3><?php echo number_format($count_publication);?></h3>
+								<p>Publications</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-book"></i>
+							</div>
+							<a href="<?php echo base_url().'publication';?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
+					<!-- grants -->
+					<div class="col-lg-3 col-xs-6">
+						<div class="small-box bg-yellow">
+							<div class="inner">
+								<h3><?php echo number_format($count_grant);?></h3>
+								<p>Grants</p>
+							</div>
+							<div class="icon">
+								<i class="fa fa-bookmark"></i>
+							</div>
+							<a href="<?php echo base_url().'grants';?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -88,7 +115,7 @@
 					<div class="col-lg-3 col-xs-6">
 						<div class="small-box bg-green">
 							<div class="inner">
-								<h3><?php echo number_format($count_news);?></h3>
+								<h3><?php echo number_format($count_publication);?></h3>
 								<p>Publications</p>
 							</div>
 							<div class="icon">
@@ -97,17 +124,17 @@
 							<a href="<?php echo base_url().'publication';?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
-					<!-- quotes -->
+					<!-- grants -->
 					<div class="col-lg-3 col-xs-6">
 						<div class="small-box bg-yellow">
 							<div class="inner">
-								<h3><?php echo number_format($count_video);?></h3>
+								<h3><?php echo number_format($count_grant);?></h3>
 								<p>Grants</p>
 							</div>
 							<div class="icon">
 								<i class="fa fa-bookmark"></i>
 							</div>
-							<a href="<?php echo base_url().'publication/grant';?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+							<a href="<?php echo base_url().'grants';?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
 				</div>

@@ -21,6 +21,7 @@ class Lib_cms {
 	# update information
 	public function update_info(){
 		$id = $this->ci->input->post('id');
+		$page = $this->ci->input->post('page');
 		$data = array(
 			'about'		=> $this->ci->security->xss_clean($this->ci->input->post('about')),
 			'vision'		=> $this->ci->security->xss_clean($this->ci->input->post('vision')),
@@ -30,12 +31,36 @@ class Lib_cms {
 			'research_centers'	=> $this->ci->security->xss_clean($this->ci->input->post('research_centers')),
 			'research_groups'	=> $this->ci->security->xss_clean($this->ci->input->post('research_groups')),
 			'researchers'	=> $this->ci->security->xss_clean($this->ci->input->post('researchers')),
+			'statistics'	=> $this->ci->security->xss_clean($this->ci->input->post('statistics')),
 			'last_updated'	=> date('Y-m-d H:i:s')
 		);
 		$act = $this->ci->cms->update('information', array('id', $id), $data);
 		if($act) $this->ci->session->set_flashdata('success','Information has been updated.');
 		else $this->ci->session->set_flashdata('error','Trouble updating information.');
-		redirect('dashboard/information#about');
+		redirect($page);
+	}
+	
+	public function update_profile(){
+		$id = $this->ci->input->post('user_id');
+		$data = array(
+			'name'		=> $this->ci->security->xss_clean($this->ci->input->post('name')),
+			'user_code'		=> $this->ci->security->xss_clean($this->ci->input->post('user_code')),
+			'email'		=> $this->ci->security->xss_clean($this->ci->input->post('email')),
+			'phone'		=> $this->ci->security->xss_clean($this->ci->input->post('phone')),
+			'department_id'		=> $this->ci->security->xss_clean($this->ci->input->post('department_id')),
+			'functional'	=> $this->ci->security->xss_clean($this->ci->input->post('functional')),
+			'research_interest'	=> $this->ci->security->xss_clean($this->ci->input->post('research_interest')),
+			'link_research_gate'	=> $this->ci->security->xss_clean($this->ci->input->post('link_research_gate')),
+			'link_google_scholar'	=> $this->ci->security->xss_clean($this->ci->input->post('link_google_scholar')),
+			'link_scopus'	=> $this->ci->security->xss_clean($this->ci->input->post('link_scopus')),
+			'index_scholar'	=> $this->ci->security->xss_clean($this->ci->input->post('index_scholar')),
+			'index_scopus'	=> $this->ci->security->xss_clean($this->ci->input->post('index_scopus')),
+			'date_update'	=> date('Y-m-d H:i:s')
+		);
+		$act = $this->ci->cms->update('users', array('user_id', $id), $data);
+		if($act) $this->ci->session->set_flashdata('success','User Profile has been updated.');
+		else $this->ci->session->set_flashdata('error','Trouble updating User Profile.');
+		redirect('dashboard/profile');
 	}
 	
 	public function insert_news(){
@@ -136,7 +161,7 @@ class Lib_cms {
 		if($_FILES){
 			$config['upload_path'] = './uploads/files/';
 			$config['allowed_types'] = '*';
-			$config['max_size'] = '10240'; # Max size 10 MB
+			$config['max_size'] = '102400'; # Max size 100 MB
 			
 			$ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
 			$fileName = date('Ymd-His').mt_rand(0,10000).'.'.$ext;
@@ -172,7 +197,7 @@ class Lib_cms {
 		if($_FILES){
 			$config['upload_path'] = './uploads/files/';
 			$config['allowed_types'] = '*';
-			$config['max_size'] = '10240'; # Max size 10 MB
+			$config['max_size'] = '102400'; # Max size 100 MB
 			
 			$ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
 			$fileName = date('Ymd-His').mt_rand(0,10000).'.'.$ext;
@@ -200,9 +225,18 @@ class Lib_cms {
 	
 	public function delete_resource(){
 		$id = $this->ci->input->post('resource_id');
-		$act = $this->ci->cms->delete('resources', array('resource_id', $id));
-		if($act) $this->ci->session->set_flashdata('success','File has been deleted.');
-		else $this->ci->session->set_flashdata('error','Trouble deleting file.');
+		$cr = $this->ci->cms->current_resource($id);
+		$file_path = str_replace(site_url(),'./', $cr[0]['file_url']);
+		$rm = false;
+		if(file_exists($file_path))
+			$rm = unlink($file_path);
+		else
+			$this->ci->cms->delete('resources', array('resource_id', $id));
+		if($rm){
+			$this->ci->cms->delete('resources', array('resource_id', $id));
+			$this->ci->session->set_flashdata('success','File has been deleted.');
+		}else $this->ci->session->set_flashdata('error','Trouble deleting file.');
+		
 		redirect('dashboard/resources');
 	}
 	
@@ -293,7 +327,7 @@ class Lib_cms {
 	public function insert_video(){
 		$data = array(
 			'video_title'		=> $this->ci->security->xss_clean($this->ci->input->post('video_title')),
-			'video_description'		=> $this->ci->input->post('video_description'),
+			'video_description'	=> $this->ci->input->post('video_description'),
 			'video_url'		=> $this->ci->security->xss_clean($this->ci->input->post('video_url')),
 			'status'		=> $this->ci->security->xss_clean($this->ci->input->post('status')),
 			'added_by'		=> $this->ci->session->userdata('user_id'),
@@ -417,7 +451,7 @@ class Lib_cms {
 		if($_FILES){
 			$config['upload_path'] = './uploads/avatar/';
 			$config['allowed_types'] = 'jpg|jpef|png';
-			$config['max_size'] = '1024'; # Max size 1 MB
+			$config['max_size'] = '10240'; # Max size 10 MB
 			$config['overwrite'] = true;
 			
 			$ext = pathinfo($_FILES['userfile']['name'], PATHINFO_EXTENSION);
@@ -475,6 +509,17 @@ class Lib_cms {
 			$this->ci->session->set_flashdata('success','User status has been updated.');
 		else
 			$this->ci->session->set_flashdata('alert','Trouble while updating user status!');
+		redirect('dashboard/account');
+	}
+	
+	public function reset_password(){
+		$id = $this->ci->security->xss_clean($this->ci->input->post('user_id'));
+		$pass = $this->ci->security->xss_clean($this->ci->input->post('password'));
+		$change = $this->ci->cms->update('users', array('user_id', $id), array('password'=>md5($pass)));
+		if($change)
+			$this->ci->session->set_flashdata('success','User password has been updated.');
+		else
+			$this->ci->session->set_flashdata('alert','Trouble while updating user password!');
 		redirect('dashboard/account');
 	}
 	

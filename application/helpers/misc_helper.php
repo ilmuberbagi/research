@@ -66,4 +66,11 @@ function gen_url($str){
 	$str = str_replace('+','-', urlencode($str));
 	return strtolower($str);
 }
+
+function getYoutubeImage($url){
+	$vid = explode('/', $url);
+	$id = $vid[count($vid)-1];
+	return "http://img.youtube.com/vi/".$id."/0.jpg";
+}
+
 ?>

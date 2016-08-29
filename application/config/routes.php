@@ -76,6 +76,7 @@ $route['videos/page/(:any)'] = 'home/videos/page/$1';
 $route['videos/read/(:any)/(:any)'] = 'home/videos/read/$1/$2';
 $route['videos'] = 'home/videos';
 $route['resources'] = 'home/resources';
+$route['statistics'] = 'home/statistics';
 $route['download/resource/(:any)'] = 'home/download/$1';
 
 
@@ -85,4 +86,18 @@ $route['about/(:any)'] = 'home/about/$1';
 $route['service'] = 'home/service';
 $route['contact'] = 'home/contact';
 
- $route['register'] = 'login/register';
+$route['search'] = 'home/search';
+$route['search/page'] = 'home/search/page';
+$route['search/page/(:any)'] = 'home/search/page/$1';
+
+$route['register'] = 'login/register';
+
+$route['research/grant'] = 'home/research/grant';
+$route['research/grant/page'] = 'home/research/grant/page';
+$route['researchers'] = 'home/researchers';
+$route['researchers/page'] = 'home/researchers/page';
+$route['researchers/page/(:any)'] = 'home/researchers/page/$1';
+
+$route['research/publication'] = 'home/research/publication';
+$route['research/publication/page'] = 'home/research/publication/page';
+$route['research/publication/page/(:any)'] = 'home/research/publication/page/$1';

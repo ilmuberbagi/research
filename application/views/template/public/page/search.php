@@ -2,31 +2,20 @@
 	<div class="row">
 		<div class="col-md-8">
 			<div class="page-header">
-				<h4>Resources</h4>
+				<h4>Search Result</h4>
 			</div>
-
-			<table class="table table-bordered table-striped">
-				<tr>
-					<th>No.</th>
-					<th>Title</th>
-					<th>View</th>
-					<th>Download</th>
-				</tr>
-				<?php if(!empty($resources)){ $no=0; foreach($resources as $r){ $no++; ?>
-				<tr>
-					<td><?php echo $no;?></td>
-					<td><?php echo $r['resource_title'];?></td>
-					<td align="right"><?php echo number_format($r['viewed']);?></td>
-					<td align="center"><a target="_blank" href="<?php echo site_url().'download/resource/'.$r['resource_id'];?>"><i class="fa fa-download"></i></a></td>
-				</tr>
-				<?php }}else{?>
-				<tr><td colspan="4">Belum ada data yang dapat ditampilkan.</td></tr>
-				<?php } ?>
-			</table>
+			
+			<?php if(!empty($result)){ foreach ($result as $r){?>
+				<div style="margin-bottom:10px; padding-bottom:5px; border-bottom:solid 1px #DDD">
+					<a style="font-size:1.2em" href="<?php echo site_url().'news/read/'.$r['id'].'/'.gen_url($r['title']);?>"><?php echo $r['title'];?></a><br/>
+					<div style="color:#006621"><?php echo site_url().'news/read/'.$r['id'].'/'.gen_url($r['title']);?></div>
+					<div><?php echo substr(strip_tags($r['content']),0,200).'...';?></div>
+				</div>	
+			<?php }}else{ echo "You search - <b>".$key."</b> did not match any content";}?>
+			<br/>
 		</div>
 		
 		<div class="col-md-4 sidebar">
-			<!-- search box -->
 			<div class="row">
 				<div class="list-group">
 					<div class="list-group-item">

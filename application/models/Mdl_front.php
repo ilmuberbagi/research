@@ -111,7 +111,105 @@ class Mdl_front extends CI_Model{
 		return $this->db->query($sql);
 	}
 	
+	# grant and publication models
+	public function get_latest($param = 'grants'){
+		$sql = "select * from grants a left join grants_detail b on a.grant_id = b.grant_id 
+				where a.publish = 1
+				order by a.date_input DESC limit 0,5";
+		if($param == 'publication')
+			$sql = "select * from publication a left join publication_detail b on a.pub_id = b.pub_id 
+					where a.publish = 1 
+					order by a.date_input DESC limit 0,5";
+		return $this->db->query($sql)->result_array();
+	}
+	
+	public function count_publication($year="", $key=""){
+		$this->db->select('a.*, b.*');
+		$this->db->join('publication_detail b', 'a.pub_id = b.pub_id', 'left');
+		// $CI->db->join('user_email', 'user_email.user_id = emails.id', 'left');
+		$this->db->where('a.publish', 1);
+		if($year !== "")
+			$this->db->where('b.pub_year', $year);
+		
+		if($key !== "")
+			$this->db->where('a.title', $key);
+			
+		$this->db->order_by("a.date_input", "DESC"); 
+		$query = $this->db->get('publication a')->num_rows();
+		return $query;
+	}
+	
+	public function count_grant($year="", $key=""){
+		$this->db->select('a.*, b.*');
+		$this->db->join('grants_detail b', 'a.grant_id = b.grant_id', 'left');
+		$this->db->where('a.publish', 1);
+		if($year !== "")
+			$this->db->where('a.grant_year', $year);
+		
+		if($key !== "")
+			$this->db->where('a.research_title', $key);
+			
+		$this->db->order_by("a.date_input", "DESC"); 
+		$query = $this->db->get('grants a')->num_rows();
+		return $query;
+	}
+	
+	public function publication($year="", $key="", $num = 10, $offset = 0){		
+		$this->db->select('a.*, b.*');
+		$this->db->join('publication_detail b','a.pub_id = b.pub_id','left');
+		$this->db->where('a.publish', 1);
+		if($year !== "")
+			$this->db->where('b.pub_year', $year);
+		
+		if($key !== "")
+			$this->db->like('a.title', $key);
+			
+		$this->db->order_by("a.date_input", "DESC"); 
+		$query = $this->db->get('publication a', $num, $offset)->result_array();
+		return $query;
+	}
 
+	public function grant($year="", $key="", $num = 10, $offset = 0){
+		$this->db->select('a.*, b.*');
+		$this->db->join('grants_detail b', 'a.grant_id = b.grant_id', 'left');
+		$this->db->where('a.publish', 1);
+		if($year !== "")
+			$this->db->where('a.grant_year', $year);
+		
+		if($key !== "")
+			$this->db->where('a.research_title', $key);
+			
+		$this->db->order_by("a.date_input", "DESC"); 
+		$query = $this->db->get('grants a', $num, $offset)->result_array();
+		return $query;
+	}
+	
+	public function searching($key){
+		$base = site_url();
+		$sql = "select news_id as id, news_title as title, news_content as content, 
+				concat('".$base."news/read/', news_id) as url from news where news_title like '%$key%' order by last_updated DESC limit 0, 10";
+		return $this->db->query($sql)->result_array();
+	}
+
+	public function count_search($key){
+		$sql = "select * from news where news_title like '%$key%'";
+		return $this->db->query($sql)->num_rows();
+	}
+
+	public function researchers($sort="", $num = 10, $offset = 0){		
+		$this->db->select('a.*, b.*');
+		$this->db->join('department b','a.department_id = b.department_id','left');
+		$this->db->where('a.role_id', 3);
+		if($sort == "")
+			$this->db->order_by("a.name", "ASC");
+		if($sort == 'department')
+			$this->db->order_by("a.department_id", "ASC");
+		if($sort == 'date')
+			$this->db->order_by("a.date_create", "ASC");
+			
+		$query = $this->db->get('users a', $num, $offset)->result_array();
+		return $query;
+	}
 	
 }
 
