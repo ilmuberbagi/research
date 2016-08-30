@@ -63,7 +63,7 @@
 						<div class="small-box bg-red">
 							<div class="inner"><h3>About</h3><p>Manage Info Page</p></div>
 							<div class="icon"><i class="fa fa-book"></i></div>
-							<a href="<?php echo base_url().'dashboard/information';?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
+							<a href="<?php echo base_url().'dashboard/information?tab=about';?>" class="small-box-footer">Selengkapnya <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
 
