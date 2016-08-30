@@ -17,14 +17,14 @@
 			</div>
 			
 			<?php if(!empty($result)){ foreach ($result as $r){?>
-				<div class="col-md-6">
+				<div class="col-md-6" style="min-height:250px">
 					<table style="width:100%; margin-bottom:50px; padding:10px">
 						<tr><td rowspan="4" valign="top" width="75"><img src="<?php echo $r['avatar']?$r['avatar']:site_url().'assets/img/user.jpg';?>" width="60" class="img-responsive img">
-						<a href="#" data-toggle="modal" data-target="#modalProfile" onclick="return profile_preview('<?php echo $r['name'].'`'.$r['profile'];?>)" class="btn btn-xs btn-warning">Profile</a>
-						</td><th width="100">Name</th><td><?php echo $r['name'];?></td></tr>
+						<a href="#" onClick="return profile_preview('<?php echo $r['name'].'`'.$r['profile'];?>')" data-toggle="modal" data-target="#modalProfile" class="btn btn-xs btn-warning">Profile</a>
+						</td><th width="100" valign="top">Name</th><td><?php echo $r['name'];?></td></tr>
 						<tr><th>Department</th><td><?php echo $r['department_name'];?></td></tr>
-						<tr><th>Expertise</th><td><?php echo $r['research_interest'];?></td></tr>
-						<tr><th>Research Interest</th><td><?php echo $r['research_interest'];?></td></tr>
+						<tr><th valign="top">Expertise</th><td><?php echo $r['expertise'];?></td></tr>
+						<tr><th valign="top">Research Interest</th><td><?php echo $r['research_interest'];?></td></tr>
 					</table>
 				</div>
 			<?php }}else{ echo "No Researchers registered.";}?>
@@ -78,9 +78,9 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="titleProfile"></h4>
+        <h4 class="modal-title" id="titleProfile" style="border-bottom:solid 1px #EEE"></h4>
       </div>
-      <div class="modal-body" id="contentProfile">
+      <div class="modal-body" id="contentProfile" style="padding:50px; padding-top:5px">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>

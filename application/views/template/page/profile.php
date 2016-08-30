@@ -32,8 +32,8 @@
 									<span class="sr-only">Toggle Dropdown</span>
 								  </button>
 								  <ul class="dropdown-menu" role="menu">
-									<li><a target="_blank" href="<?php echo site_url().'dashboard/profile/'.$this->session->userdata('user_id').'/print';?>">Print</a></li>
-									<li><a href="<?php echo site_url().'dashboard/profile/'.$this->session->userdata('user_id').'/excel';?>">Export Excel</a></li>
+									<li><a target="_blank" href="<?php echo site_url().'dashboard/profile/'.($this->uri->segment(3)?$this->uri->segment(3):$this->session->userdata('user_id')).'/print';?>"><i class="fa fa-print"></i> Print</a></li>
+									<li><a href="<?php echo site_url().'dashboard/profile/'.($this->uri->segment(3)?$this->uri->segment(3):$this->session->userdata('user_id')).'/excel';?>"><i class="fa fa-file-excel-o"></i> Export Excel</a></li>
 								  </ul>
 								</div>
 							</div>
@@ -140,8 +140,8 @@
 									<span class="sr-only">Toggle Dropdown</span>
 								  </button>
 								  <ul class="dropdown-menu" role="menu">
-									<li><a target="_blank" href="<?php echo site_url().'dashboard/profile/'.$this->session->userdata('user_id').'/print';?>"><i class="fa fa-print"></i> Print</a></li>
-									<li><a href="<?php echo site_url().'dashboard/profile/'.$this->session->userdata('user_id').'/excel';?>"><i class="fa fa-file-excel-o"></i> Export Excel</a></li>
+									<li><a target="_blank" href="<?php echo site_url().'dashboard/profile/'.($this->uri->segment(3)?$this->uri->segment(3):$this->session->userdata('user_id')).'/print';?>"><i class="fa fa-print"></i> Print</a></li>
+									<li><a href="<?php echo site_url().'dashboard/profile/'.($this->uri->segment(3)?$this->uri->segment(3):$this->session->userdata('user_id')).'/excel';?>"><i class="fa fa-file-excel-o"></i> Export Excel</a></li>
 								  </ul>
 								</div>
 							</div>

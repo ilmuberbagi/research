@@ -15,19 +15,18 @@
 			<div class="col-md-12">
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs">
-						<li class="active"><a href="#about" data-toggle="tab">About</a></li>
-						<li><a href="#visimisi" data-toggle="tab">Vision & Mission</a></li>
-						<li><a href="#organization" data-toggle="tab">Organization Structure</a></li>
-						<li><a href="#service" data-toggle="tab">Services</a></li>
-						<li><a href="#contact" data-toggle="tab">Contact</a></li>
-						<li><a href="#rcenters" data-toggle="tab">Research Centers</a></li>
-						<li><a href="#rgroups" data-toggle="tab">Research Groups</a></li>
-						<li><a href="#researchers" data-toggle="tab">Researchers</a></li>
-						<li><a href="#statistics" data-toggle="tab">Data and Statistics</a></li>
+						<li class="<?php echo $_GET['tab'] == 'about' ? 'active':'';?>"><a href="#about" data-toggle="tab">About</a></li>
+						<li class="<?php echo $_GET['tab'] == 'visimisi' ? 'active':'';?>"><a href="#visimisi" data-toggle="tab">Vision & Mission</a></li>
+						<li class="<?php echo $_GET['tab'] == 'organization' ? 'active':'';?>"><a href="#organization" data-toggle="tab">Organization Structure</a></li>
+						<li class="<?php echo $_GET['tab'] == 'services' ? 'active':'';?>"><a href="#service" data-toggle="tab">Services</a></li>
+						<li class="<?php echo $_GET['tab'] == 'contact' ? 'active':'';?>"><a href="#contact" data-toggle="tab">Contact</a></li>
+						<li class="<?php echo $_GET['tab'] == 'rcenters' ? 'active':'';?>"><a href="#rcenters" data-toggle="tab">Research Centers</a></li>
+						<li class="<?php echo $_GET['tab'] == 'rgroups' ? 'active':'';?>"><a href="#rgroups" data-toggle="tab">Research Groups</a></li>
+						<li class="<?php echo $_GET['tab'] == 'statistics' ? 'active':'';?>"><a href="#statistics" data-toggle="tab">Data and Statistics</a></li>
 					</ul>
 					<div class="tab-content">
 						<!-- about -->
-						<div class="active tab-pane" id="about">
+						<div class="tab-pane <?php echo $_GET['tab'] == 'about' ? 'active':'';?>" id="about">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
@@ -42,7 +41,7 @@
 						</div>
 
 						<!-- visimisi -->
-						<div class="tab-pane" id="visimisi">  
+						<div class="tab-pane <?php echo $_GET['tab'] == 'visimisi' ? 'active':'';?>" id="visimisi">  
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
@@ -56,7 +55,7 @@
 							</div>
 						</div>
 
-						<div class="tab-pane" id="organization">
+						<div class="tab-pane <?php echo $_GET['tab'] == 'organization' ? 'active':'';?>" id="organization">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
@@ -70,7 +69,7 @@
 							</div>
 						</div>
 
-						<div class="tab-pane" id="service">
+						<div class="tab-pane <?php echo $_GET['tab'] == 'services' ? 'active':'';?>" id="service">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
@@ -84,7 +83,7 @@
 							</div>
 						</div>
 
-						<div class="tab-pane" id="contact">
+						<div class="tab-pane <?php echo $_GET['tab'] == 'contact' ? 'active':'';?>" id="contact">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
@@ -98,7 +97,7 @@
 							</div>
 						</div>
 						
-						<div class="tab-pane" id="rcenters">
+						<div class="tab-pane <?php echo $_GET['tab'] == 'rcenters' ? 'active':'';?>" id="rcenters">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
@@ -112,7 +111,7 @@
 							</div>
 						</div>
 						
-						<div class="tab-pane" id="rgroups">
+						<div class="tab-pane <?php echo $_GET['tab'] == 'rgroups' ? 'active':'';?>" id="rgroups">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">
@@ -126,21 +125,7 @@
 							</div>
 						</div>
 						
-						<div class="tab-pane" id="researchers">
-							<div class="row">
-								<div class="col-md-12">
-									<div class="form-group">
-										<textarea name="researchers" class="form-control description">
-										<?php echo $info[0]['researchers'];?></textarea>
-									</div>
-									<div class="form-action">
-										<input type="submit" class="btn btn-primary" value="Save" name="submit">
-									</div>
-								</div>
-							</div>
-						</div>
-						
-						<div class="tab-pane" id="statistics">
+						<div class="tab-pane <?php echo $_GET['tab'] == 'statistics' ? 'active':'';?>" id="statistics">
 							<div class="row">
 								<div class="col-md-12">
 									<div class="form-group">

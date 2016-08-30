@@ -26,11 +26,17 @@
 				<li class="<?php echo $this->uri->segment(2) == '' && $this->uri->segment(1) == 'dashboard'? 'active':'';?>"><a href="<?php echo base_url().'dashboard';?>"><i class="fa fa-home"></i> <span>Dashboard</span></a></li>
 				
 				<?php if($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2){?>
-					<li class="treeview <?php echo $this->uri->segment(2) == 'slideshow'|| $this->uri->segment(2) == 'about'|| $this->uri->segment(2) == 'contact'? 'active':'';?>">
+					<li class="treeview <?php echo $this->uri->segment(2) == 'slideshow'|| $this->uri->segment(2) == 'information' ? 'active':'';?>">
 						<a href="#"><i class="fa fa-globe"></i> <span>Web CMS</span> <i class="fa fa-angle-left pull-right"></i></a>
 						<ul class="treeview-menu">
-							<li><a href="<?php echo base_url().'dashboard/information#about';?>"><i class="fa fa-arrow-circle-right"></i> About</a></li>
-							<li><a href="<?php echo base_url().'dashboard/information#contact';?>"><i class="fa fa-arrow-circle-right"></i>  Contact</a></li>
+							<li><a href="<?php echo base_url().'dashboard/information?tab=about';?>"><i class="fa fa-arrow-circle-right"></i> About</a></li>
+							<li><a href="<?php echo base_url().'dashboard/information?tab=visimisi';?>"><i class="fa fa-arrow-circle-right"></i>  Visi & Misi</a></li>
+							<li><a href="<?php echo base_url().'dashboard/information?tab=organization';?>"><i class="fa fa-arrow-circle-right"></i>  Organization</a></li>
+							<li><a href="<?php echo base_url().'dashboard/information?tab=services';?>"><i class="fa fa-arrow-circle-right"></i>  Services</a></li>
+							<li><a href="<?php echo base_url().'dashboard/information?tab=contact';?>"><i class="fa fa-arrow-circle-right"></i>  Contact</a></li>
+							<li><a href="<?php echo base_url().'dashboard/information?tab=rcenters';?>"><i class="fa fa-arrow-circle-right"></i>  Research Centers</a></li>
+							<li><a href="<?php echo base_url().'dashboard/information?tab=rgroups';?>"><i class="fa fa-arrow-circle-right"></i>  Research Groups</a></li>
+							<li><a href="<?php echo base_url().'dashboard/information?tab=statistics';?>"><i class="fa fa-arrow-circle-right"></i>  Data and Statistics</a></li>
 							<li><a href="<?php echo base_url().'dashboard/slideshow';?>"><i class="fa fa-arrow-circle-right"></i>  Slide Show</i></a></li>
 						</ul>
 					</li>

@@ -127,7 +127,7 @@ class Mdl_cms extends CI_Model{
 	# mics
 	# ==================================================
 	public function get_department(){
-		$sql = "select * from department order by department_name ASC";
+		$sql = "select * from department order by sort ASC";
 		return $this->db->query($sql)->result_array();
 	}
 	

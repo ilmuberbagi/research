@@ -3,6 +3,7 @@
 <head>
 	<title><?php echo isset($title) ? $title : 'Research FTUI';?></title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<link rel="icon" type="image/png" href="<?php echo base_url().'assets/public/img/Makara_FTUI.png';?>">
     <link rel="stylesheet" href="<?php echo base_url().'assets/css/bootstrap.min.css';?>">
     <link rel="stylesheet" href="<?php echo base_url().'assets/css/font-awesome.min.css';?>">
     <link rel="stylesheet" href="<?php echo base_url().'assets/css/ionicons.min.css';?>">
@@ -37,9 +38,9 @@
 
 			<form action="<?php echo site_url().'login/proc_register';?>" method="post">
 				<div class="form-group has-feedback">
-					<label>User ID <i class="fa fa-question-circle" data-toggle="popover" data-placement="top" title="User ID" data-content="Enter your unique ID such as NIP/NUP or NIDN"></i> <span>*</span></label>
-					<input type="text" class="form-control" name="user_id" placeholder="User ID" id="user_id" required autofocus>
-					<span class="glyphicon glyphicon-user form-control-feedback"></span>
+					<label>User ID <i class="fa fa-question-circle" data-toggle="popover" data-placement="top" title="User ID" data-content="Enter your unique ID such as NIP/NUP or NIDN"></i> <span>*</span></label><br/><small>User ID tidak boleh mengandung karakter khusus dan spasi</small>
+					<input type="text" class="form-control" name="user_id" placeholder="User ID" id="user_id" pattern="[a-zA-Z0-9]+" required autofocus>
+					<span class="glyphicon glyphicon-user form-control-feedback" style="margin-top:15px"></span>
 					<div class="note-userid" style="display:none"><i class="fa fa-warning"></i> User ID has been used. Please use another one.</div>
 				</div>
 				<div class="form-group has-feedback">
@@ -48,7 +49,7 @@
 					<span class="glyphicon glyphicon-user form-control-feedback"></span>
 				</div>
 				<div class="form-group has-feedback">
-					<label>Fullname <i class="fa fa-question-circle" data-toggle="popover" data-placement="top" title="Fullname" data-content="Enter your fullname include your title such as Prof, Dr, etc"></i></label>
+					<label>Fullname <i class="fa fa-question-circle" data-toggle="popover" data-placement="top" title="Fullname" data-content="Enter your fullname include your title such as Prof, Dr, etc"></i></label><br/><small>Tulis nama lengkap dan gelar</small>
 					<input type="text" class="form-control" name="name" placeholder="Fullname" required>
 					<span class="glyphicon glyphicon-card form-control-feedback"></span>
 				</div>

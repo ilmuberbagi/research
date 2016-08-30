@@ -1,19 +1,23 @@
 <div class="row">
 	<div class="col-md-12">
-		<h4 align="center">Researcher Profile<br/>Fakultas Teknik<br/>Universitas Indonesia</h4>
+		<!-- h4 align="center">Researcher Profile<br/>Fakultas Teknik<br/>Universitas Indonesia</h4 -->
+		<?php
+			echo "<table class='title'><tr><td colspan='3' rowspan='3'><img src='".site_url().'assets/public/img/logo-ftui.jpg'."' width='250'></td><td colspan='3'><b>RESEARCHER PROFILE<BR/>FAKULTAS TEKNIK UNIVERSITAS INDONESIA</b></td></tr></table><br/>";
+		?>
 		<h4>Researcher Profile</h4>
 		<table class="table table-bordered">
 			<tr>
 				<th>Name</th>
 				<td><?php echo $user[0]['name'];?></td>
-				<td rowspan="6"><img src="<?php echo $user[0]['avatar']? $user[0]['avatar']:site_url().'assets/img/user.jpg';?>" class="img-responsive" width="75"></td>
+				<td rowspan="7" align="center"><img src="<?php echo $user[0]['avatar']? $user[0]['avatar']:site_url().'assets/img/user.jpg';?>" class="img" width="130"></td>
 			</tr>
 			<tr><th>NIDN/NUP</th><td><?php echo $user[0]['user_code'];?></td></tr>
 			<tr><th>Department</th><td><?php echo $user[0]['department_name'];?></td></tr>
 			<tr><th>Email</th><td><?php echo $user[0]['email'];?></td></tr>
 			<tr><th>Phone</th><td><?php echo $user[0]['phone'];?></td></tr>
 			<tr><th>Expertise</th><td><?php echo $user[0]['expertise'];?></td></tr>
-			<tr><th>Profile</th><td colpan="2"><?php echo $user[0]['profile'];?></td></tr>
+			<tr><th>Research Interest</th><td><?php echo $user[0]['research_interest'];?></td></tr>
+			<tr><th>Profile</th><td colspan="2"><?php echo $user[0]['profile'];?></td></tr>
 		</table>
 		<hr/>
 		<?php 
