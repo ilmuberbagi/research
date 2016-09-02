@@ -11,7 +11,7 @@
 				<td><?php echo $user[0]['name'];?></td>
 				<td rowspan="7" align="center"><img src="<?php echo $user[0]['avatar']? $user[0]['avatar']:site_url().'assets/img/user.jpg';?>" class="img" width="130"></td>
 			</tr>
-			<tr><th>NIDN/NUP</th><td><?php echo $user[0]['user_code'];?></td></tr>
+			<tr><th>NIP/NUP</th><td><?php echo $user[0]['user_code'];?></td></tr>
 			<tr><th>Department</th><td><?php echo $user[0]['department_name'];?></td></tr>
 			<tr><th>Email</th><td><?php echo $user[0]['email'];?></td></tr>
 			<tr><th>Phone</th><td><?php echo $user[0]['phone'];?></td></tr>

@@ -52,8 +52,12 @@ class Publication extends CI_Controller{
 		}
 	}
 	
-	public function input(){	
+	public function input(){
 		$this->data['title'] = "Publication Input Data";
+		if($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2){
+			$this->load->model('Mdl_cms','cms');
+			$this->data['researchers'] = $this->cms->get_all_users();
+		}
 		$this->data['types'] = $this->pub->get_publication_type();
 		$this->data['page'] = "page/form_publication";
 		$this->load->view('template', $this->data);

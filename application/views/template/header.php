@@ -19,12 +19,12 @@
 
 					<li class="dropdown user user-menu">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-							<img class="user-image" src="<?php echo set_image($this->session->userdata('avatar'));?>" alt="">
+							<img class="user-image" src="<?php echo set_image($this->session->userdata('avatar'));?>" alt="<?php echo $this->session->userdata('name');?>">
 							<span class="hidden-xs"><?php echo $this->session->userdata('name');?></span>
 						</a>
 						<ul class="dropdown-menu">
 							<li class="user-header">
-								<img class="img-circle link" src="<?php echo set_image($this->session->userdata('avatar'));?>" data-toggle="modal" data-target="#modalProfile" style=" cursor:pointer">
+								<img class="img-circle link" src="<?php echo set_image($this->session->userdata('avatar'));?>" data-toggle="modal" data-target="#modalProfile" alt="<?php echo $this->session->userdata('name');?>" style="cursor:pointer">
 								<p><?php echo $this->session->userdata('name').'<small>Last Login : '.date('d/m/Y H:i', strtotime($this->session->userdata('last_login'))).'</small>';?></p>
 							</li>
 							<li class="user-body">
@@ -47,7 +47,7 @@
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">
 					<span aria-hidden="true"><i class="fa fa-remove"></i></span><span class="sr-only">Close</span></button>
-					<img class="img-circle link" src="<?php echo set_image($this->session->userdata('avatar'));?>"  style="width:100px;height:100px">
+					<img class="img-circle link" src="<?php echo set_image($this->session->userdata('avatar'));?>"  style="width:100px;height:100px" alt="<?php echo set_image($this->session->userdata('name'));?>">
 					<h4 class="modal-title">Change Photo</h4>
 					<div>Change profile photo</div>
 				</div>

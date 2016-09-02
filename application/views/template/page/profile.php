@@ -47,7 +47,7 @@
 									<input type="text" name="name" class="form-control" value="<?php echo $user[0]['name'];?>">
 								</div>
 								<div class="form-group">
-									<label>NIDN/NUP</label>
+									<label>NIP/NUP</label>
 									<input type="text" name="user_code" class="form-control" value="<?php echo $user[0]['user_code'];?>">
 								</div>
 								<div class="form-group">
@@ -156,7 +156,7 @@
 										<td><?php echo $user[0]['name'];?></td>
 									</tr>
 									<tr>
-										<th>NIDN/NUP</th>
+										<th>NIP/NUP</th>
 										<td><?php echo $user[0]['user_code'];?></td>
 									</tr>
 									<tr>

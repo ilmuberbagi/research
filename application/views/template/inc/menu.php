@@ -48,6 +48,10 @@
 						<ul class="treeview-menu">
 							<li><a href="<?php echo base_url().'grants';?>"><i class="fa fa-arrow-circle-right"></i>  Grant</a></li>
 							<li><a href="<?php echo base_url().'publication';?>"><i class="fa fa-arrow-circle-right"></i>  Publication</a></li>
+							<li></li>
+							<li><a href="<?php echo base_url().'grants/action/input';?>"><i class="fa fa-arrow-circle-right"></i>  Input Grant</a></li>
+							<li><a href="<?php echo base_url().'publication/action/input';?>"><i class="fa fa-arrow-circle-right"></i>  Input Publication</a></li>
+							<li></li>
 							<li><a href="<?php echo base_url().'dashboard/research/video';?>"><i class="fa fa-arrow-circle-right"></i> Research Video</a></li>
 						</ul>
 					</li>

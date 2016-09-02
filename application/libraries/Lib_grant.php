@@ -19,11 +19,8 @@ class Lib_grant {
     }
 	
 	public function insert_grant(){
-		$user_id = $this->ci->session->userdata('user_id');
 		$grant_data = array(
 			'grant_id' => date('YmdHis').mt_rand(0,100),
-			'user_id' => $user_id,
-			'department_id' => $this->ci->session->userdata('department_id'),
 			'main_researcher' => $this->ci->security->xss_clean($this->ci->input->post('main_researcher')),
 			'member_researcher' => $this->ci->security->xss_clean($this->ci->input->post('member_researcher')),
 			'research_title' => $this->ci->security->xss_clean($this->ci->input->post('research_title')),
@@ -36,6 +33,13 @@ class Lib_grant {
 			'date_input' => date('Y-m-d H:i:s'),
 			'date_update' => date('Y-m-d H:i:s'),
 		);
+		$grant_data['user_id'] = $this->ci->session->userdata('user_id');
+		$grant_data['department_id'] = $this->ci->session->userdata('department_id');
+		if($this->ci->session->userdata('role') == 1 || $this->ci->session->userdata('role') == 2){
+			$user = explode('#', $this->ci->input->post('user_id'));
+			$grant_data['user_id'] = $user[0];
+			$grant_data['department_id'] = $user[1];
+		}
 		$grant_detail = array(
 			'grant_id' => $grant_data['grant_id'],
 			'sd_riset' => $this->ci->input->post('sd_riset'),

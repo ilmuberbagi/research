@@ -47,6 +47,23 @@
 								<th>Status</th>
 								<td><?php echo $cg[0]['st_granted'] == 1? '<i class="fa fa-check-circle text-success"></i>':'<i class="fa fa-times-circle text-danger"></i>';?></td>
 							</tr>
+							<tr><th></th><th style="text-align:left">Status Penelitian</th></tr>
+							<tr>
+								<th>Single/Multi Year(s)</th>
+								<td><?php echo $cg[0]['st_year'] == 1 ? 'Multi':'Single';?></td>
+							</tr>
+							<tr>
+								<th>Submisi Proposal</th>
+								<td><?php echo $cg[0]['st_submision']==1? 'Lanjutan':'Baru';?></td>
+							</tr>
+							<tr>
+								<th>Seleksi</th>
+								<td><?php echo $cg[0]['selection'];?></td>
+							</tr>
+							<tr>
+								<th>Website</th>
+								<td><?php echo $cg[0]['site'];?></td>
+							</tr>
 							<tr><th></th><th style="text-align:left">Sumber Dana</th></tr>
 							<tr>
 								<th>Riset/PengMas</th>
@@ -84,6 +101,23 @@
 							<tr>
 								<th>Tahun 3 (Rp)</th>
 								<td><?php echo number_format($cg[0]['year_3']);?></td>
+							</tr>
+							<tr><th></th><th style="text-align:left">Keterangan Tambahan</th></tr>
+							<tr>
+								<th>Laporan Kemajuan</th>
+								<td><?php echo $cg[0]['report_progress'] == 1? '<i class="fa fa-check-circle text-success"></i>':'<i class="fa fa-times-circle text-danger"></i>';?></td>
+							</tr>
+							<tr>
+								<th>Laporan Akhir</th>
+								<td><?php echo $cg[0]['last_report'] == 1? '<i class="fa fa-check-circle text-success"></i>':'<i class="fa fa-times-circle text-danger"></i>';?></td>
+							</tr>
+							<tr>
+								<th>BAST/SP</th>
+								<td><?php echo $cg[0]['sp'] == 1? '<i class="fa fa-check-circle text-success"></i>':'<i class="fa fa-times-circle text-danger"></i>';?></td>
+							</tr>
+							<tr>
+								<th>Keterangan Lain</th>
+								<td><?php echo $cg[0]['description'];?></td>
 							</tr>
 						</table>
 					</div>

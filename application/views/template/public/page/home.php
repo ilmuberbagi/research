@@ -7,7 +7,7 @@
 							<div class="carousel-inner" role="listbox">
 								<?php if(!empty($slideshow)){ $no=0; foreach ($slideshow as $slide){ $no++;?>
 								<div class="item <?php echo $no==1? 'active':'';?>">
-									<img src="<?php echo $slide['img_url'];?>" alt="">
+									<img src="<?php echo $slide['img_url'];?>" alt="<?php echo $slide['caption_title'] !== "" ? $slide['caption_title']:'Slideshow';?>">
 									<!-- div class="carousel-caption">
 										<h3><?php echo $slide['caption_title'];?></h3>
 										<p><?php echo $slide['caption_text'];?></p>
@@ -35,7 +35,7 @@
 						</div>
 						<div class="page-body">
 							<?php if(!empty($news)){ foreach($news as $n){?>
-							<div class="col-md-6 col-xs-6" style="margin-bottom:10px; min-height:380px">
+							<div class="col-md-6 col-sm-6 col-xs-12" style="margin-bottom:10px; min-height:380px">
 								<div class="thumbnail img-responsive">
 									<div class="img-thumb-bg" style="background-image:url('<?php echo $n['thumbnail_url'];?>')"></div>
 								</div>
@@ -85,13 +85,13 @@
 								<?php if(!empty($publication)){ $no=0; foreach($publication as $g){ $no++;?>
 									<div class="list-group-item data">
 										<div class="row">
-											<div class="col-md-2 big">
+											<div class="col-md-2 col-sm-2 col-xs-2 big">
 												<div class="date"><?php echo date('d', strtotime($g['date_input']));?></div>
 												<div><?php echo date('M', strtotime($g['date_input']));?></div>
 												<div><?php echo date('Y', strtotime($g['date_input']));?></div>
 											</div>
-											<div class="col-md-10">
-												<div class="item-title"><?php echo $g['title'];?></div>
+											<div class="col-md-10 col-sm-10 col-xs-10">
+												<div class="item-title" data-toggle="modal" data-target="#modalAbstract" onclick="return get_abstract('<?php echo $g['pub_id'];?>')" style="cursor:pointer"><?php echo $g['title'];?></div>
 												<div class="author">Authors : <?php echo $g['author'];?></div>
 											</div>
 										</div>
@@ -105,12 +105,12 @@
 								<?php if(!empty($grant)){ $no=0; foreach($grant as $g){ $no++; ?>
 									<div class="list-group-item data">
 										<div class="row">
-											<div class="col-md-2 big">
+											<div class="col-md-2 col-sm-2 col-xs-2 big">
 												<div class="date"><?php echo date('d', strtotime($g['date_input']));?></div>
 												<div><?php echo date('M', strtotime($g['date_input']));?></div>
 												<div><?php echo date('Y', strtotime($g['date_input']));?></div>
 											</div>
-											<div class="col-md-10">
+											<div class="col-md-10 col-sm-10 col-xs-10">
 												<b><?php echo $g['research_title'];?></b>
 												<div class="author">Authors : <?php echo $g['main_researcher'];?></div>
 											</div>
@@ -131,7 +131,7 @@
 							<?php if(!empty($video)){ foreach($video as $v){?>
 							<div class="list-group-item">
 								<a href="<?php echo site_url().'videos/read/'.$v['video_id'].'/'.gen_url($v['video_title']);?>">
-									<img src="<?php echo getYoutubeImage($v['video_url']);?>" class="img-responsive">
+									<img src="<?php echo getYoutubeImage($v['video_url']);?>" class="img-responsive" alt="<?php echo $v['video_title'] ==''? 'Video Thumbnail': $v['video_title'];?>">
 								</a>
 							</div>
 							<?php }?>
@@ -168,4 +168,21 @@
 					</div>
 				</div>
 			</div>
+		</div>
+
+		<!-- modal abstract -->
+		<div class="modal fade" tabindex="-1" role="dialog" id="modalAbstract">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header" style="border-bottom:solid 1px #DDD">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="titlePub" style="font-size:16px; font-weight:bold; line-height:18px"></h4>
+			  </div>
+			  <div class="modal-body" id="contentPub" style="padding:50px; padding-top:5px; border-bottom:solid 1px #DDD">
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+			  </div>
+			</div>
+		  </div>
 		</div>

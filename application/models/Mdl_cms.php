@@ -157,7 +157,8 @@ class Mdl_cms extends CI_Model{
 	public function get_all_users(){
 		$sql = "select a.*, b.role_name, c.department_name from users a 
 				left join role b on a.role_id = b.role_id
-				left join department c on a.department_id = c.department_id";
+				left join department c on a.department_id = c.department_id
+				where a.role_id not in  (1,2) order by date_create DESC";
 		return $this->db->query($sql)->result_array();		
 	}
 }

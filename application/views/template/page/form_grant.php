@@ -20,6 +20,21 @@
 						<h3 class="box-title"><i class="fa fa-book"></i> &nbsp;Grant Data</h3>
 					</div>
 					<div class="box-body">
+						<?php 
+						if($this->uri->segment(3) == "input"){
+							if($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2){?>
+								<div class="form-group">
+									<label>Researcher</label>
+									<select name="user_id" class="form-control select" required>
+										<option value="">- Select Researcher -</option>
+										<?php if(!empty($researchers)){ foreach($researchers as $r){?>
+										<option value="<?php echo $r['user_id'].'#'.$r['department_id'];?>"><?php echo $r['name'];?></option>
+										<?php }} ?>
+									</select>
+								</div>
+								<hr/>
+						<?php } } ?>
+
 						<div class="form-group">
 							<label>Judul Penelitian</label>
 							<input type="text" name="research_title" class="form-control" value='<?php echo isset($cg[0]['research_title']) ? $cg[0]['research_title']:'';?>' placeholder="Judul Penelitian" required>

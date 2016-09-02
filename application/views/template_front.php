@@ -4,6 +4,9 @@
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="description" content="<?php echo isset($meta['description']) ? $meta['description']:'Sistem Riset dan Pengabdian Masyarakat Fakultas Teknik Universitas Indonesia';?>">
+		<meta name="keywords" content="<?php echo isset($meta['description']) ? $meta['keyword']: 'RPM FTUI, Riset dan Pengabdian Masyarakat, Fakultas Teknik, Universitas Indonesia, Publikasi, Publication, Grant, Hibah, Riset, Penelitian';?>">
+		<meta name="author" content="RPM FTUI">
 		<title><?php echo isset($title) ? $title : 'Riset & Pengabdian Masyarakat FTUI';?></title>
 		<link rel="icon" type="image/png" href="<?php echo base_url().'assets/public/img/Makara_FTUI.png';?>">
 		<link href="<?php echo base_url().'assets/public/css/bootstrap.css';?>" rel="stylesheet">

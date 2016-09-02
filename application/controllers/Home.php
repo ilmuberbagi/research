@@ -27,6 +27,7 @@ class Home extends CI_Controller{
 	}
 	
 	public function about($param = null){
+		$this->data['title'] = 'About - Riset & Pengabdian Masyarakat FTUI';
 		$this->data['video'] = $this->front->get_video_5();
 		$this->data['info'] = $this->front->get_information();
 		$this->data['page'] = 'page/about';
@@ -34,6 +35,7 @@ class Home extends CI_Controller{
 	}
 	
 	public function service(){
+		$this->data['title'] = 'Services - Riset & Pengabdian Masyarakat FTUI';
 		$this->data['page'] = 'page/about';
 		$this->data['video'] = $this->front->get_video_5();
 		$this->data['info'] = $this->front->get_information();
@@ -41,6 +43,7 @@ class Home extends CI_Controller{
 	}
 	
 	public function resources(){
+		$this->data['title'] = 'Resources - Riset & Pengabdian Masyarakat FTUI';
 		$this->data['page'] = 'page/resource';
 		$this->data['video'] = $this->front->get_video_5();
 		$this->data['resources'] = $this->front->get_resources();
@@ -48,6 +51,7 @@ class Home extends CI_Controller{
 	}
 	
 	public function statistics(){
+		$this->data['title'] = 'Statistics - Riset & Pengabdian Masyarakat FTUI';
 		$this->data['page'] = 'page/about';
 		$this->data['video'] = $this->front->get_video_5();
 		$this->data['info'] = $this->front->get_information();
@@ -55,6 +59,7 @@ class Home extends CI_Controller{
 	}
 	
 	public function contact(){
+		$this->data['title'] = 'Contact - Riset & Pengabdian Masyarakat FTUI';
 		$this->data['page'] = 'page/contact';
 		$this->data['info'] = $this->front->get_information();
 		$this->load->view('template_front', $this->data);
@@ -67,9 +72,11 @@ class Home extends CI_Controller{
 		if($param == 'read'){
 			$this->front->counter_news($id);
 			$this->data['news'] = $this->front->get_current_news($id);
+			$this->data['title'] = $this->data['news'][0]['news_title'].' - Riset & Pengabdian Masyarakat FTUI';
 			$this->data['other_news'] = $this->front->get_news_5();
 		}else if($param == null || $param == "page"){
 			# list news pagination
+			$this->data['title'] = 'News - Riset & Pengabdian Masyarakat FTUI';
 			$tot = $this->front->count_news(1);
 			$this->load->library('pagination');
 			$config = array(
@@ -101,12 +108,14 @@ class Home extends CI_Controller{
 	}
 	
 	public function conferences($param = '', $id=''){
+		$this->data['title'] = 'Conferences - Riset & Pengabdian Masyarakat FTUI';
 		$this->data['page'] = 'page/news';
 		$this->data['video'] = $this->front->get_video_5();
 		$this->data['popular'] = $this->front->popular_news();
 		if($param == 'read'){
 			$this->front->counter_news($id);
 			$this->data['news'] = $this->front->get_current_news($id);
+			$this->data['title'] = $this->data['news'][0]['news_title'].' - Riset & Pengabdian Masyarakat FTUI';
 			$this->data['other_news'] = $this->front->get_news_5();
 		}else if($param == null || $param == "page"){
 			# list news pagination
@@ -141,12 +150,14 @@ class Home extends CI_Controller{
 	}
 
 	public function grant($param = '', $id=''){
+		$this->data['title'] = 'Grant - Riset & Pengabdian Masyarakat FTUI';
 		$this->data['page'] = 'page/news';
 		$this->data['video'] = $this->front->get_video_5();
 		$this->data['popular'] = $this->front->popular_news();
 		if($param == 'read'){
 			$this->front->counter_news($id);
 			$this->data['news'] = $this->front->get_current_news($id);
+			$this->data['title'] = $this->data['news'][0]['news_title'].' - Riset & Pengabdian Masyarakat FTUI';
 			$this->data['other_news'] = $this->front->get_news_5();
 		}else if($param == null || $param == "page"){
 			# list news pagination
@@ -181,10 +192,12 @@ class Home extends CI_Controller{
 	}
 
 	public function videos($param = '', $id=''){
+		$this->data['title'] = 'Videos - Riset & Pengabdian Masyarakat FTUI';
 		$this->data['page'] = 'page/videos';
 		$this->data['popular'] = $this->front->popular_news();
 		if($param == 'read'){
 			$this->data['videos'] = $this->front->get_current_video($id);
+			$this->data['title'] = $this->data['videos'][0]['video_title'].' - Riset & Pengabdian Masyarakat FTUI';
 			$this->data['other_videos'] = $this->front->get_video_5();
 		}else if($param == null || $param == "page"){
 			# list news pagination
@@ -233,9 +246,8 @@ class Home extends CI_Controller{
 	
 	# grant and publication
 	public function research($param){
-		$this->data['title'] = "Research Data";
+		$this->data['title'] = 'Publications - Riset & Pengabdian Masyarakat FTUI';
 		$this->data['page'] = "page/research";
-		
 		$year = isset($_GET['year']) ? $_GET['year']:'';
 		$key = isset($_GET['key']) ? $_GET['key']:'';
 		$param = isset($_GET['param']) ? $_GET['param']:$param;
@@ -245,6 +257,7 @@ class Home extends CI_Controller{
 		
 		$tot = $this->front->count_publication($year, $key);
 		if($param == 'grant')
+			$this->data['title'] = 'Grants - Riset & Pengabdian Masyarakat FTUI';
 			$tot = $this->front->count_grant($year, $key);
 		
 		$this->load->library('pagination');
@@ -282,7 +295,7 @@ class Home extends CI_Controller{
 
 	# searching feature
 	public function search(){
-		$this->data['title'] = "Search Result";
+		$this->data['title'] = "Search Result - Riset & Pengabdian Masyarakat FTUI";
 		$this->data['page'] = "page/search";
 		$key = isset($_GET['key']) ? str_replace(array('"',"'"),'', $_GET['key']):'';
 		$this->data['key'] = $key;		
@@ -291,12 +304,18 @@ class Home extends CI_Controller{
 	}
 	
 	public function researchers(){
-		$this->data['title'] = "Researchers";
+		$this->data['title'] = "Researchers - Riset & Pengabdian Masyarakat FTUI";
 		$sort = isset($_GET['sort'])?$_GET['sort']:'';
 		$this->data['page'] = "page/researcher";
 		$this->data['sort'] = $sort;
 		$this->data['result'] = $this->front->researchers($sort);
 		$this->load->view('template_front', $this->data);
+	}
+	
+	public function current_publication($id){
+		$this->load->model('Mdl_publication','pub');
+		$data = $this->pub->current_publication($id);
+		echo json_encode($data);
 	}
 
 }

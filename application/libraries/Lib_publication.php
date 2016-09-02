@@ -19,12 +19,9 @@ class Lib_publication {
     }
 	
 	public function insert_publication(){
-		$user_id = $this->ci->session->userdata('user_id');
 		$publication_data = array(
 			'pub_id' => date('YmdHis').mt_rand(0,100),
 			'pub_type_id' => $this->ci->input->post('type_id'),
-			'user_id' => $user_id,
-			'department_id' => $this->ci->session->userdata('department_id'),
 			'publication_name' => $this->ci->security->xss_clean($this->ci->input->post('publication_name')),
 			'title' => $this->ci->security->xss_clean($this->ci->input->post('title')),
 			'abstract' => $this->ci->input->post('abstract'),
@@ -32,6 +29,13 @@ class Lib_publication {
 			'date_input' => date('Y-m-d H:i:s'),
 			'date_update' => date('Y-m-d H:i:s'),
 		);
+		$publication_data['user_id'] = $this->ci->session->userdata('user_id');
+		$publication_data['department_id'] = $this->ci->session->userdata('department_id');
+		if($this->ci->session->userdata('role') == 1 || $this->ci->session->userdata('role') == 2){
+			$user = explode('#', $this->ci->input->post('user_id'));
+			$publication_data['user_id'] = $user[0];
+			$publication_data['department_id'] = $user[1];
+		}
 		$publication_detail = array(
 			'pub_id' => $publication_data['pub_id'],
 			'publisher' => $this->ci->security->xss_clean($this->ci->input->post('publisher')),

@@ -54,6 +54,10 @@ class Grants extends CI_Controller{
 	
 	public function input(){	
 		$this->data['title'] = "Grant Input Data";
+		if($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2){
+			$this->load->model('Mdl_cms','cms');
+			$this->data['researchers'] = $this->cms->get_all_users();
+		}
 		$this->data['page'] = "page/form_grant";
 		$this->load->view('template', $this->data);
 	}

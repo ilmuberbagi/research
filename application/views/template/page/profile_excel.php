@@ -49,10 +49,10 @@
 			<td colspan="2"><?php echo $user[0]['name'];?></td>
 			<td rowspan="6" align="center"><img src="<?php echo $user[0]['avatar']? $user[0]['avatar']:site_url().'assets/img/user.jpg';?>" class="img-responsive" width="100"></td>
 		</tr>
-		<tr><th colspan="2" align="left">NIDN/NUP</th><td align="left" colspan="2"><?php echo (string)$user[0]['user_code'];?></td></tr>
+		<tr><th colspan="2" align="left">NIP/NUP</th><td align="left" colspan="2"><?php echo (string)$user[0]['user_code'];?></td></tr>
 		<tr><th colspan="2" align="left">Department</th><td colspan="2"><?php echo $user[0]['department_name'];?></td></tr>
 		<tr><th colspan="2" align="left">Email</th><td colspan="2"><?php echo $user[0]['email'];?></td></tr>
-		<tr><th colspan="2" align="left">Phone</th><td align="left" colspan="2"><?php echo (string)$user[0]['phone'];?></td></tr>
+		<tr><th colspan="2" align="left">Phone</th><td align="left" colspan="2"><?php echo "'".$user[0]['phone'];?></td></tr>
 		<tr><th colspan="2" align="left">Expertise</th><td colspan="2"><?php echo $user[0]['expertise'];?></td></tr>
 		<tr><th colspan="2" align="left">Research Interest</th><td colspan="2"><?php echo $user[0]['research_interest'];?></td></tr>
 		<tr><th colspan="2" align="left" valign="top">Profile</th><td colspan="4"><?php echo $user[0]['profile'];?></td></tr>

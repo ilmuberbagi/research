@@ -1,10 +1,10 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-3 logo">
-					<img src="<?php echo base_url().'assets/public/img/logo-ftui.jpg';?>" class="img-responsive">
+					<img src="<?php echo base_url().'assets/public/img/logo-ftui.jpg';?>" class="img-responsive" alt="logo-ftui">
 				</div>
 				<div class="col-md-9" align="right">
-					<img src="<?php echo base_url().'assets/public/img/rce.jpg';?>" class="img-responsive">
+					<img src="<?php echo base_url().'assets/public/img/rce.jpg';?>" class="img-responsive" alt="rpm-ftui">
 				</div>
 			</div>
 		</div>
@@ -37,10 +37,10 @@
 						<li class="<?php echo $this->uri->segment(1) == 'conferences'? 'active':'';?>"><a href="<?php echo site_url().'conferences';?>">Conferences/Seminars</a></li>
 						
 						<li class="dropdown <?php echo $this->uri->segment(1) == 'statistics' || $this->uri->segment(1) == 'research' ? 'active':'';?>">
-							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Data And Statictics <span class="caret"></span></a>
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Data <span class="caret"></span></a>
 							<ul class="dropdown-menu">
-								<li><a href="<?php echo site_url().'research/publication';?>">Publications</a></li>
-								<li><a href="<?php echo site_url().'research/grant';?>">Grants</a></li>
+								<li><a href="<?php echo site_url().'research/publication';?>">List of Publications</a></li>
+								<li><a href="<?php echo site_url().'research/grant';?>">List of Grants</a></li>
 								<li><a href="<?php echo site_url().'statistics';?>">Statistics</a></li>
 							</ul>
 						</li>

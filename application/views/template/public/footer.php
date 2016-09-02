@@ -1,5 +1,5 @@
 <style>
-	footer .app div{font-size:0.7em; line-height:0px}
+	footer .app div{font-size:0.7em; line-height:0px; font-weight:normal}
 	footer a{color:#FFF;}
 	footer a:hover{color:#FFF;}
 	footer .app{font-size:18px; font-weight:bold;}
@@ -10,9 +10,9 @@
 		background-color:#333;
 	}
 </style>
-<footer style="padding:100px; padding-top:20px; padding-bottom:20px; color:#FFF; background-color:#292c2f">
+<footer style="text-align:center; padding:20px; color:#FFF; background-color:#292c2f">
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-8 col-sm-12 col-xs-12">
 			<div class="app">Riset & Pengabdian Masyarakat<div>Fakultas Teknik Universitas Indonesia</div></div>
 			<br/>
 			<div class="link">
@@ -26,7 +26,7 @@
 				<a href="<?php echo site_url().'about/research-groups';?>">Research Groups</a>
 			</div>
 		</div>
-		<div class="col-md-4">
+		<div class="col-md-4 col-sm-12 col-xs-12">
 			<div><i class="fa fa-map-marker"></i> <span>Dekanat Fakultas Teknik - Kampus UI Depok - Indonesia</span></div>
 			<div><i class="fa fa-envelope"></i> <span><a href="mailto:risetft@eng.ui.ac.id">risetft@eng.ui.ac.id</a></span></div>
 		</div>

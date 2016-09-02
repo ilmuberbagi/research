@@ -49,7 +49,7 @@
 					<td><?php echo $param == 'grant'? $r['grant_year']:$r['pub_year'];?></td>
 					<?php if($param == 'publication'){?>
 					<td><?php echo $r['publisher'];?></td>
-					<td><a class="btn btn-default btn-sm" href="#<?php #echo site_url().'research/'.$param.'/abstract/'.$r['pub_id'];?>"><i class="fa fa-search"></i></a></td>
+					<td><a class="btn btn-default btn-sm" href="#" data-toggle="modal" data-target="#modalAbstract" onclick="return get_abstract('<?php echo $r['pub_id'];?>')"><i class="fa fa-search"></i></a></td>
 					<?php } ?>
 				</tr>
 				<?php }}else{?>
@@ -100,3 +100,21 @@
 		
 	</div>
 </div>
+
+<!-- modal abstract -->
+<div class="modal fade" tabindex="-1" role="dialog" id="modalAbstract">
+  <div class="modal-dialog" role="document">
+	<div class="modal-content">
+	  <div class="modal-header" style="border-bottom:solid 1px #DDD">
+		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		<h4 class="modal-title" id="titlePub" style="font-size:16px; font-weight:bold; line-height:18px"></h4>
+	  </div>
+	  <div class="modal-body" id="contentPub" style="padding:50px; padding-top:5px; border-bottom:solid 1px #DDD">
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+	  </div>
+	</div>
+  </div>
+</div>
+

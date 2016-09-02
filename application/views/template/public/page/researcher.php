@@ -17,14 +17,14 @@
 			</div>
 			
 			<?php if(!empty($result)){ foreach ($result as $r){?>
-				<div class="col-md-6" style="min-height:250px">
+				<div class="col-md-6" style="height:200px">
 					<table style="width:100%; margin-bottom:50px; padding:10px">
 						<tr><td rowspan="4" valign="top" width="75"><img src="<?php echo $r['avatar']?$r['avatar']:site_url().'assets/img/user.jpg';?>" width="60" class="img-responsive img">
 						<a href="#" onClick="return profile_preview('<?php echo $r['name'].'`'.$r['profile'];?>')" data-toggle="modal" data-target="#modalProfile" class="btn btn-xs btn-warning">Profile</a>
 						</td><th width="100" valign="top">Name</th><td><?php echo $r['name'];?></td></tr>
 						<tr><th>Department</th><td><?php echo $r['department_name'];?></td></tr>
 						<tr><th valign="top">Expertise</th><td><?php echo $r['expertise'];?></td></tr>
-						<tr><th valign="top">Research Interest</th><td><?php echo $r['research_interest'];?></td></tr>
+						<tr><th valign="top">Research<br/>Interest</th><td><?php echo $r['research_interest'];?></td></tr>
 					</table>
 				</div>
 			<?php }}else{ echo "No Researchers registered.";}?>
