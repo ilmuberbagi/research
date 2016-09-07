@@ -12,6 +12,7 @@
 			<form method="POST" action="<?php echo site_url().'dashboard/update/information';?>">
 			<input type="hidden" name="id" value="<?php echo $info[0]['id'];?>">
 			<input type="hidden" name="page" value="<?php echo current_url();?>">
+			<input type="hidden" name="tab" value="<?php echo $_GET['tab'];?>">
 			<div class="col-md-12">
 				<div class="nav-tabs-custom">
 					<ul class="nav nav-tabs">

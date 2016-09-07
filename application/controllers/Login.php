@@ -130,10 +130,8 @@ class Login extends CI_Controller {
 
 	public function proc_register(){
 		$this->load->helper('misc');
-		// $pass = generatePassword(8,4);
 		$userid = $this->security->xss_clean($this->input->post('user_id'));
 		$code = $this->security->xss_clean($this->input->post('usercode'));
-		// $status = $this->input->post('role_id');
 		$name = $this->security->xss_clean($this->input->post('name'));
 		$email = $this->security->xss_clean($this->input->post('email'));
 		$data = array(
@@ -198,19 +196,11 @@ class Login extends CI_Controller {
 			$act = $this->mdl_login->update($data[0]['user_id'], array('password' => md5($result['password'])));
 			if($act){
 				$message = $this->load->view('template/mailer/password_reset', $result, TRUE);
-				$send = $this->lib_mailer->sendmail(array('email'=>$email), 'Research FTUI', $message, '', $bcc);
-				var_dump($send); die();
-				if($send != -1){
-					$msg = '<div class="alert alert-success alert-dismissable">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-						<h4><i class="icon fa fa-check"></i> Success!</h4>Your new password has been sent to your email.</div>';
-					$this->session->set_flashdata('invalid',$msg);
-				}else{
-					$msg = '<div class="alert alert-warning alert-dismissable">
-						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-						<h4><i class="icon fa fa-check"></i> Warning!</h4>Trouble while sending email.</div>';
-					$this->session->set_flashdata('invalid',$msg);
-				}
+				$this->lib_mailer->sendmail(array('email'=>$email), 'Research FTUI', $message, '', $bcc);				
+				$msg = '<div class="alert alert-success alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<h4><i class="icon fa fa-check"></i> Success!</h4>Your new password has been sent to your email.</div>';
+				$this->session->set_flashdata('invalid',$msg);
 			}
 		}else{
 			$msg = '<div class="alert alert-warning alert-dismissable">

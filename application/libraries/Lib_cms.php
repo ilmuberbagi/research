@@ -22,6 +22,7 @@ class Lib_cms {
 	public function update_info(){
 		$id = $this->ci->input->post('id');
 		$page = $this->ci->input->post('page');
+		$tab = $this->ci->input->post('tab');
 		$data = array(
 			'about'		=> $this->ci->security->xss_clean($this->ci->input->post('about')),
 			'vision'		=> $this->ci->security->xss_clean($this->ci->input->post('vision')),
@@ -37,7 +38,10 @@ class Lib_cms {
 		$act = $this->ci->cms->update('information', array('id', $id), $data);
 		if($act) $this->ci->session->set_flashdata('success','Information has been updated.');
 		else $this->ci->session->set_flashdata('error','Trouble updating information.');
-		redirect($page);
+		if(!isset($tab) || $tab == "")
+			redirect($page.'?tab=about');
+		else
+			redirect($page.'?tab='.$tab);
 	}
 	
 	public function update_profile(){

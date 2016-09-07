@@ -67,10 +67,13 @@ function gen_url($str){
 	return strtolower($str);
 }
 
-function getYoutubeImage($url){
+function getYoutubeImage($url, $type='poster'){
 	$vid = explode('/', $url);
 	$id = $vid[count($vid)-1];
-	return "http://img.youtube.com/vi/".$id."/0.jpg";
+	$res = "http://img.youtube.com/vi/".$id."/0.jpg";
+	if($type == 'icon')
+		$res = "http://img.youtube.com/vi/".$id."/3.jpg";
+	return $res;	
 }
 
 ?>

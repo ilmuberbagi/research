@@ -18,7 +18,7 @@
 			<div class="box-body">
 				<table  class="table table-striped table-hover data-member">
 				<thead>
-					<th>No</th>
+					<th>Icon</th>
 					<th>Video Embed URL</th>
 					<th>Posted By</th>
 					<th>Status</th>
@@ -28,8 +28,13 @@
 				<tbody>
 				<?php if(!empty($video)){ $no=0; foreach($video as $a){ $no++; ?>
 				<tr>
-					<td><?php echo $no;?></td>
-					<td><?php echo $a['video_url'];?></td>
+					<td>
+						<img src="<?php echo getYoutubeImage($a['video_url'],'icon');?>" class="img-responsive" alt="<?php echo $a['video_title'] ==''? 'Video Thumbnail': $a['video_title'];?>" width="50">
+					</td>
+					<td>
+						<?php echo $a['video_title'] == ""? '---':$a['video_title'];?><br/>
+						<small><a href="<?php echo $a['video_url'];?>" target="_blank"><?php echo $a['video_url'];?></a></small>
+					</td>
 					<td><?php echo $a['name'];?></td>
 					<td><?php echo $a['status']==1?'<span class="label label-success">Active</span>':'<span class="label label-default">Inactive</span>';?></td>
 					<td><?php echo date('d/m/Y H:i', strtotime($a['last_updated']));?></td>

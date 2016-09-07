@@ -10,7 +10,7 @@
 		background-color:#333;
 	}
 </style>
-<footer style="text-align:center; padding:20px; color:#FFF; background-color:#292c2f">
+<footer style="padding:20px; padding-left:50px; padding-right:50px; color:#FFF; background-color:#292c2f">
 	<div class="row">
 		<div class="col-md-8 col-sm-12 col-xs-12">
 			<div class="app">Riset & Pengabdian Masyarakat<div>Fakultas Teknik Universitas Indonesia</div></div>
