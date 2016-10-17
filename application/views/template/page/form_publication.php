@@ -79,7 +79,7 @@
 						if($this->uri->segment(3) == "input"){
 							if($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2){?>
 								<div class="form-group">
-									<label>Researcher</label>
+									<label>Researcher <span>*</span></label>
 									<select name="user_id" class="form-control select" required>
 										<option value="">- Select Researcher -</option>
 										<?php if(!empty($researchers)){ foreach($researchers as $r){?>
@@ -90,15 +90,15 @@
 								<hr/>
 						<?php } } ?>
 						<div class="form-group">
-							<label>Publication Title</label>
+							<label>Publication Title <span>*</span></label>
 							<input type="text" name="title" class="form-control" value='<?php echo $title;?>' placeholder="Publication Title" required>
 						</div>
 						<div class="form-group">
-							<label>Publication Name</label><br/><small>Masukan nama jurnal, jenis paten, atau konferensi ilmiah</small>
+							<label>Publication Name <span>*</span></label><br/><small>Masukan nama jurnal, jenis paten, atau konferensi ilmiah</small>
 							<input type="text" name="publication_name" class="form-control" value='<?php echo $publication_name;?>' placeholder="Publication Name" required>
 						</div>
 						<div class="form-group">
-							<label>Publication Type</label>
+							<label>Publication Type <span>*</span></label>
 							<select name="type_id" class="form-control" required>
 								<option value="">- Select type -</option>
 								<?php if(!empty($types)){ foreach($types as $t){?>
@@ -107,17 +107,17 @@
 							</select>
 						</div>
 						<div class="form-group">
-							<label>Authors</label><br/><small>Masukan seluruh nama penulis dalam karya ilmiah dipisahkan dengan tanda koma</small>
+							<label>Authors <span>*</span></label><br/><small>Masukan seluruh nama penulis dalam karya ilmiah dipisahkan dengan tanda koma</small>
 							<textarea name="author" class="form-control" rows="1"><?php echo $author;?></textarea>
 						</div>
 						<div class="form-group">
-							<label>Abstract</label>
-							<textarea name="abstract" class="form-control description" rows="10"><?php echo $abstract;?></textarea>
+							<label>Abstract <span>*</span></label>
+							<textarea name="abstract" class="form-control description" rows="10" required><?php echo $abstract;?></textarea>
 						</div>
 						<div class="form-group">
 							<label>Upload File </label><br/><small>Allowed file type <b>PDF</b> <i class="fa fa-file-pdf-o"></i></small>
 							<div class="input-group">
-								<input type="file" name="userfile" class="form-input">
+								<input type="file" name="userfile" class="form-input" required>
 							</div>
 						</div>
 						<hr/>

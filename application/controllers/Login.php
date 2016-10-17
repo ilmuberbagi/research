@@ -177,7 +177,7 @@ class Login extends CI_Controller {
 	public function reset_password(){
 		$email = $this->input->post('email');
 		$this->load->library('Lib_mailer');
-		$this->lib_mailer->init();
+		$this->lib_mailer->init(array('from'=>'noreply.risetft@eng.ui.ac.id'));
 		# get data member
 		$data = $this->mdl_login->check_user_data('email', $email);
 		if(!empty($data)){

@@ -174,14 +174,89 @@
 		<div class="modal fade" tabindex="-1" role="dialog" id="modalAbstract">
 		  <div class="modal-dialog" role="document">
 			<div class="modal-content">
-			  <div class="modal-header" style="border-bottom:solid 1px #DDD">
+			  <div class="modal-header" style="border-bottom:solid 2px #444; background-color:#fed602;">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="titlePub" style="font-size:16px; font-weight:bold; line-height:18px"></h4>
+				<h4 class="modal-title" id="titlePub" style="color:#FFF; font-size:14px; font-weight:bold; line-height:18px"></h4>
 			  </div>
-			  <div class="modal-body" id="contentPub" style="padding:50px; padding-top:5px; border-bottom:solid 1px #DDD">
+			  <div class="modal-body" style="padding:30px; padding-top:10px; max-height:400px; overflow:auto; text-align:justify;">
+			  	<div class="row">
+			  		<div class="col-md-12">			  			
+					  	<table style="width:100%">
+					  		<tr>
+					  			<th>Authors</th>
+					  			<th width="20">:</th>
+					  			<td id="authors"></td>
+					  		</tr>
+					  		<tr>
+					  			<th width="130">Publication Name</th>
+					  			<th width="20">:</th>
+					  			<td id="publication_name"></td>
+					  		</tr>
+					  		<tr>
+					  			<th valign="top">Abstract</th>
+					  			<th valign="top" width="20">:</th>
+					  			<td id="abstract"></td>
+					  		</tr>
+					  	</table>
+					  	<hr>
+					 </div>
+					 <div class="col-md-6">
+					  	<table class="">
+					  		<tr>
+					  			<th width="75">Publisher</th>
+					  			<th width="20">:</th>
+					  			<td id="publisher"></td>
+					  		</tr>
+					  		<tr>
+					  			<th>ISSN</th>
+					  			<th width="20">:</th>
+					  			<td id="issn"></td>
+					  		</tr>
+					  		<tr>
+					  			<th>Page</th>
+					  			<th width="20">:</th>
+					  			<td id="page"></td>
+					  		</tr>
+					  		<tr>
+					  			<th>Volume</th>
+					  			<th width="20">:</th>
+					  			<td id="volume"></td>
+					  		</tr>
+					  		<tr>
+					  			<th>Year</th>
+					  			<th width="20">:</th>
+					  			<td id="year"></td>
+					  		</tr>
+					  	</table>
+					 </div>
+					 <div class="col-md-6">
+					  	<table class="">
+					  		<tr>
+					  			<th width="120">Impact Factor (JCR)</th>
+					  			<th width="20">:</th>
+					  			<td id="impact_factor"></td>
+					  		</tr>
+					  		<tr>
+					  			<th>SJR</th>
+					  			<th width="20">:</th>
+					  			<td id="sjr"></td>
+					  		</tr>
+					  		<tr>
+					  			<th>Ranking Quartile</th>
+					  			<th width="20">:</th>
+					  			<td id="ranking"></td>
+					  		</tr>
+					  		<tr>
+					  			<th>Website</th>
+					  			<th width="20">:</th>
+					  			<td id="website"></td>
+					  		</tr>
+					  	</table>
+					 </div>
+			  	</div>
 			  </div>
-			  <div class="modal-footer">
-				<button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+			  <div class="modal-footer" style="background-color:#DDD">
+				<button type="button" class="btn btn-default btn-outline btn-sm" data-dismiss="modal">Close</button>
 			  </div>
 			</div>
 		  </div>

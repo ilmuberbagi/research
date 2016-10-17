@@ -10,7 +10,8 @@
 		background-color:#333;
 	}
 </style>
-<footer style="padding:20px; padding-left:50px; padding-right:50px; color:#FFF; background-color:#292c2f">
+<footer style="padding:20px; padding-left:50px; padding-right:50px; color:#FFF; background-color:#292c2f; clear:both; margin-top:20px">
+	<div class="container">
 	<div class="row">
 		<div class="col-md-8 col-sm-12 col-xs-12">
 			<div class="app">Riset & Pengabdian Masyarakat<div>Fakultas Teknik Universitas Indonesia</div></div>
@@ -30,6 +31,7 @@
 			<div><i class="fa fa-map-marker"></i> <span>Dekanat Fakultas Teknik - Kampus UI Depok - Indonesia</span></div>
 			<div><i class="fa fa-envelope"></i> <span><a href="mailto:risetft@eng.ui.ac.id">risetft@eng.ui.ac.id</a></span></div>
 		</div>
+	</div>
 	</div>
 </footer>
 <footer style="padding:20x; text-align:center; background:#000">

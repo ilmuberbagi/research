@@ -7,9 +7,9 @@ class Mdl_login extends CI_Model{
 	}
 	
 	public function get_user($user, $pass){
-		$pass = md5($pass);
+		$password = md5($pass);
 		$sql = "select a.*, b.role_name from users a left join role b on a.role_id = b.role_id 
-				where (a.user_id = '$user' or a.email = '$user') and a.password = '$pass' and a.status = 1";
+				where (a.user_id = '$user' or a.email = '$user') and a.password = '$password' and a.status = 1";
 		return $this->db->query($sql)->result_array();
 	}
 	

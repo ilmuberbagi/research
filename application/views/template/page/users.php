@@ -12,7 +12,7 @@
 			<div class="box-header with-border">
 				<h3 class="box-title"><i class="fa fa-users"></i> &nbsp; Users</h3>
 				<div class="box-tools pull-right">
-					<a class="btn btn-default" href="#<?php #echo base_url().'dashboard/create/resources';?>"><i class="fa fa-plus-circle"></i></a>
+					<a class="btn btn-success btn-sm" href="<?php echo base_url().'dashboard/create/exportuser';?>"><i class="fa fa-file-excel-o"></i></a>
 				</div> 
 			</div>
 			<div class="box-body">

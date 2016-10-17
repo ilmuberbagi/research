@@ -60,7 +60,8 @@ div.right-column-about{
 
 .img-thumb-bg{
 	background-position:center;
-	background-width:80%;
+	background-width:90%;
+	background-size: contain;
 	background-repeat:no-repeat;
 	height:150px;
 	width:100%;
@@ -145,4 +146,12 @@ div.right-column-about{
 .text-muted{ color:#888}
 .btn{
 	box-shadow:none;
+}
+
+table.desc{
+	font-size:0.9em;
+}
+
+table.desc th{
+	vertical-align: top;
 }

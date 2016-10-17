@@ -88,8 +88,12 @@ class Dashboard extends CI_Controller{
 				$this->data['field'] = $this->cms->get_research_field();
 				$this->data['page'] = 'page/form_research';				
 			} break;
+			case "exportuser":{
+				$this->lib_cms->export_user();				
+			} break;
 		}
-		$this->load->view('template', $this->data);
+		if ($param !== 'exportuser')
+			$this->load->view('template', $this->data);
 	}
 	
 	public function edit($param, $id=''){

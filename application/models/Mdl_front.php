@@ -27,7 +27,7 @@ class Mdl_front extends CI_Model{
 	
 	public function get_news_home(){
 		$sql = "select a.*, b.name from news a left join users b on a.user_id = b.user_id 
-				where a.status = 1 order by date_posted DESC limit 0,8";
+				where a.status = 1 order by date_posted DESC limit 0,12";
 		return $this->db->query($sql)->result_array();
 	}
 	
@@ -53,6 +53,11 @@ class Mdl_front extends CI_Model{
 	public function popular_news(){
 		$sql = "select a.*, b.name from news a left join users b on a.user_id = b.user_id 
 				where a.status = 1 order by a.hit DESC limit 0,5";
+		return $this->db->query($sql)->result_array();
+	}
+
+	public function current_user($id){
+		$sql = "select * from users where user_id = '$id'";
 		return $this->db->query($sql)->result_array();
 	}
 	
@@ -124,9 +129,8 @@ class Mdl_front extends CI_Model{
 	}
 	
 	public function count_publication($year="", $key=""){
-		$this->db->select('a.*, b.*');
+		$this->db->select('*');
 		$this->db->join('publication_detail b', 'a.pub_id = b.pub_id', 'left');
-		// $CI->db->join('user_email', 'user_email.user_id = emails.id', 'left');
 		$this->db->where('a.publish', 1);
 		if($year !== "")
 			$this->db->where('b.pub_year', $year);
@@ -134,9 +138,9 @@ class Mdl_front extends CI_Model{
 		if($key !== "")
 			$this->db->where('a.title', $key);
 			
-		$this->db->order_by("a.date_input", "DESC"); 
 		$query = $this->db->get('publication a')->num_rows();
 		return $query;
+		//print_r($query); die();
 	}
 	
 	public function count_grant($year="", $key=""){
@@ -196,14 +200,20 @@ class Mdl_front extends CI_Model{
 		return $this->db->query($sql)->num_rows();
 	}
 
+	public function count_researcher(){
+		$sql = "select * from users where role_id = '3' and status = 1";
+		return $this->db->query($sql)->num_rows();
+	}
+
 	public function researchers($sort="", $num = 10, $offset = 0){		
 		$this->db->select('a.*, b.*');
 		$this->db->join('department b','a.department_id = b.department_id','left');
 		$this->db->where('a.role_id', 3);
+		$this->db->where('a.status', 1);
 		if($sort == "")
 			$this->db->order_by("a.name", "ASC");
 		if($sort == 'department')
-			$this->db->order_by("a.department_id", "ASC");
+			$this->db->order_by("b.department_name", "ASC");
 		if($sort == 'date')
 			$this->db->order_by("a.date_create", "ASC");
 			

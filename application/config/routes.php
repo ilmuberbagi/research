@@ -94,6 +94,7 @@ $route['register'] = 'login/register';
 
 $route['research/grant'] = 'home/research/grant';
 $route['research/grant/page'] = 'home/research/grant/page';
+$route['research/grant/page/(:any)'] = 'home/research/grant/page/$1';
 $route['researchers'] = 'home/researchers';
 $route['researchers/page'] = 'home/researchers/page';
 $route['researchers/page/(:any)'] = 'home/researchers/page/$1';

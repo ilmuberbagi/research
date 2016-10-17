@@ -24,7 +24,7 @@
 						if($this->uri->segment(3) == "input"){
 							if($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2){?>
 								<div class="form-group">
-									<label>Researcher</label>
+									<label>Researcher <span>*</span></label>
 									<select name="user_id" class="form-control select" required>
 										<option value="">- Select Researcher -</option>
 										<?php if(!empty($researchers)){ foreach($researchers as $r){?>
@@ -36,11 +36,11 @@
 						<?php } } ?>
 
 						<div class="form-group">
-							<label>Judul Penelitian</label>
+							<label>Judul Penelitian <span>*</span></label>
 							<input type="text" name="research_title" class="form-control" value='<?php echo isset($cg[0]['research_title']) ? $cg[0]['research_title']:'';?>' placeholder="Judul Penelitian" required>
 						</div>
 						<div class="form-group">
-							<label>Nama Peneliti Utama</label><br/><small>Masukan nama peneliti utama</small>
+							<label>Nama Peneliti Utama <span>*</span></label><br/><small>Masukan nama peneliti utama</small>
 							<input type="text" name="main_researcher" class="form-control" value='<?php echo isset($cg[0]['main_researcher']) ? $cg[0]['main_researcher']:'';?>' placeholder="Peneliti utama" required>
 						</div>
 						<div class="form-group">
@@ -48,7 +48,7 @@
 							<textarea name="member_researcher" class="form-control" rows="1"><?php echo isset($cg[0]['member_researcher']) ? $cg[0]['member_researcher']:'';?></textarea>
 						</div>
 						<div class="form-group">
-							<label>Tahun</label>
+							<label>Tahun <span>*</span></label>
 							<input type="numer" name="grant_year" class="form-control" value='<?php echo isset($cg[0]['grant_year']) ? $cg[0]['grant_year']:'';?>' placeholder="Fill the number">
 						</div>
 						<div class="form-group">
@@ -66,8 +66,8 @@
 					<div class="box-body">
 						<div class="form-group">
 							<div>Riset/Pengabdian Masyarakat <span>*)</span></div>
-							<label><input type="radio" name="sd_riset" class="" value="0" <?php echo (isset($cg[0]) && $cg[0]['sd_riset']) == 0 ? 'checked':'';?>> Riset</label>
-							<label><input type="radio" name="sd_riset" class="" value="1" <?php echo (isset($cg[0]) && $cg[0]['sd_riset']) == 1 ? 'checked':'';?>> Pengabdian Masyarakat</label>
+							<label><input type="radio" name="sd_riset" class="" value="0" <?php echo (isset($cg[0]) && $cg[0]['sd_riset']) == 0 ? 'checked="checked"':'';?>> Riset</label>
+							<label><input type="radio" name="sd_riset" class="" value="1" <?php echo (isset($cg[0]) && $cg[0]['sd_riset']) == 1 ? 'checked="checked"':'';?>> Pengabdian Masyarakat</label>
 						</div>
 						<div class="form-group">
 							<label>Nama Hibah</label>
@@ -93,17 +93,17 @@
 						<div class="form-group">
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" name="report_progress" class="" value="1" <?php echo isset($cg[0]) && $cg[0]['report_progress'] == 1 ? 'checked':'';?>> Laporan Kemajuan
+									<input type="checkbox" name="report_progress" class="" value="1" <?php echo isset($cg[0]) && $cg[0]['report_progress'] == 1 ? 'checked="checked"':'';?>> Laporan Kemajuan
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" name="last_report" class="" value="1" <?php echo isset($cg[0]) && $cg[0]['last_report'] == 1 ? 'checked':'';?>> Laporan Akhir
+									<input type="checkbox" name="last_report" class="" value="1" <?php echo isset($cg[0]) && $cg[0]['last_report'] == 1 ? 'checked="checked"':'';?>> Laporan Akhir
 								</label>
 							</div>
 							<div class="checkbox">
 								<label>
-									<input type="checkbox" name="sp" class="" value="1" <?php echo isset($cg[0]) && $cg[0]['sp'] == 1 ? 'checked':'';?>> BAST/SP
+									<input type="checkbox" name="sp" class="" value="1" <?php echo isset($cg[0]) && $cg[0]['sp'] == 1 ? 'checked="checked"':'';?>> BAST/SP
 								</label>
 							</div>
 						</div>
@@ -122,13 +122,13 @@
 					<div class="box-body">
 						<div class="form-group">
 							<label>Single/Multi Year(s)</label><br/>
-							<input type="radio" name="sd_riset" class="" value="0" <?php echo isset($cg[0]) && $cg[0]['sd_riset'] == 0 ? 'checked':'';?>> Single
-							<input type="radio" name="sd_riset" class="" value="1" <?php echo isset($cg[0]) && $cg[0]['sd_riset'] == 1 ? 'checked':'';?>> Multi
+							<input type="radio" name="sd_riset" class="" value="0" <?php echo isset($cg[0]) && $cg[0]['sd_riset'] == 0 ? 'checked="checked"':'';?>> Single
+							<input type="radio" name="sd_riset" class="" value="1" <?php echo isset($cg[0]) && $cg[0]['sd_riset'] == 1 ? 'checked="checked"':'';?>> Multi
 						</div>
 						<div class="form-group">
 							<label>Submisi Proposal</label><br/>
-							<input type="radio" name="st_submision" class="" value="0" <?php echo isset($cg[0]) && $cg[0]['st_submision'] == 0 ? 'checked':'';?>> Baru
-							<input type="radio" name="st_submision" class="" value="1" <?php echo isset($cg[0]) && $cg[0]['st_submision'] == 1 ? 'checked':'';?>> Lanjutan
+							<input type="radio" name="st_submision" class="" value="0" <?php echo isset($cg[0]) && $cg[0]['st_submision'] == 0 ? 'checked="checked"':'';?>> Baru
+							<input type="radio" name="st_submision" class="" value="1" <?php echo isset($cg[0]) && $cg[0]['st_submision'] == 1 ? 'checked="checked"':'';?>> Lanjutan
 						</div>
 						<div class="form-group">
 							<label>Seleksi</label>

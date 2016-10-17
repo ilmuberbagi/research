@@ -66,9 +66,14 @@ class Lib_cms {
 		$act = $this->ci->cms->update('users', array('user_id', $id), $data);
 		if($act) $this->ci->session->set_flashdata('success','User Profile has been updated.');
 		else $this->ci->session->set_flashdata('error','Trouble updating User Profile.');
-		redirect('dashboard/profile');
+		redirect('dashboard/profile/'.$id);
 	}
 	
+	public function export_user(){
+		$data['users'] = $this->ci->cms->get_all_users();
+		$this->ci->load->view('template/page/user_excel', $data);
+	}
+
 	public function insert_news(){
 		$data = array(
 			'user_id' => $this->ci->session->userdata('user_id'),

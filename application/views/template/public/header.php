@@ -44,9 +44,6 @@
 								<li><a href="<?php echo site_url().'statistics';?>">Statistics</a></li>
 							</ul>
 						</li>
-						
-						
-						</li>
 						<li class="<?php echo $this->uri->segment(1) == 'service'? 'active':'';?>"><a href="<?php echo site_url().'service';?>">Services</a></li>
 						<li class="<?php echo $this->uri->segment(1) == 'resources'? 'active':'';?>"><a href="<?php echo site_url().'resources';?>">Resources</a></li>
 						<li class="<?php echo $this->uri->segment(1) == 'contact'? 'active':'';?>"><a href="<?php echo base_url().'contact';?>">Contact Us</a></li>

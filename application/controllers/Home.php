@@ -82,7 +82,7 @@ class Home extends CI_Controller{
 			$config = array(
 				'base_url'		 => base_url().'news/page/',
 				'total_rows'	 => $tot,
-				'per_page'		 => 8,
+				'per_page'		 => 12,
 				'full_tag_open'	 => '<ul class="pagination pagination-sm text-center">',
 				'full_tag_close' => '</ul>',
 				'cur_tag_open'	 => '<li class="active"><a href="#">',
@@ -231,6 +231,10 @@ class Home extends CI_Controller{
 		$this->load->view('template_front', $this->data);		
 	}
 
+	public function get_user($id){
+		header('Content-Type: application/json');
+		echo json_encode($this->front->current_user($id));
+	}
 	# downloader
 	#==================
 	public function download($id){
@@ -256,9 +260,10 @@ class Home extends CI_Controller{
 		$this->data['param'] = $param;
 		
 		$tot = $this->front->count_publication($year, $key);
-		if($param == 'grant')
+		if($param == 'grant'){
 			$this->data['title'] = 'Grants - Riset & Pengabdian Masyarakat FTUI';
 			$tot = $this->front->count_grant($year, $key);
+		}
 		
 		$this->load->library('pagination');
 		$config = array(
@@ -283,9 +288,10 @@ class Home extends CI_Controller{
 		);
 		$offset = $this->uri->segment(4)? (($this->uri->segment(4)-1) * $config['per_page']) : 0;
 		$this->pagination->initialize($config);
+		$this->data['offset'] = $offset;
 		$this->data['paging'] = $this->pagination->create_links();
-		
 		$this->data['result'] = $this->front->publication($year, $key, $config['per_page'], $offset);
+		
 		if($param == 'grant')
 			$this->data['result'] = $this->front->grant($year, $key, $config['per_page'], $offset);
 		
@@ -308,7 +314,35 @@ class Home extends CI_Controller{
 		$sort = isset($_GET['sort'])?$_GET['sort']:'';
 		$this->data['page'] = "page/researcher";
 		$this->data['sort'] = $sort;
-		$this->data['result'] = $this->front->researchers($sort);
+			# paging here
+			$tot = $this->front->count_researcher();
+			$this->data['total'] = $tot;
+			$this->load->library('pagination');
+			$config = array(
+				'base_url'		 => base_url().'researchers/page/',
+				'total_rows'	 => $tot,
+				'per_page'		 => 12,
+				'full_tag_open'	 => '<ul class="pagination pagination-sm">',
+				'full_tag_close' => '</ul>',
+				'cur_tag_open'	 => '<li class="active"><a href="#">',
+				'cur_tag_close' => '</a></li>',
+				'num_tag_open'	=> '<li>',
+				'num_tag_close'	=> '</li>',
+				'prev_tag_open' => '<li class="prev">',
+				'prev_tag_close' => '</li>',
+				'next_tag_open' => '<li class="next">',
+				'next_tag_close' => '</li>',
+				'prev_link'		=> '<i class="fa fa-chevron-left"></i>',
+				'next_link'		=> '<i class="fa fa-chevron-right"></i>',
+				'first_link'	=> '',
+				'last_link'	=> '',
+				'use_page_numbers' => TRUE,
+			);
+			$offset = $this->uri->segment(3)? (($this->uri->segment(3)-1) * $config['per_page']) : 0;
+			$this->pagination->initialize($config);
+			$this->data['paging'] = $this->pagination->create_links();
+
+		$this->data['result'] = $this->front->researchers($sort, $config['per_page'], $offset);
 		$this->load->view('template_front', $this->data);
 	}
 	

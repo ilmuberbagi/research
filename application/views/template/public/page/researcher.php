@@ -1,6 +1,6 @@
 <div class="container">
 	<div class="row">
-		<div class="col-md-8">
+		<div class="col-md-8" style="margin-bottom:20px; clear:both">
 			<div class="page-header">
 				<h4>Researchers</h4>
 				<div class="btn-group pull-right">
@@ -15,21 +15,42 @@
 					</ul>
 				</div>
 			</div>
+
+			<table style="width:100%">
+
+			<?php 
+				if(!empty($result)){ 
+					foreach (array_chunk($result, 2) as $row){
+						echo "<tr>";
+						foreach ($row as $r){
+							echo "<td width='50%' valign='top'>";
+			?>
+							<!-- div class="col-md-6" style="height:250px; overflow:auto; margin-bottom:100px;" -->
+							<table style="width:100%; margin-bottom:50px; padding:10px">
+								<tr><td rowspan="4" valign="top" width="100"><img src="<?php echo $r['avatar']?$r['avatar']:site_url().'assets/img/user.jpg';?>" width="80" class="img-responsive img">						
+								<a href="<?php echo $r['link_google_scholar'];?>" target="_blank"><img src="<?php echo site_url().'assets/public/img/gs.png';?>" class="img-responsive" alt="Google Scholar" width="80"></a>
+								<a href="<?php echo $r['link_research_gate'];?>" target="_blank"><img src="<?php echo site_url().'assets/public/img/researchgate.png';?>" class="img-responsive" alt="Google Scholar" width="80"></a>
+								</td><th width="100" valign="top">Name</th><td><a href="#" onClick="return profile_preview('<?php echo $r['user_id'];?>')" data-toggle="modal" data-target="#modalProfile" title="Click to view biography" style="cursor:pointer"><?php echo $r['name'];?></a></td></tr>
+								<tr><th>Department</th><td><?php echo $r['department_name'];?></td></tr>
+								<tr><th valign="top">Expertise</th><td><?php echo $r['expertise'];?></td></tr>
+								<tr><th valign="top">Research<br/>Interest</th><td><?php echo $r['research_interest'];?></td></tr>
+							</table>
+							<!-- /div -->
+			<?php 		echo "</td>";
+					}
+						echo "</tr>";
+					}
+			?>
+			</table>
+			<?php }else{ echo "No Researchers registered.";}?>
+
+			<div style="clear:both; padding-top:10; border-top:solid 1px #DDD">
+				<span class="pull-left"><?php echo $paging;?></span>
+				<span class="pull-right"><i>Total Researchers: <b><?php echo number_format($total);?></b></i></span>
+			</div>
 			
-			<?php if(!empty($result)){ foreach ($result as $r){?>
-				<div class="col-md-6" style="height:200px">
-					<table style="width:100%; margin-bottom:50px; padding:10px">
-						<tr><td rowspan="4" valign="top" width="75"><img src="<?php echo $r['avatar']?$r['avatar']:site_url().'assets/img/user.jpg';?>" width="60" class="img-responsive img">
-						<a href="#" onClick="return profile_preview('<?php echo $r['name'].'`'.$r['profile'];?>')" data-toggle="modal" data-target="#modalProfile" class="btn btn-xs btn-warning">Profile</a>
-						</td><th width="100" valign="top">Name</th><td><?php echo $r['name'];?></td></tr>
-						<tr><th>Department</th><td><?php echo $r['department_name'];?></td></tr>
-						<tr><th valign="top">Expertise</th><td><?php echo $r['expertise'];?></td></tr>
-						<tr><th valign="top">Research<br/>Interest</th><td><?php echo $r['research_interest'];?></td></tr>
-					</table>
-				</div>
-			<?php }}else{ echo "No Researchers registered.";}?>
-			<br/>
 		</div>
+
 		
 		<div class="col-md-4 sidebar">
 			<div class="row">
@@ -76,15 +97,17 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="modalProfile">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
+      <div class="modal-header" style="border-bottom:solid 2px #444; background-color:#fed602;">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="titleProfile" style="border-bottom:solid 1px #EEE"></h4>
+        <h4 class="modal-title" id="titleProfile" style="color:#FFF"></h4>
       </div>
-      <div class="modal-body" id="contentProfile" style="padding:50px; padding-top:5px">
+      <div class="modal-body" id="contentProfile" style="padding:30px; padding-top:10px; max-height:400px; overflow:auto; text-align:justify;">
       </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-outline" data-dismiss="modal">Close</button>
+      <div class="modal-footer" style="background-color:#DDD">
+        <button type="button" class="btn btn-default btn-outline" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
+
+<div style="clear:both; height:200px"></div>

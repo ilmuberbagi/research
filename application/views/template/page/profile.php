@@ -25,7 +25,7 @@
 									<?php echo date('d/m/Y H:i', strtotime($user[0]['last_login']));?>
 								</div><hr/>
 								<div class="btn-group" style="text-align:center">
-								  <a href="<?php echo site_url().'dashboard/profile/'.$this->session->userdata('user_id').'/edit';?>" type="button" class="btn btn-default"><i class="fa fa-edit"></i> Edit</a>
+								  <a href="<?php echo site_url().'dashboard/profile/'.($this->uri->segment(3)?$this->uri->segment(3):$this->session->userdata('user_id')).'/edit';?>" type="button" class="btn btn-default"><i class="fa fa-edit"></i> Edit</a>
 								  <button type="button" class="btn btn-default">Action</button>
 								  <button aria-expanded="false" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 									<span class="caret"></span>
@@ -133,7 +133,8 @@
 									<?php echo date('d/m/Y H:i', strtotime($user[0]['last_login']));?>
 								</div><hr/>
 								<div class="btn-group" style="text-align:center">
-								  <a href="<?php echo site_url().'dashboard/profile/'.$this->session->userdata('user_id').'/edit';?>" type="button" class="btn btn-default"><i class="fa fa-edit"></i> Edit</a>
+								  <a href="<?php echo site_url().'dashboard/profile/'.($this->uri->segment(3)?$this->uri->segment(3):$this->session->userdata('user_id')).'/edit';?>" type="button" class="btn btn-default"><i class="fa fa-edit"></i> Edit</a>
+
 								  <button type="button" class="btn btn-default">Action</button>
 								  <button aria-expanded="false" type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
 									<span class="caret"></span>
