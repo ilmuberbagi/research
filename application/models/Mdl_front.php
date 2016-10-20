@@ -200,16 +200,21 @@ class Mdl_front extends CI_Model{
 		return $this->db->query($sql)->num_rows();
 	}
 
-	public function count_researcher(){
+	public function count_researcher($dep = ""){		
 		$sql = "select * from users where role_id = '3' and status = 1";
+		if ($dep !== "" && $dep !== 'page')
+			$sql = "select * from users where role_id = '3' and status = 1 and department_id = '$dep'";
 		return $this->db->query($sql)->num_rows();
 	}
 
-	public function researchers($sort="", $num = 10, $offset = 0){		
+	public function researchers($dep="", $sort="", $num = 10, $offset = 0){		
 		$this->db->select('a.*, b.*');
 		$this->db->join('department b','a.department_id = b.department_id','left');
 		$this->db->where('a.role_id', 3);
 		$this->db->where('a.status', 1);
+		if($dep !== "" && $dep !== 'page')
+			$this->db->where("a.department_id", $dep);
+		
 		if($sort == "")
 			$this->db->order_by("a.name", "ASC");
 		if($sort == 'department')
@@ -219,6 +224,11 @@ class Mdl_front extends CI_Model{
 			
 		$query = $this->db->get('users a', $num, $offset)->result_array();
 		return $query;
+	}
+	
+	public function get_all_department(){
+		$sql = "select * from department order by sort ASC";
+		return $this->db->query($sql)->result_array();
 	}
 	
 }

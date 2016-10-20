@@ -1,25 +1,30 @@
 <div class="container">
 	<div class="row">
-		<div class="col-md-8" style="margin-bottom:20px; clear:both">
-			<div class="page-header">
-				<h4>Researchers</h4>
-				<div class="btn-group pull-right">
-					<button type="button" class="btn btn-default">Sort By</button>
-					<button aria-expanded="false" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-						<span class="caret"></span>
-						<span class="sr-only">Toggle Dropdown</span>
-					</button>
-					<ul class="dropdown-menu" role="menu">
-						<li><a href="<?php echo site_url().'researchers?sort=name';?>">Name</a></li>
-						<li><a href="<?php echo site_url().'researchers?sort=department';?>">Department</a></li>
-					</ul>
+		<div class="col-md-8" style="margin-bottom:20px; clear:both">			
+			<div class="row" style="padding:10px; border-bottom:solid 1px #DDD; margin-bottom: 10px;">
+				<div class="col-md-6">
+					<h4>Researchers</h4>
 				</div>
+				<div class="col-md-6 pull-right">
+					<form method="GET" action="<?php echo site_url().'researchers';?>">
+						<div class="input-group">
+							<select name="department" class="form-control">
+								<option value="">-- All Department --</option>
+								<?php if (!empty($department)){ foreach ($department as $d){?>
+									<option value="<?php echo $d['department_id'];?>" <?php echo $d['department_id'] == $dep ? 'selected':'';?>><?php echo $d['department_name'];?></option>
+								<?php } } ?>
+							</select>
+							<span class="input-group-btn" id="basic-addon2">
+								<input class="btn btn-primary" type="submit" name="submit" value="Go!">
+							</span>
+						</div>
+					</form>
+				</div>			
+				<hr/>
 			</div>
-
-			<table style="width:100%">
-
 			<?php 
 				if(!empty($result)){ 
+					echo '<table style="width:100%">';
 					foreach (array_chunk($result, 2) as $row){
 						echo "<tr>";
 						foreach ($row as $r){
@@ -42,7 +47,7 @@
 					}
 			?>
 			</table>
-			<?php }else{ echo "No Researchers registered.";}?>
+			<?php }else{ echo "<div class='col-md-12'>No researchers registered.</div>";}?>
 
 			<div style="clear:both; padding-top:10; border-top:solid 1px #DDD">
 				<span class="pull-left"><?php echo $paging;?></span>

@@ -309,17 +309,21 @@ class Home extends CI_Controller{
 		$this->load->view('template_front', $this->data);
 	}
 	
-	public function researchers(){
+	public function researchers($department = ""){
 		$this->data['title'] = "Researchers - Riset & Pengabdian Masyarakat FTUI";
+		$this->data['department'] = $this->front->get_all_department();
+		$dep = isset($_GET['department'])?$_GET['department']: $department;
 		$sort = isset($_GET['sort'])?$_GET['sort']:'';
+		$page = isset($_GET['page'])?$_GET['page']:'';
 		$this->data['page'] = "page/researcher";
 		$this->data['sort'] = $sort;
+		$this->data['dep'] = $dep;
 			# paging here
-			$tot = $this->front->count_researcher();
+			$tot = $this->front->count_researcher($dep);
 			$this->data['total'] = $tot;
 			$this->load->library('pagination');
 			$config = array(
-				'base_url'		 => base_url().'researchers/page/',
+				'base_url'		 => base_url().'researchers/page',
 				'total_rows'	 => $tot,
 				'per_page'		 => 12,
 				'full_tag_open'	 => '<ul class="pagination pagination-sm">',
@@ -339,10 +343,15 @@ class Home extends CI_Controller{
 				'use_page_numbers' => TRUE,
 			);
 			$offset = $this->uri->segment(3)? (($this->uri->segment(3)-1) * $config['per_page']) : 0;
+			if ($dep !== "" && $dep !== 'page'){
+				$config['base_url'] = base_url().'researchers/'.$dep.'/page/';
+				$offset = $this->uri->segment(4)? (($this->uri->segment(4)-1) * $config['per_page']) : 0;
+			}
+
 			$this->pagination->initialize($config);
 			$this->data['paging'] = $this->pagination->create_links();
 
-		$this->data['result'] = $this->front->researchers($sort, $config['per_page'], $offset);
+		$this->data['result'] = $this->front->researchers($dep, $sort, $config['per_page'], $offset);
 		$this->load->view('template_front', $this->data);
 	}
 	

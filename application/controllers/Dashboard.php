@@ -203,7 +203,20 @@ class Dashboard extends CI_Controller{
 		$this->load->view('template', $this->data);		
 	}
 	
-	
+	public function backup($act = null){
+		if ($act !== null){
+			$file = date('Y-m-d_His').'_backup.gz';
+			$this->load->dbutil();
+			$backup = $this->dbutil->backup();
+			$this->load->helper('file');
+			write_file('/assets/research.zip', $backup);
+			$this->load->helper('download');
+			force_download($file, $backup);
+		}else{
+			$this->data['page'] = 'page/backup';
+			$this->load->view('template', $this->data);
+		}		
+	}
 
 
 

@@ -59,6 +59,7 @@
 					
 					<li class="<?php echo $this->uri->segment(2) == 'account'? 'active':'';?>"><a href="<?php echo site_url().'dashboard/account';?>"><i class="fa fa-users"></i> <span>Account Management</span></a></li>
 					<li class="<?php echo $this->uri->segment(2) == 'resources'? 'active':'';?>"><a href="<?php echo site_url().'dashboard/resources';?>"><i class="fa fa-file"></i> <span>File Management</span></a></li>
+					<li class="<?php echo $this->uri->segment(2) == 'backup'? 'active':'';?>"><a href="<?php echo site_url().'dashboard/backup';?>"><i class="fa fa-cog"></i> <span> Backup Databases</span></a></li>
 				<?php }else{?>
 
 					<li class="<?php echo $this->uri->segment(2) == 'profile' && $this->uri->segment(1) == 'dashboard'? 'active':'';?>"><a href="<?php echo base_url().'dashboard/profile';?>"><i class="fa fa-user"></i> <span>Profile</span></a></li>

@@ -98,6 +98,8 @@ $route['research/grant/page/(:any)'] = 'home/research/grant/page/$1';
 $route['researchers'] = 'home/researchers';
 $route['researchers/page'] = 'home/researchers/page';
 $route['researchers/page/(:any)'] = 'home/researchers/page/$1';
+$route['researchers/(:any)/page/(:any)'] = 'home/researchers/$1/page/$2';
+$route['researchers/(:any)/page'] = 'home/researchers/$1/page';
 
 $route['research/publication'] = 'home/research/publication';
 $route['research/publication/page'] = 'home/research/publication/page';
