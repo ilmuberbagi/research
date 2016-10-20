@@ -117,7 +117,7 @@
 						<div class="form-group">
 							<label>Upload File </label><br/><small>Allowed file type <b>PDF</b> <i class="fa fa-file-pdf-o"></i></small>
 							<div class="input-group">
-								<input type="file" name="userfile" class="form-input" required>
+								<input type="file" name="userfile" class="btn btn-block" <?php echo $id !== ""? '':'required';?>>
 							</div>
 						</div>
 						<hr/>

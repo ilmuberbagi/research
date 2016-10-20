@@ -2,9 +2,9 @@
 	<div class="col-md-12">
 		<!-- h4 align="center">Researcher Profile<br/>Fakultas Teknik<br/>Universitas Indonesia</h4 -->
 		<?php
-			echo "<table class='title'><tr><td colspan='3' rowspan='3'><img src='".site_url().'assets/public/img/logo-ftui.jpg'."' width='250'></td><td colspan='3'><b>FAKULTAS TEKNIK<br/>UNIVERSITAS INDONESIA</b></td></tr></table><br/>";
+			// echo "<table class='title'><tr><td colspan='3' rowspan='3'><img src='".site_url().'assets/public/img/logo-ftui.jpg'."' width='250'></td><td colspan='3'><b>FAKULTAS TEKNIK<br/>UNIVERSITAS INDONESIA</b></td></tr></table><br/>";
 		?>
-		<h4>Researcher Profile</h4>
+		<h2>Researcher Profile</h2>
 		<table class="table table-bordered">
 			<tr>
 				<th>Name</th>
@@ -22,7 +22,7 @@
 			<tr><th>Link Scopus</th><td><?php echo $user[0]['link_scopus'] ==''? '---':$user[0]['link_scopus'];?></td></tr>
 			<tr><th>H-index Google Scholar</th><td><?php echo $user[0]['index_scholar'] == ''? '---': $user[0]['index_scholar'];?></td></tr>
 			<tr><th>H-index Scopus</th><td><?php echo $user[0]['index_scopus'] == ''? '---': $user[0]['index_scopus'];?></td></tr>
-			<tr><th>Profile</th><td colspan="2"><?php echo $user[0]['profile'];?></td></tr>
+			<tr><th>Profile</th><td colspan="2" align="justify"><?php echo $user[0]['profile'];?></td></tr>
 		</table>
 		<hr/>
 		<?php 
