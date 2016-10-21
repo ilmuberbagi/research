@@ -34,33 +34,33 @@
   </head>
 <body>
 	<?php
-		$filename = "Profile_".str_replace(' ','_', $user[0]['name']).'.xls';
+		$filename = "Profile_".str_replace(' ','_', $user[0]['user_id']).'.xls';
 		header('Content-Disposition: attachment; filename='.$filename);
 		header('Content-type: application/force-download');
 		header('Content-Transfer-Encoding: binary');
 		header('Pragma: public');
 		print "\xEF\xBB\xBF"; // UTF-8 BOM		
-		echo "<table class='title'><tr><td colspan='3' rowspan='3'><img src='".site_url().'assets/public/img/logo-ftui.jpg'."' width='250'></td><td colspan='3'><b>FAKULTAS TEKNIK<BR/>UNIVERSITAS INDONESIA</b></td></tr></table><br/>";
+		// echo "<table class='title'><tr><td colspan='3' rowspan='3'><img src='".site_url().'assets/public/img/logo-ftui.jpg'."' width='250'></td><td colspan='3'><b>FAKULTAS TEKNIK<BR/>UNIVERSITAS INDONESIA</b></td></tr></table><br/>";
 	?>
-	<table><tr><td class="title" colspan="6">Researcher Profile</td></tr></table>
+	<h2>Researcher Profile</h2>
 	<table class="list">
 		<tr>
 			<th>Name</th>
-			<td><?php echo $user[0]['name'];?></td>
+			<td colspan="2"><?php echo $user[0]['name'];?></td>
 			<td rowspan="12" align="center" valign="top"><img src="<?php echo $user[0]['avatar']? $user[0]['avatar']:site_url().'assets/img/user.jpg';?>" class="img" width="130"></td>
 		</tr>
-		<tr><th width="200">NIP/NUP</th><td><?php echo "'".$user[0]['user_code'];?></td></tr>
-		<tr><th>Department</th><td><?php echo $user[0]['department_name'];?></td></tr>
-		<tr><th>Email</th><td><?php echo $user[0]['email'];?></td></tr>
-		<tr><th>Phone</th><td><?php echo "'".$user[0]['phone'];?></td></tr>
-		<tr><th>Expertise</th><td><?php echo $user[0]['expertise'] == '' ? '---': $user[0]['expertise'];?></td></tr>
-		<tr><th>Research Interest</th><td><?php echo $user[0]['research_interest'] == ''? '---':$user[0]['research_interest'];?></td></tr>
-		<tr><th>Link Research Gate</th><td><?php echo $user[0]['link_research_gate'] == ''? '---': $user[0]['link_research_gate'];?></td></tr>
-		<tr><th>Link Google Scholar</th><td><?php echo $user[0]['link_google_scholar'] == ''? '---': $user[0]['link_google_scholar'];?></td></tr>
-		<tr><th>Link Scopus</th><td><?php echo $user[0]['link_scopus'] ==''? '---':$user[0]['link_scopus'];?></td></tr>
-		<tr><th>H-index Google Scholar</th><td align="left"><?php echo $user[0]['index_scholar'] == ''? '---': $user[0]['index_scholar'];?></td></tr>
-		<tr><th>H-index Scopus</th><td align="left"><?php echo $user[0]['index_scopus'] == ''? '---': $user[0]['index_scopus'];?></td></tr>
-		<tr><th>Profile</th><td colspan="2"><?php echo $user[0]['profile'];?></td></tr>
+		<tr><th width="200">NIP/NUP</th><td colspan="2"><?php echo "'".$user[0]['user_code'];?></td></tr>
+		<tr><th>Department</th><td colspan="2"><?php echo $user[0]['department_name'];?></td></tr>
+		<tr><th>Email</th><td colspan="2"><?php echo $user[0]['email'];?></td></tr>
+		<tr><th>Phone</th><td colspan="2"><?php echo "'".$user[0]['phone'];?></td></tr>
+		<tr><th>Expertise</th><td colspan="2"><?php echo $user[0]['expertise'] == '' ? '---': $user[0]['expertise'];?></td></tr>
+		<tr><th>Research Interest</th><td colspan="2"><?php echo $user[0]['research_interest'] == ''? '---':$user[0]['research_interest'];?></td></tr>
+		<tr><th>Link Research Gate</th><td colspan="2"><?php echo $user[0]['link_research_gate'] == ''? '---': $user[0]['link_research_gate'];?></td></tr>
+		<tr><th>Link Google Scholar</th><td colspan="2"><?php echo $user[0]['link_google_scholar'] == ''? '---': $user[0]['link_google_scholar'];?></td></tr>
+		<tr><th>Link Scopus</th><td colspan="2"><?php echo $user[0]['link_scopus'] ==''? '---':$user[0]['link_scopus'];?></td></tr>
+		<tr><th>H-index Google Scholar</th><td colspan="2" align="left"><?php echo $user[0]['index_scholar'] == ''? '---': $user[0]['index_scholar'];?></td></tr>
+		<tr><th>H-index Scopus</th><td align="left" colspan="2"><?php echo $user[0]['index_scopus'] == ''? '---': $user[0]['index_scopus'];?></td></tr>
+		<tr><th valign="top">Profile</th><td colspan="4" align="justify"><?php echo $user[0]['profile'];?></td></tr>
 	</table>
 	<hr/>
 	<?php 
