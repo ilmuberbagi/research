@@ -513,11 +513,39 @@ class Lib_cms {
 	public function change_user_status(){
 		$id = $this->ci->security->xss_clean($this->ci->input->post('user_id'));
 		$sts = $this->ci->security->xss_clean($this->ci->input->post('status'));
-		if($sts == 0) $status = 1; else $status = 0;
+		if($sts == 0) {
+			$status = 1;
+			$subject = "Activation User Research FTUI"; 
+		}else{
+			$status = 0;
+			$subject = "Suspending User Research FTUI"; 
+		}
+
 		$data = array('status' => $status);
 		$change = $this->ci->cms->update('users', array('user_id', $id), $data);
-		if($change)
-			$this->ci->session->set_flashdata('success','User status has been updated.');
+		if($change){
+			if ($status == 1){
+				$userdata = $this->ci->cms->get_user($id);
+				$result = array(
+					'status' => $status,
+					'title' => $subject,
+					'user_id' => $id,
+					'password'	=> $userdata[0]['user_code'],
+					'name'	=> $userdata[0]['name']
+				);
+				$message = $this->ci->load->view('template/mailer/activation', $result, TRUE);
+				$this->ci->load->library('email'); // load email library
+				$this->ci->email->from('risetft@eng.ui.ac.id', 'Riset FTUI');
+				$this->ci->email->to($userdata[0]['email']);
+				$this->ci->email->bcc('sabbana.azmi@kompas.com'); 
+				$this->ci->email->subject($subject);
+				$this->ci->email->message($message);
+				if($this->ci->email->send())
+					$this->ci->session->set_flashdata('success','User status has been updated. An email notification has been sent to user');
+				else
+					$this->ci->session->set_flashdata('warning','User status has been updated. Sending email notofication failed.');
+			}
+		}
 		else
 			$this->ci->session->set_flashdata('alert','Trouble while updating user status!');
 		redirect('dashboard/account');

@@ -69,64 +69,6 @@ class Login extends CI_Controller {
 		$res = $this->mdl_login->check_user($key, $value);
 		echo $res;
 	}
-	
-	public function proc_register_email(){
-		// $this->load->library('recaptcha');
-		// $recaptcha = $this->input->post('g-recaptcha-response');
-        // if (!empty($recaptcha)) {
-            // $response = $this->recaptcha->verifyResponse($recaptcha);
-            // if (isset($response['success']) and $response['success'] === true) {
-				$this->load->helper('misc');
-				// $pass = generatePassword(8,4);
-				$userid = $this->security->xss_clean($this->input->post('user_id'));
-				$code = $this->security->xss_clean($this->input->post('usercode'));
-				$status = $this->input->post('role_id');
-				$name = $this->security->xss_clean($this->input->post('name'));
-				$email = $this->security->xss_clean($this->input->post('email'));
-				$data = array(
-					'user_id'	=> $userid,
-					'user_code'	=> $code,
-					'name'		=> $name,
-					'email'		=> $email,
-					'role_id'	=> $status,
-					'department_id'	=> $this->input->post('department_id'),
-					'password'	=> md5($code),
-					'phone'		=> $this->security->xss_clean($this->input->post('phone')),
-					'functional' => $this->security->xss_clean($this->input->post('functional')),
-					'date_create' => date('Y-m-d H:i:s'),
-				);
-				$act = $this->mdl_login->create_user($data);
-				if($act){
-					# sending emil
-					$this->load->library('Lib_mailer');
-					$this->lib_mailer->init();
-					$bcc = array(
-						'email' => 'sabbana.a7@gmail.com',
-						'name'	=> 'Sabbana Azmi'
-					);
-					$result = array(
-						'user_id'	=> $userid,
-						'password'	=> $pass,
-						'status'	=> $status,
-						'name'		=> $name,
-					);
-					$message = $this->load->view('template/mailer/createUser', $result, TRUE);
-					$send = $this->lib_mailer->sendmail(array('email'=>$email), 'Research FTUI', $message, '', $bcc);
-										
-					if($send){
-						$this->session->set_flashdata('success','<b>Success,</b> Registration process successfully. We just send you an email containing your account to login into application.');
-					}else{
-						$this->session->set_flashdata('warning','<b>Warning!</b> We could not send your account to your email. Please contact administrator.');
-					}				
-				}else
-					$this->session->set_flashdata('warning','<b>Error</b> Trouble while register new user!');
-			// }else
-				// $this->session->set_flashdata('Warning','<b>Warning,</b> Please pass the capcha request!');
-        // }else
-			// $this->session->set_flashdata('Warning','<b>Warning,</b> Please pass the capcha request!');
-		
-		redirect('register');
-	}
 
 	public function proc_register(){
 		$this->load->helper('misc');
@@ -149,7 +91,27 @@ class Login extends CI_Controller {
 		);
 		$act = $this->mdl_login->create_user($data);
 		if($act){
-			$this->session->set_flashdata('success','<b>Success,</b> Proses registrasi peneliti berhasil. Mohon menunggu untuk proses verifikasi oleh admin. Silakan gunakan <b>user ID</b> dan <b>NIP/NUP </b>untuk masuk ke aplikasi pertama kali. Gunakan fitur <b>Change Password </b> untuk memperbaharui password Anda.');
+
+			$result = array(
+				'user_id'	=> $userid,
+				'password'	=> $code,
+				'name'		=> $name
+			);
+			$message = $this->load->view('template/mailer/register', $result, TRUE);
+			$this->load->library('email'); // load email library
+			$this->email->from('risetft@eng.ui.ac.id', 'Riset FTUI');
+			$this->email->to($email);
+			$this->email->bcc('sabbana.azmi@kompas.com'); 
+			$this->email->subject('Register Researcher');
+			$this->email->message($message);
+			if($this->email->send()){
+				$this->session->set_flashdata('success','<b>Success,</b> Registration process successfully. We just send you an email containing your account to login into application.  Please open your email inbox now if you don\'t find it, maybe it in spam');
+			}else{
+				$this->session->set_flashdata('warning','<b>Warning!</b> We could not send your account to your email. Please contact administrator.');
+			}
+
+			
+			#$this->session->set_flashdata('success','<b>Success,</b> Proses registrasi peneliti berhasil. Mohon menunggu untuk proses verifikasi oleh admin. Silakan gunakan <b>user ID</b> dan <b>NIP/NUP </b>untuk masuk ke aplikasi pertama kali. Gunakan fitur <b>Change Password </b> untuk memperbaharui password Anda.');
 		}else{
 			$this->session->set_flashdata('warning','<b>Warning!</b> Terjadi kesalahan saat memproses data. Proses registrasi peneliti gagal dilakukan. Mohon untuk menghubungi administrator.');
 		}				
@@ -161,23 +123,9 @@ class Login extends CI_Controller {
 	 * @email
 	 */
 	 
-	public function test(){
-		$to      = 'sabbana.a7@gmail.com';
-		$subject = 'the subject';
-		$message = 'hello';
-		$headers = 'From: webmaster@example.com' . "\r\n" .
-			'Reply-To: webmaster@example.com' . "\r\n" .
-			'X-Mailer: PHP/' . phpversion();
-
-		$send = mail($to, $subject, $message, $headers);
-		var_dump($send);
-
-	}
 	 
 	public function reset_password(){
 		$email = $this->input->post('email');
-		$this->load->library('Lib_mailer');
-		$this->lib_mailer->init(array('from'=>'noreply.risetft@eng.ui.ac.id'));
 		# get data member
 		$data = $this->mdl_login->check_user_data('email', $email);
 		if(!empty($data)){
@@ -196,11 +144,24 @@ class Login extends CI_Controller {
 			$act = $this->mdl_login->update($data[0]['user_id'], array('password' => md5($result['password'])));
 			if($act){
 				$message = $this->load->view('template/mailer/password_reset', $result, TRUE);
-				$this->lib_mailer->sendmail(array('email'=>$email), 'Research FTUI', $message, '', $bcc);				
-				$msg = '<div class="alert alert-success alert-dismissable">
-					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-					<h4><i class="icon fa fa-check"></i> Success!</h4>Your new password has been sent to your email.</div>';
-				$this->session->set_flashdata('invalid',$msg);
+				$this->load->library('email'); // load email library
+				$this->email->from('risetft@eng.ui.ac.id', 'Riset FTUI');
+				$this->email->to($email);
+				$this->email->bcc('sabbana.azmi@kompas.com'); 
+				$this->email->subject('Reset Password');
+				$this->email->message($message);
+				if($this->email->send()){
+					$msg = '<div class="alert alert-success alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	                    <h4><i class="icon fa fa-check-circle"></i> Success!</h4>We just send you a new password to your email address. Please open your email inbox now if you don\'t find it, maybe it in spam.</div>';
+					$this->session->set_flashdata('invalid', $msg);
+				}else{
+					#print_r($this->email->send()); die();
+					$msg = '<div class="alert alert-warning alert-dismissable">
+						<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+	                    <h4><i class="icon fa fa-warning"></i> Invalid!</h4>Trouble sending new password to email address.</div>';
+					$this->session->set_flashdata('invalid', $msg);
+				}
 			}
 		}else{
 			$msg = '<div class="alert alert-warning alert-dismissable">
