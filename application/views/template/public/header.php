@@ -47,6 +47,7 @@
 						<li class="<?php echo $this->uri->segment(1) == 'service'? 'active':'';?>"><a href="<?php echo site_url().'service';?>">Services</a></li>
 						<li class="<?php echo $this->uri->segment(1) == 'resources'? 'active':'';?>"><a href="<?php echo site_url().'resources';?>">Resources</a></li>
 						<li class="<?php echo $this->uri->segment(1) == 'contact'? 'active':'';?>"><a href="<?php echo base_url().'contact';?>">Contact Us</a></li>
+						<li class="pull-right" style="display: block; color: #fed502; font-size: 20px"><a href="<?php echo base_url().'login';?>"><i class="fa fa-lock"></i></a></li>
 					</ul>
 				</div>
 			</div>

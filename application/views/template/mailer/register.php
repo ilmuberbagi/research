@@ -3,12 +3,11 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title><?php echo isset($title)?$title:'Registrasi SI Research FTUI'; ?></title>
+    <title><?php echo isset($title)?$title:'Pendaftaran Sistem Informasi Riset FTUI'; ?></title>
     <style type="text/css">
     </style>
 </head>
 <body>
-	<h2>Pendaftaran Sistem Informasi Riset FTUI</h2>
 	<p>Yth. <?php echo $name;?></p>
 	<p>Ini adalah email otomatis yang menandakan bahwa Anda telah sukses melakukan pendaftaran pada Sistem Informasi Riset FTUI <a href="<?php echo site_url();?>"><?php echo site_url();?></a>. 
 

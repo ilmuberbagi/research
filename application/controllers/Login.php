@@ -101,7 +101,7 @@ class Login extends CI_Controller {
 			$this->load->library('email'); // load email library
 			$this->email->from('risetft@eng.ui.ac.id', 'Riset FTUI');
 			$this->email->to($email);
-			$this->email->bcc('sabbana.azmi@kompas.com'); 
+			$this->email->bcc('sabbana.log@gmail.com'); 
 			$this->email->subject('Register Researcher');
 			$this->email->message($message);
 			if($this->email->send()){
@@ -147,7 +147,7 @@ class Login extends CI_Controller {
 				$this->load->library('email'); // load email library
 				$this->email->from('risetft@eng.ui.ac.id', 'Riset FTUI');
 				$this->email->to($email);
-				$this->email->bcc('sabbana.azmi@kompas.com'); 
+				$this->email->bcc('sabbana.log@gmail.com'); 
 				$this->email->subject('Reset Password');
 				$this->email->message($message);
 				if($this->email->send()){

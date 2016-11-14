@@ -515,7 +515,7 @@ class Lib_cms {
 		$sts = $this->ci->security->xss_clean($this->ci->input->post('status'));
 		if($sts == 0) {
 			$status = 1;
-			$subject = "Activation User Research FTUI"; 
+			$subject = "Aktivasi Akun Sistem Information FTUI"; 
 		}else{
 			$status = 0;
 			$subject = "Suspending User Research FTUI"; 
@@ -537,14 +537,15 @@ class Lib_cms {
 				$this->ci->load->library('email'); // load email library
 				$this->ci->email->from('risetft@eng.ui.ac.id', 'Riset FTUI');
 				$this->ci->email->to($userdata[0]['email']);
-				$this->ci->email->bcc('sabbana.azmi@kompas.com'); 
+				$this->ci->email->bcc('sabbana.log@gmail.com'); 
 				$this->ci->email->subject($subject);
 				$this->ci->email->message($message);
 				if($this->ci->email->send())
 					$this->ci->session->set_flashdata('success','User status has been updated. An email notification has been sent to user');
 				else
 					$this->ci->session->set_flashdata('warning','User status has been updated. Sending email notofication failed.');
-			}
+			}else
+				$this->ci->session->set_flashdata('success','User status has been updated. Suspending user account.');
 		}
 		else
 			$this->ci->session->set_flashdata('alert','Trouble while updating user status!');
@@ -555,8 +556,26 @@ class Lib_cms {
 		$id = $this->ci->security->xss_clean($this->ci->input->post('user_id'));
 		$pass = $this->ci->security->xss_clean($this->ci->input->post('password'));
 		$change = $this->ci->cms->update('users', array('user_id', $id), array('password'=>md5($pass)));
-		if($change)
-			$this->ci->session->set_flashdata('success','User password has been updated.');
+		if($change){
+			$userdata = $this->ci->cms->get_user($id);
+			$result = array(
+				'status'	=> 99,
+				'name'	=> $userdata[0]['name'],
+				'user_id' => $id,
+				'password'	=> $userdata[0]['user_code'],
+			);
+			$message = $this->ci->load->view('template/mailer/activation', $result, TRUE);
+			$this->ci->load->library('email'); // load email library
+			$this->ci->email->from('risetft@eng.ui.ac.id', 'Riset FTUI');
+			$this->ci->email->to($userdata[0]['email']);
+			$this->ci->email->bcc('sabbana.log@gmail.com'); 
+			$this->ci->email->subject('Reset Password');
+			$this->ci->email->message($message);
+			if($this->ci->email->send())
+				$this->ci->session->set_flashdata('success','User status has been updated. An email notification has been sent to user');
+			else				
+				$this->ci->session->set_flashdata('warning','User status has been updated. Sending email notofication failed.');
+		}
 		else
 			$this->ci->session->set_flashdata('alert','Trouble while updating user password!');
 		redirect('dashboard/account');

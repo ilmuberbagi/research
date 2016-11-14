@@ -10,7 +10,6 @@
 <body>
 	<?php if ($status == 1){?>
 
-		<h2>Aktivasi Sistem Informasi Riset FTUI</h2>
 		<p>Yth. <?php echo $name;?></p>
 		<p>Ini adalah email otomatis yang menandakan bahwa kami telah melakukan verifikasi akun Anda pada Sistem Informasi Riset FTUI <a href="<?php echo site_url();?>"><?php echo site_url();?></a>. Anda dapat menggunakan dan masuk ke dalam sistem dengan akun sebagai berikut:</p>
 
@@ -33,7 +32,22 @@
 
 	<?php }else{?>
 
-		<p>Ini adalah email otomatis yang menandakan bahwa kami telah melakukan pemblokiran akun dengan email ini pada Sistem Informasi Riset FTUI <a href="<?php echo site_url();?>"><?php echo site_url();?></a>. Akun ini tidak dapat menggunakan atau masuk ke dalam sistem.</p>
+		<p>Yth. <?php echo $name;?></p>
+		<p>Ini adalah email otomatis yang menandakan bahwa kami telah melakukan reset akun Anda pada Sistem Informasi Riset FTUI <a href="<?php echo site_url();?>"><?php echo site_url();?></a>. Anda dapat menggunakan dan masuk ke dalam sistem dengan akun sebagai berikut:</p>
+
+		<table>		
+			<tr>
+				<td>Username</td>
+				<td>: <?php echo $user_id;?></td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td>: <?php echo $password;?></td>
+			</tr>
+		</table>
+		
+		<p>Login : <a href="<?php echo site_url().'login';?>"><?php echo site_url().'login';?></a></p>
+
 		<p>Jika Anda memerlukan bantuan, Silakan hubungi kami.</p>
 		<p>Salam hormat,<br/>Administrator</p>
 

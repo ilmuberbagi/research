@@ -75,6 +75,12 @@
 						<h3 class="box-title"><i class="fa fa-book"></i> &nbsp;Publication Data</h3>
 					</div>
 					<div class="box-body">
+						<?php if($this->session->flashdata('invalid') != null){?>
+							<div class="callout callout-danger">
+								<h4>Warning</h4>
+								<p><?php echo $this->session->flashdata('invalid');?></p>
+							</div>
+						<?php } ?>
 						<?php 
 						if($this->uri->segment(3) == "input"){
 							if($this->session->userdata('role') == 1 || $this->session->userdata('role') == 2){?>
@@ -112,7 +118,7 @@
 						</div>
 						<div class="form-group">
 							<label>Abstract <span>*</span></label>
-							<textarea name="abstract" class="form-control description" rows="10" required><?php echo $abstract;?></textarea>
+							<textarea name="abstract" class="form-control description" rows="10"><?php echo $abstract;?></textarea>
 						</div>
 						<div class="form-group">
 							<label>Upload File </label><br/><small>Allowed file type <b>PDF</b> <i class="fa fa-file-pdf-o"></i></small>
